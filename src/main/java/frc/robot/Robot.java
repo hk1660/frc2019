@@ -5,9 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-//testing here!!!
-//also test(Haim)
-
 
 package frc.robot;
 
@@ -19,11 +16,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-
-
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Jaguar;
 //import edu.wpi.first.wpilibj.camera.AxisCamera;
@@ -41,38 +39,33 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * it contains the code necessary to operate a robot with tank drive.
  */
 public class Robot extends IterativeRobot {
-  //public class Robot extends SampleRobot {
 
-  private DifferentialDrive m_myRobot;
-  private Joystick m_leftStick;
-  private Joystick m_rightStick;
-]
+    //MOTOR PORTS
+    int RIGHT1 = 9;
+    int RIGHT2 = 4;
+    int LEFT1 = 2;
+    int LEFT2 = 37;
+    int SHOOT1F = 3;
+    int SHOOT1R = 12;
+    int SHOOT2F = 55;
+    int SHOOT2R = 444;
+    int PITCH = 8;
 
-/* 2019 SAMPLE CODE
-  @Override
-  public void robotInit() {
-    m_myRobot = new DifferentialDrive(new Spark(0), new Spark(1));
-    m_leftStick = new Joystick(0);
-    m_rightStick = new Joystick(1);
-  }
+    //MOTORS
+    private DifferentialDrive newHkDrive;
 
-  @Override
-  public void teleopPeriodic() {
-    m_myRobot.tankDrive(m_leftStick.getY(), m_rightStick.getY());
-  }
-
-*/
-		
-    private Jaguar rightF;
-    private Jaguar rightR;
-    private Jaguar leftF;
-    private Jaguar leftR;
-    private Relay loadingRelay, climbRelay, compressorRelay;
+    private WPI_TalonSRX rightDrive1;
+    private WPI_TalonSRX rightDrive2;
+    private WPI_TalonSRX leftDrive1;
+    private WPI_TalonSRX leftDrive2;
+    private WPI_TalonSRX shootingWheel1FWD, shootingWheel1REV, shootingWheel2FWD, shootingWheel2REV;
     private Jaguar shootingPitchMotor;
-    private Jaguar shootingWheel1FWD, shootingWheel1REV, shootingWheel2FWD, shootingWheel2REV;
+
+    private Relay loadingRelay, climbRelay, compressorRelay;
+
     private Joystick driveStick;
     private Joystick frisbeeStick;
-    //private Joystick manipJoystick;
+
     private DigitalInput highLimitSwitch;
     private DigitalInput lowLimitSwitch;
     private DigitalInput pressureLimitSwitch;
@@ -96,16 +89,20 @@ public class Robot extends IterativeRobot {
         try {
             driveStick = new Joystick(1);
             frisbeeStick = new Joystick(2);
-            //manipJoystick = new Joystick(3);
-            rightR = new Jaguar(9);
-            rightF = new Jaguar(10);
-            leftR= new Jaguar(1);
-            leftF = new Jaguar(2);
-            shootingPitchMotor = new Jaguar(8);
-            shootingWheel1FWD = new Jaguar(6);
-            shootingWheel1REV = new Jaguar(7);
-            shootingWheel2FWD = new Jaguar(4);
-            shootingWheel2REV = new Jaguar(5);
+
+            //Drivetrain Initializations
+            rightDrive1 = new WPI_TalonSRX(RIGHT1);
+            rightDrive2 = new WPI_TalonSRX(RIGHT2);
+            leftDrive1 = new WPI_TalonSRX(LEFT1);
+            leftDrive2 = new WPI_TalonSRX(LEFT2);
+
+            //newHkDrive = new DifferentialDrive(rightDrive1, rightDrive2, leftDrive1, leftDrive2);
+
+            shootingPitchMotor = new Jaguar(PITCH);
+            shootingWheel1FWD = new WPI_TalonSRX(SHOOT1F);
+            shootingWheel1REV = new WPI_TalonSRX(SHOOT1R);
+            shootingWheel2FWD = new WPI_TalonSRX(SHOOT2F);
+            shootingWheel2REV = new WPI_TalonSRX(SHOOT2R);
    
             
             compressorRelay = new Relay(1, Relay.Direction.kForward);
@@ -115,7 +112,7 @@ public class Robot extends IterativeRobot {
             compressorRelay.set(Relay.Value.kOff);
             loadingRelay.set(Relay.Value.kOff);
             climbRelay.set(Relay.Value.kOff); 
-            compressorRelaySwitchOn();
+            //compressorRelaySwitchOn();
             
             highLimitSwitch = new DigitalInput(1);
             lowLimitSwitch = new DigitalInput(2);
@@ -149,21 +146,21 @@ public class Robot extends IterativeRobot {
             } else {
                 if(System.currentTimeMillis() % 600 < 200 )  //this is to simulate a pump command
                 {
-                    jagDrive(0, 0); 
+                    newDrive(0, 0); 
                 }
                 else
                 {
                    if (camera.getCurrentX() < camera.getDesiredX()) {
-                        jagDrive(ROBOT_TURN_SPEED, -1); //turn left
+                        newDrive(ROBOT_TURN_SPEED, -1); //turn left
                     } else {
-                        jagDrive(ROBOT_TURN_SPEED, 1);
+                        newDrive(ROBOT_TURN_SPEED, 1);
                     } 
                 }
             }
         }
         else
         {
-            jagDrive(0, 0);
+            newDrive(0, 0);
         }
         return false;
     }
@@ -501,7 +498,7 @@ public class Robot extends IterativeRobot {
                 System.out.println(e);
            }
     }
-*/
+
     public void debug_CheckRelays() {
 
         System.out.print("\nChecking Status of Relays:");
@@ -554,7 +551,7 @@ public class Robot extends IterativeRobot {
         
 
     }
-/*
+
     public void climbRelaySwitchBack() {
         climbRelay.set(Relay.Value.kReverse);
         System.out.print("Climb Relay Value: " + climbRelay.get().value);
@@ -563,8 +560,8 @@ public class Robot extends IterativeRobot {
 */
     public void climbRelaySwitchOff() {
         climbRelay.set(Relay.Value.kOff);
-        System.out.print("Climb Relay Value: " + climbRelay.get().value);
-        SmartDashboard.putInt("Climb Relay Value", climbRelay.get().value);
+        //System.out.print("Climb Relay Value: " + climbRelay.get().value);
+        //SmartDashboard.putInt("Climb Relay Value", climbRelay.get().value);
 
     }
     public void turnShootingWheelOn() 
@@ -634,10 +631,10 @@ public class Robot extends IterativeRobot {
 
         if (is_launching) {
             if (launchingTimer.get() < 0.4) {
-                loadingRelaySwitchBack();
+                //loadingRelaySwitchBack();
             } 
             else if ( launchingTimer.get() > 0.4 && launchingTimer.get() < 0.8 ){
-                loadingRelaySwitchFwd();
+                //loadingRelaySwitchFwd();
             }
             else {   
                 is_launching = false;
@@ -680,22 +677,23 @@ public class Robot extends IterativeRobot {
     	
     	double dSpeed = driveStick.getRawAxis(1);
     	double dTurn  = driveStick.getRawAxis(0);
-    	jagDrive(dSpeed * -1.0, dTurn * -1.0);
+    	newDrive(dSpeed * -1.0, dTurn * -1.0);
         
     }
     
     //Replaces method from the RobotDrive class to use Jaguars
-    public void jagDrive(double dSpeed, double dTurn){
-    	
-    	leftF.set(dSpeed + dTurn);
-    	leftR.set(dSpeed + dTurn);
-    	rightF.set(dSpeed - dTurn);
-    	rightR.set(dSpeed - dTurn);
+    public void newDrive(double dSpeed, double dTurn){
+        
+        rightDrive1.set(dSpeed + dTurn);
+    	rightDrive2.set(dSpeed + dTurn);
+    	leftDrive1.set(dSpeed - dTurn);
+    	leftDrive2.set(dSpeed - dTurn);
     	
     }
     
-/*    public void checkDriveJoysticks() {
-        
+/*
+    
+    public void checkDriveJoysticks() {
         if(driveStick.getRawButton(8))
         {
             if(slow_drive_mode)
@@ -707,10 +705,13 @@ public class Robot extends IterativeRobot {
                 slow_drive_mode = true;
             }
         }
-        
+
+
+
         //if(!frisbeeStick.getRawButton(11)) //not pressed auto-aim button
         if(true)
         {
+        
             if (slow_drive_mode) {
                 double leftJoyVal = driveStick.getY();
                 double rightJoyVal = frisbeeStick.getY();
@@ -744,12 +745,15 @@ public class Robot extends IterativeRobot {
                  }
                 hkDrive.tankDrive(leftJoyVal * -1, rightJoyVal * -1, true);
             } else {
+
                 hkDrive.tankDrive(driveStick.getY() * -1, frisbeeStick.getY() * - 1, true);
             }
         }
         
     }
+
 */
+
     public void operatorControl() {
         shooting_motor_switch = false;
          //climbRelaySwitchBack();
@@ -760,10 +764,10 @@ public class Robot extends IterativeRobot {
             newCheckDrive();
         	
             if (frisbeeStick.getRawButton(5)) {
-                loadingRelaySwitchFwd();
+                //loadingRelaySwitchFwd();
             }
             if (frisbeeStick.getRawButton(6)) {
-                loadingRelaySwitchBack();
+               // loadingRelaySwitchBack();
             }
             
             /*
@@ -776,21 +780,21 @@ public class Robot extends IterativeRobot {
             */            
             
             if (pressureLimitSwitch.get() == false){
-            compressorRelaySwitchOn();
+                //compressorRelaySwitchOn();
             }
             
             if (pressureLimitSwitch.get() == true){
-            compressorRelaySwitchOff();
+                //compressorRelaySwitchOff();
             }
 
             
             if (frisbeeStick.getRawButton(3)) {
-                compressorRelaySwitchOff();
-                loadingRelaySwitchOff();
-                climbRelaySwitchOff();
+                //compressorRelaySwitchOff();
+                //loadingRelaySwitchOff();
+                //climbRelaySwitchOff();
             }
             if (frisbeeStick.getRawButton(4)) {
-                debug_CheckRelays();
+                //debug_CheckRelays();
             }
             //checkShootingPitchMotorButton();
             newCheckPitchMotorButton();  //11 & 12
@@ -815,4 +819,4 @@ public class Robot extends IterativeRobot {
 
 
 
-}
+//}
