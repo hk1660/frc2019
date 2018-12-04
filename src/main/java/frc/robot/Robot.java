@@ -42,15 +42,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
     //MOTOR PORTS
-    int RIGHT1 = 9;
-    int RIGHT2 = 4;
-    int LEFT1 = 2;
-    int LEFT2 = 37;
-    int SHOOT1F = 3;
-    int SHOOT1R = 12;
-    int SHOOT2F = 55;
-    int SHOOT2R = 444;
-    int PITCH = 8;
+    int RIGHT1 = 57;
+    int RIGHT2 = 56;
+    int LEFT1 = 62;
+    int LEFT2 = 58;
+    int SHOOT1 = 60;
+    int SHOOT2 = 61;
+    int SHOOT3 = 59;
+    int SHOOT4 = 55;
+    int JAW = 0;
 
     //MOTORS
     private DifferentialDrive newHkDrive;
@@ -99,7 +99,7 @@ public class Robot extends IterativeRobot {
 
             //newHkDrive = new DifferentialDrive(rightDrive1, rightDrive2, leftDrive1, leftDrive2);
 
-            shootingPitchMotor = new Jaguar(PITCH);
+            shootingPitchMotor = new Jaguar(JAW);
             shootingWheel1FWD = new WPI_TalonSRX(SHOOT1F);
             shootingWheel1REV = new WPI_TalonSRX(SHOOT1R);
             shootingWheel2FWD = new WPI_TalonSRX(SHOOT2F);
