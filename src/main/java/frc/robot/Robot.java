@@ -100,10 +100,10 @@ public class Robot extends IterativeRobot {
             //newHkDrive = new DifferentialDrive(rightDrive1, rightDrive2, leftDrive1, leftDrive2);
 
             shootingPitchMotor = new Jaguar(JAW);
-            shootingWheel1FWD = new WPI_TalonSRX(SHOOT1F);
-            shootingWheel1REV = new WPI_TalonSRX(SHOOT1R);
-            shootingWheel2FWD = new WPI_TalonSRX(SHOOT2F);
-            shootingWheel2REV = new WPI_TalonSRX(SHOOT2R);
+            shootingWheel1FWD = new WPI_TalonSRX(SHOOT1);
+            shootingWheel1REV = new WPI_TalonSRX(SHOOT2);
+            shootingWheel2FWD = new WPI_TalonSRX(SHOOT3);
+            shootingWheel2REV = new WPI_TalonSRX(SHOOT4);
    
             
             compressorRelay = new Relay(1, Relay.Direction.kForward);
