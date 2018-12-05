@@ -62,9 +62,13 @@ public class Robot extends IterativeRobot {
     int LOAD_BUTTON = 5;
     int UNLOAD_BUTTON = 6;
 
+    int PRESSURE_OVERRIDE_BUTTON = 9; //???
+    int AUTO_COMPRESSOR_BUTTON = 10; //???
 
     int SHOOTING_BUTTON = 9;
     int STOP_SHOOTING_BUTTON = 10;
+    int LOAD_CHANNEL = 1;
+    int RELOAD_CHANNEL = 2;
 
     //MOTORS
     private DifferentialDrive newHkDrive;
@@ -98,6 +102,8 @@ public class Robot extends IterativeRobot {
     
 	Compressor comp;
 	DoubleSolenoid frisbeeLoader;
+    private boolean isCompressing;
+    private boolean isManualCompFlag;
 
 
    ///making a change to test with Marlahna
@@ -127,7 +133,8 @@ public class Robot extends IterativeRobot {
    
 
             comp = new Compressor(COMPRESSOR_PORT);
-            frisb
+            frisbeeLoader = new DoubleSolenoid(LOAD_CHANNEL, RELOAD_CHANNEL);            //construct double solenoid
+
 
             //compressorRelay = new Relay(1, Relay.Direction.kForward);
             //loadingRelay = new Relay(3, Relay.Direction.kBoth);
@@ -162,32 +169,13 @@ public class Robot extends IterativeRobot {
 
         while (isOperatorControl() && isEnabled()) {
            
+            checkCompressor();
             newCheckDrive();
             checkLoadButtons();                    
             
-            if (pressureLimitSwitch.get() == false){
-                //compressorRelaySwitchOn();
-            }
-            
-            if (pressureLimitSwitch.get() == true){
-                //compressorRelaySwitchOff();
-            }
-
-<<<<<<< HEAD
             //newCheckJawMotorButton();  //11 & 12
-=======
-            
-            if (frisbeeStick.getRawButton(3)) {
-                //compressorRelaySwitchOff();
-                //loadingRelaySwitchOff();
-                //climbRelaySwitchOff();
-            }
-            if (frisbeeStick.getRawButton(4)) {
-                //debug_CheckRelays();
-            }
             //checkShootingJawMotorButton();
-            newCheckJawMotorButton();  //11 & 12
->>>>>>> creaed shooting and nonshooting buttopns
+            //newCheckJawMotorButton();  //11 & 12
             
             checkShootingWheelButton();
 
@@ -198,6 +186,46 @@ public class Robot extends IterativeRobot {
     }
 
 
+    // basic compressor functionality methods -Aldenis
+    public void compressorCLOn() {
+        this.comp.setClosedLoopControl(true);
+        this.comp.start();
+        SmartDashboard.putString("compressorStatus", "CL is on");
+    }
+
+    public void compressorCLOff() {
+        this.comp.setClosedLoopControl(false);
+        this.comp.start();
+        SmartDashboard.putString("compressorStatus", "CL is off");
+    }
+
+    public void checkCompressor() {
+        
+
+
+        if (maniStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
+            isManualCompFlag = true;
+        } else if(maniStick.getRawButton(AUTO_COMPRESSOR_BUTTON){
+            isManualCompFlag = false;
+        }
+
+        if(isManualCompFlag){
+            compressorCLOn();
+        } else {
+            compressorCLOff();
+        }
+
+    }
+
+
+    public void checkComboLaunchingButton(){
+        if (frisbeeStick.getRawButton(3)) {
+            // compressorRelaySwitchOff();
+            // loadingRelaySwitchOff();
+            // climbRelaySwitchOff();
+        }
+
+    }
     public void checkLoadButtons(){
         if (frisbeeStick.getRawButton(LOAD_BUTTON)) {
             loadFrisbee();
@@ -209,15 +237,14 @@ public class Robot extends IterativeRobot {
     }
 
     public void loadFrisbee() {
-        //loadingRelay.set(Relay.Value.kForward);
-        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
 
+        this.frisbeeLoader.set(DoubleSolenoid.Value.kForward);
+       
     }
 
     public void reloadFrisbee() {
-        //loadingRelay.set(Relay.Value.kReverse);
-        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
-    }
+        this.frisbeeLoader.set(DoubleSolenoid.Value.kReverse);
+       }
 
 
     public void newCheckDrive() {
