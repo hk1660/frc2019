@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -62,6 +63,9 @@ public class Robot extends IterativeRobot {
     int UNLOAD_BUTTON = 6;
 
 
+    int SHOOTING_BUTTON = 9;
+    int STOP_SHOOTING_BUTTON = 10;
+
     //MOTORS
     private DifferentialDrive newHkDrive;
 
@@ -69,8 +73,8 @@ public class Robot extends IterativeRobot {
     private WPI_TalonSRX rightDriveR;
     private WPI_TalonSRX leftDriveF;
     private WPI_TalonSRX leftDriveR;
-    private WPI_TalonSRX shootingWheel1FWD, shootingWheel1REV, shootingWheel2FWD, shootingWheel2REV;
-    private Jaguar shootingPitchMotor;
+    private WPI_TalonSRX shootingWheel1, shootingWheel2, shootingWheel3, shootingWheel4;
+    private TalonSRX shootingJawMotor;
 
     private Relay loadingRelay, climbRelay, compressorRelay;
 
@@ -85,7 +89,7 @@ public class Robot extends IterativeRobot {
     //private static double ROBOT_TURN_SPEED = 0.80;
     //private static String CAMERA_STATUS = "CAM_STATUS";
     //private boolean slow_drive_mode = true;
-    private boolean shooting_motor_switch = true;
+    private boolean shootingMotorFlag = true;
     private boolean is_launching = false;
     Timer launchingTimer = new Timer();
     //private Timer alignmentTimer = new Timer();
@@ -115,11 +119,11 @@ public class Robot extends IterativeRobot {
 
             //newHkDrive = new DifferentialDrive(rightDriveF, rightDriveR, rightDriveF, rightDriveR);
 
-            shootingPitchMotor = new Jaguar(JAW);
-            shootingWheel1FWD = new WPI_TalonSRX(SHOOT1);
-            shootingWheel1REV = new WPI_TalonSRX(SHOOT2);
-            shootingWheel2FWD = new WPI_TalonSRX(SHOOT3);
-            shootingWheel2REV = new WPI_TalonSRX(SHOOT4);
+            shootingJawMotor = new TalonSRX(JAW);
+            shootingWheel1 = new WPI_TalonSRX(SHOOT1);
+            shootingWheel2 = new WPI_TalonSRX(SHOOT2);
+            shootingWheel3 = new WPI_TalonSRX(SHOOT3);
+            shootingWheel4 = new WPI_TalonSRX(SHOOT4);
    
 
             comp = new Compressor(COMPRESSOR_PORT);
@@ -153,7 +157,7 @@ public class Robot extends IterativeRobot {
 
     
     public void teleopPeriodic() {
-        shooting_motor_switch = false;
+        shootingMotorFlag = false;
         System.out.println("__________________teleop__________________");
 
         while (isOperatorControl() && isEnabled()) {
@@ -169,7 +173,21 @@ public class Robot extends IterativeRobot {
                 //compressorRelaySwitchOff();
             }
 
+<<<<<<< HEAD
             //newCheckJawMotorButton();  //11 & 12
+=======
+            
+            if (frisbeeStick.getRawButton(3)) {
+                //compressorRelaySwitchOff();
+                //loadingRelaySwitchOff();
+                //climbRelaySwitchOff();
+            }
+            if (frisbeeStick.getRawButton(4)) {
+                //debug_CheckRelays();
+            }
+            //checkShootingJawMotorButton();
+            newCheckJawMotorButton();  //11 & 12
+>>>>>>> creaed shooting and nonshooting buttopns
             
             checkShootingWheelButton();
 
@@ -221,6 +239,37 @@ public class Robot extends IterativeRobot {
 
     }
     
+    public void checkShootingJawMotorButton() {
+        try {
+            shootingJawMotor.set(0.0);
+
+            if (!frisbeeStick.getRawButton(11)) // not pressed auto-aim button
+            {
+
+                double joy_y_val = frisbeeStick.getY();
+
+                if (joy_y_val > 0) {
+                    if (highLimitSwitch.get() == false) {
+                        shootingJawMotor.set(joy_y_val);
+                    } else {
+                        shootingJawMotor.set(0.0);
+                    }
+                }
+                if (joy_y_val < 0) {
+                    if (lowLimitSwitch.get() == false) {
+                        shootingJawMotor.set(joy_y_val);
+                    } else {
+                        shootingJawMotor.set(0.0);
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 /*
     public void checkResetAlignment() {
         if (frisbeeStick.getRawButton(1)) {
@@ -258,27 +307,27 @@ public class Robot extends IterativeRobot {
             try {
                 if (camera.isWithinThresholdY(camera.getDesiredY(), camera.getCurrentY())) {
                     System.out.println("\tY IS ALIGNED");
-                    shootingPitchMotor.set(0);
+                    shootingJawMotor.set(0);
                     return true;
                 } else {
                     if (camera.getCurrentY() < camera.getDesiredY()) {
                         if(highLimitSwitch.get() == false)
                         {
-                            shootingPitchMotor.set(1); // pitch up    
+                            shootingJawMotor.set(1); // Jaw up    
                         }
                         else
                         {
-                            shootingPitchMotor.set(0); 
+                            shootingJawMotor.set(0); 
                         }
                         
                     } else {
                         if(lowLimitSwitch.get() == false)
                         {
-                            shootingPitchMotor.set(-1); //pitch down
+                            shootingJawMotor.set(-1); //Jaw down
                         }
                         else
                         {
-                            shootingPitchMotor.set(0);
+                            shootingJawMotor.set(0);
                         }
                         
                     }
@@ -295,7 +344,7 @@ public class Robot extends IterativeRobot {
     {
         if(camera!=null && camera.isCameraRunning())
         {
-            shootingPitchMotor.set(0); //make sure the pitch motor stops when camera stops 
+            shootingJawMotor.set(0); //make sure the Jaw motor stops when camera stops 
             camera.stopProcessingImage();
             alignmentTimer.stop();
             alignmentTimer.reset();           
@@ -436,10 +485,10 @@ public class Robot extends IterativeRobot {
                 } 
             }
             if (autonomoustimer.get() > 6 && autonomoustimer.get() < 15) {
-                shootingWheel1FWD.set(-1.0);
-                shootingWheel1REV.set(-1.0);
-                shootingWheel2FWD.set(-1.0);
-                shootingWheel2REV.set(-1.0);
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
             }
             if (autonomoustimer.get() > 8 && autonomoustimer.get() < 9) {
                 
@@ -478,10 +527,10 @@ public class Robot extends IterativeRobot {
   
         }
             if (autonomoustimer.get() > 6 && autonomoustimer.get() < 15) {
-                shootingWheel1FWD.set(-1.0);
-                shootingWheel1REV.set(-1.0);
-                shootingWheel2FWD.set(-1.0);
-                shootingWheel2REV.set(-1.0);
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
             }
             if (autonomoustimer.get() > 8 && autonomoustimer.get() < 9) {
                 reloadFrisbee();
@@ -529,18 +578,18 @@ public class Robot extends IterativeRobot {
     }
 */
 
-    public void newCheckPitchMotorButton() {
+    public void newCheckJawMotorButton() {
                       
-    	double pitchSpeed = 0.5;
-    	boolean pitchUpVal = frisbeeStick.getRawButton(11);
-    	boolean pitchDownVal = frisbeeStick.getRawButton(12);
+    	double JawSpeed = 0.5;
+    	boolean JawUpVal = frisbeeStick.getRawButton(11);
+    	boolean JawDownVal = frisbeeStick.getRawButton(12);
         
-    	if(pitchUpVal){
-    		shootingPitchMotor.set(pitchSpeed * 1.0);
-    	} else if (pitchDownVal){
-    		shootingPitchMotor.set(pitchSpeed * -1.0);
+    	if(JawUpVal){
+    		shootingJawMotor.set(JawSpeed * 1.0);
+    	} else if (JawDownVal){
+    		shootingJawMotor.set(JawSpeed * -1.0);
     	}else{
-    		shootingPitchMotor.set(0.0);
+    		shootingJawMotor.set(0.0);
 
     	}
     		
@@ -549,9 +598,9 @@ public class Robot extends IterativeRobot {
 
     
    /*
-    public void checkShootingPitchMotorButton() {
+    public void checkShootingJawMotorButton() {
         try {
-       //shootingPitchMotor.setX(0);
+       //shootingJawMotor.setX(0);
                       
        if(!frisbeeStick.getRawButton(11))  //not pressed auto-aim button
         {
@@ -562,22 +611,22 @@ public class Robot extends IterativeRobot {
                 {
                     if( highLimitSwitch.get() == false)
                     {
-                        shootingPitchMotor.set(joy_y_val);
+                        shootingJawMotor.set(joy_y_val);
                     }
                     else
                     {
-                        shootingPitchMotor.set(0);
+                        shootingJawMotor.set(0);
                     }
                 } 
                 if (joy_y_val < 0 )
                 {
                     if( lowLimitSwitch.get() == false)
                     {
-                        shootingPitchMotor.set(joy_y_val);
+                        shootingJawMotor.set(joy_y_val);
                     }
                     else
                     {
-                        shootingPitchMotor.set(0);
+                        shootingJawMotor.set(0);
                     }
                 }
          
@@ -637,22 +686,17 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putString("Climb piston", "up");
     }
 */
-    public void climbRelaySwitchOff() {
-        climbRelay.set(Relay.Value.kOff);
-        //System.out.print("Climb Relay Value: " + climbRelay.get().value);
-        //SmartDashboard.putInt("Climb Relay Value", climbRelay.get().value);
 
-    }
     public void turnShootingWheelOn() 
     {
     if (isShootingWheelSpinning == false)
     {
         try {
                 isShootingWheelSpinning = true;
-                shootingWheel1FWD.set(-1.0);
-                shootingWheel1REV.set(-1.0);
-                shootingWheel2FWD.set(-1.0);
-                shootingWheel2REV.set(-1.0);
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
         }
         catch (Exception e) 
         {
@@ -665,10 +709,10 @@ public class Robot extends IterativeRobot {
     {
         try {
         isShootingWheelSpinning = false;
-                shootingWheel1FWD.set(0);
-                shootingWheel1REV.set(0);
-                shootingWheel2FWD.set(0);
-                shootingWheel2REV.set(0);
+                shootingWheel1.set(0);
+                shootingWheel2.set(0);
+                shootingWheel3.set(0);
+                shootingWheel4.set(0);
         }
         catch (Exception e)
         {   
@@ -677,24 +721,25 @@ public class Robot extends IterativeRobot {
     }
     public void checkShootingWheelButton() {
         try {
-            if (frisbeeStick.getRawButton(9)) {
-                shooting_motor_switch = true;
+
+            if (frisbeeStick.getRawButton(SHOOTING_BUTTON)) {
+                shootingMotorFlag = true;
             } 
-            if (frisbeeStick.getRawButton(10)) {
-                shooting_motor_switch = false;
+            if (frisbeeStick.getRawButton(STOP_SHOOTING_BUTTON)) {
+                shootingMotorFlag = false;
             }
 
-            if (shooting_motor_switch == true) {
-                shootingWheel1FWD.set(-1.0);
-                shootingWheel1REV.set(-1.0);
-                shootingWheel2FWD.set(-1.0);
-                shootingWheel2REV.set(-1.0);
+            if (shootingMotorFlag == true) {
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
 
             } else {
-                shootingWheel1FWD.set(0);
-                shootingWheel1REV.set(0);
-                shootingWheel2FWD.set(0);
-                shootingWheel2REV.set(0);
+                shootingWheel1.set(0);
+                shootingWheel2.set(0);
+                shootingWheel3.set(0);
+                shootingWheel4.set(0);
             }
         } catch (Exception e) {
         }
@@ -703,7 +748,7 @@ public class Robot extends IterativeRobot {
     public void checkComboLaunchingButton() {
         if (frisbeeStick.getRawButton(1) && is_launching == false) {
             is_launching = true;
-            shooting_motor_switch = true;
+            shootingMotorFlag = true;
             launchingTimer.reset();
             launchingTimer.start();
         }
@@ -723,7 +768,7 @@ public class Robot extends IterativeRobot {
         if(launchingTimer.get()> 4)
         {
             launchingTimer.stop();
-            shooting_motor_switch = false;
+            shootingMotorFlag = false;
         }
     }
     /*
