@@ -65,8 +65,8 @@ public class Robot extends IterativeRobot {
 
     private WPI_TalonSRX rightDriveF;
     private WPI_TalonSRX rightDriveR;
-    private WPI_TalonSRX rightDriveF;
-    private WPI_TalonSRX rightDriveR;
+    private WPI_TalonSRX leftDriveF;
+    private WPI_TalonSRX leftDriveR;
     private WPI_TalonSRX shootingWheel1FWD, shootingWheel1REV, shootingWheel2FWD, shootingWheel2REV;
     private Jaguar shootingPitchMotor;
 
@@ -94,6 +94,8 @@ public class Robot extends IterativeRobot {
    
 
     public void robotInit() {
+        System.out.println("__________________init__________________");
+
 
         try {
             driveStick = new Joystick(1);
@@ -102,8 +104,8 @@ public class Robot extends IterativeRobot {
             //Drivetrain Initializations
             rightDriveF = new WPI_TalonSRX(RIGHT1);
             rightDriveR = new WPI_TalonSRX(RIGHT2);
-            rightDriveF = new WPI_TalonSRX(LEFT1);
-            rightDriveR = new WPI_TalonSRX(LEFT2);
+            leftDriveF = new WPI_TalonSRX(LEFT1);
+            leftDriveR = new WPI_TalonSRX(LEFT2);
 
             //newHkDrive = new DifferentialDrive(rightDriveF, rightDriveR, rightDriveF, rightDriveR);
 
@@ -144,6 +146,7 @@ public class Robot extends IterativeRobot {
     
     public void teleopPeriodic() {
         shooting_motor_switch = false;
+        System.out.println("__________________teleop__________________");
          //climbRelaySwitchBack();
         while (isOperatorControl() && isEnabled()) {
 
@@ -746,7 +749,9 @@ public class Robot extends IterativeRobot {
     	
     	double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
     	double dTurn  = driveStick.getRawAxis(LEFT_X_AXIS);
-    	newDrive(dSpeed * -1.0, dTurn * -1.0);
+        newDrive(dSpeed * -1.0, dTurn * -1.0);
+        System.out.println("Drive: dSpeed = " + dSpeed + ", dTurn= "+ dTurn);
+
         
     }
     
