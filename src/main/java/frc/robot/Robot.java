@@ -13,22 +13,20 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Jaguar;
 
-//import edu.wpi.first.wpilibj.camera.AxisCamera;
-//import edu.wpi.first.wpilibj.image.*;
-//import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
-//import edu.wpi.first.wpilibj.image.NIVision.Rect;
+
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -58,6 +56,10 @@ public class Robot extends IterativeRobot {
     int RIGHT_TRIGGER = 3;
     int RIGHT_X_AXIS = 4;
     int RIGHT_Y_AXIS = 5;
+
+    int COMPRESSOR_PORT = 0;
+    int LOAD_BUTTON = 5;
+    int UNLOAD_BUTTON = 6;
 
 
     //MOTORS
@@ -89,6 +91,10 @@ public class Robot extends IterativeRobot {
     //private Timer alignmentTimer = new Timer();
     private SendableChooser autonChooser = new SendableChooser();
     private boolean isShootingWheelSpinning = false;
+    
+	Compressor comp;
+	DoubleSolenoid frisbeeLoader;
+
 
    ///making a change to test with Marlahna
    
@@ -115,11 +121,13 @@ public class Robot extends IterativeRobot {
             shootingWheel2FWD = new WPI_TalonSRX(SHOOT3);
             shootingWheel2REV = new WPI_TalonSRX(SHOOT4);
    
+
+            comp = new Compressor(COMPRESSOR_PORT);
+            frisb
+
+            //compressorRelay = new Relay(1, Relay.Direction.kForward);
+            //loadingRelay = new Relay(3, Relay.Direction.kBoth);
             
-            compressorRelay = new Relay(1, Relay.Direction.kForward);
-            loadingRelay = new Relay(3, Relay.Direction.kBoth);
-            climbRelay = new Relay(2, Relay.Direction.kBoth);
-   
             compressorRelay.set(Relay.Value.kOff);
             loadingRelay.set(Relay.Value.kOff);
             climbRelay.set(Relay.Value.kOff); 
@@ -147,28 +155,11 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         shooting_motor_switch = false;
         System.out.println("__________________teleop__________________");
-         //climbRelaySwitchBack();
-        while (isOperatorControl() && isEnabled()) {
 
-    //         System.out.println("\n\t boundingRectWidth: " + boundingRectWidth + " ... angle: "+ current.current_y); //delete after test
-            
+        while (isOperatorControl() && isEnabled()) {
+           
             newCheckDrive();
-        	
-            if (frisbeeStick.getRawButton(5)) {
-                //loadingRelaySwitchFwd();
-            }
-            if (frisbeeStick.getRawButton(6)) {
-               // loadingRelaySwitchBack();
-            }
-            
-            /*
-            if (manipJoystick.getRawButton(11)) {
-                climbRelaySwitchFwd();
-            }
-            if (manipJoystick.getRawButton(12)) {
-                climbRelaySwitchBack();
-            }
-            */            
+            checkLoadButtons();                    
             
             if (pressureLimitSwitch.get() == false){
                 //compressorRelaySwitchOn();
@@ -178,30 +169,36 @@ public class Robot extends IterativeRobot {
                 //compressorRelaySwitchOff();
             }
 
-            
-            if (frisbeeStick.getRawButton(3)) {
-                //compressorRelaySwitchOff();
-                //loadingRelaySwitchOff();
-                //climbRelaySwitchOff();
-            }
-            if (frisbeeStick.getRawButton(4)) {
-                //debug_CheckRelays();
-            }
-            //checkShootingPitchMotorButton();
-            newCheckPitchMotorButton();  //11 & 12
+            //newCheckJawMotorButton();  //11 & 12
             
             checkShootingWheelButton();
 
-            //checkResetAlignment();
-
-            checkLaunchingButton();
-
-            //checkCameraButtons();
-            
-            //test_adjustRobotTurnSpeed();
+            //checkComboLaunchingButton();          //get working next
             
             Timer.delay(0.01);
         }
+    }
+
+
+    public void checkLoadButtons(){
+        if (frisbeeStick.getRawButton(LOAD_BUTTON)) {
+            loadFrisbee();
+        }
+        if (frisbeeStick.getRawButton(UNLOAD_BUTTON)) {
+           reloadFrisbee();
+        }
+
+    }
+
+    public void loadFrisbee() {
+        //loadingRelay.set(Relay.Value.kForward);
+        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
+
+    }
+
+    public void reloadFrisbee() {
+        //loadingRelay.set(Relay.Value.kReverse);
+        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
     }
 
 
@@ -446,24 +443,24 @@ public class Robot extends IterativeRobot {
             }
             if (autonomoustimer.get() > 8 && autonomoustimer.get() < 9) {
                 
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 9 && autonomoustimer.get() < 10) {
                 stopCamera();
                 jagDrive(0, 0);
-                loadingRelaySwitchFwd();
+                loadFrisbee();
             }
             if (autonomoustimer.get() > 10 && autonomoustimer.get() < 11) {
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 11 && autonomoustimer.get() < 12) {
-                loadingRelaySwitchFwd();
+                loadFrisbee();
             }
             if (autonomoustimer.get() > 12 && autonomoustimer.get() < 13) {
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 13 && autonomoustimer.get() < 14) {
-                loadingRelaySwitchFwd();
+                loadFrisbee();
             }
         }
     }
@@ -487,24 +484,24 @@ public class Robot extends IterativeRobot {
                 shootingWheel2REV.set(-1.0);
             }
             if (autonomoustimer.get() > 8 && autonomoustimer.get() < 9) {
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 9 && autonomoustimer.get() < 10) {
-                loadingRelaySwitchFwd();
+                loadFrisbee();
                  stopCamera();
                 jagDrive(0, 0);
             }
             if (autonomoustimer.get() > 10 && autonomoustimer.get() < 11) {
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 11 && autonomoustimer.get() < 12) {
-                loadingRelaySwitchFwd();
+                loadFrisbee();
             }
             if (autonomoustimer.get() > 12 && autonomoustimer.get() < 13) {
-                loadingRelaySwitchBack();
+                reloadFrisbee();
             }
             if (autonomoustimer.get() > 13 && autonomoustimer.get() < 14) {
-                loadingRelaySwitchFwd();
+                loadFrisbee();
             }
         }
     }
@@ -618,16 +615,6 @@ public class Robot extends IterativeRobot {
         //System.out.println("Compressor Relay Value Now: " + compressorRelay.get().value);
     }
 
-    public void loadingRelaySwitchFwd() {
-        loadingRelay.set(Relay.Value.kForward);
-        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
-
-    }
-
-    public void loadingRelaySwitchBack() {
-        loadingRelay.set(Relay.Value.kReverse);
-        //System.out.println("Loading Relay Value Now: " + loadingRelay.get().value);
-    }
 
     public void loadingRelaySwitchOff() {
         loadingRelay.set(Relay.Value.kOff);
@@ -713,7 +700,7 @@ public class Robot extends IterativeRobot {
         }
     }
 
-    public void checkLaunchingButton() {
+    public void checkComboLaunchingButton() {
         if (frisbeeStick.getRawButton(1) && is_launching == false) {
             is_launching = true;
             shooting_motor_switch = true;
@@ -723,10 +710,10 @@ public class Robot extends IterativeRobot {
 
         if (is_launching) {
             if (launchingTimer.get() < 0.4) {
-                //loadingRelaySwitchBack();
+                //reloadFrisbee();
             } 
             else if ( launchingTimer.get() > 0.4 && launchingTimer.get() < 0.8 ){
-                //loadingRelaySwitchFwd();
+                //loadFrisbee();
             }
             else {   
                 is_launching = false;
