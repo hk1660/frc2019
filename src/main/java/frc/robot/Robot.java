@@ -52,13 +52,21 @@ public class Robot extends IterativeRobot {
     int SHOOT4 = 55;
     int JAW = 0;
 
+    int LEFT_X_AXIS = 0;
+    int LEFT_Y_AXIS = 1;
+    int LEFT_TRIGGER = 2;
+    int RIGHT_TRIGGER = 3;
+    int RIGHT_X_AXIS = 4;
+    int RIGHT_Y_AXIS = 5;
+
+
     //MOTORS
     private DifferentialDrive newHkDrive;
 
-    private WPI_TalonSRX rightDrive1;
-    private WPI_TalonSRX rightDrive2;
-    private WPI_TalonSRX leftDrive1;
-    private WPI_TalonSRX leftDrive2;
+    private WPI_TalonSRX rightDriveF;
+    private WPI_TalonSRX rightDriveR;
+    private WPI_TalonSRX rightDriveF;
+    private WPI_TalonSRX rightDriveR;
     private WPI_TalonSRX shootingWheel1FWD, shootingWheel1REV, shootingWheel2FWD, shootingWheel2REV;
     private Jaguar shootingPitchMotor;
 
@@ -92,12 +100,12 @@ public class Robot extends IterativeRobot {
             frisbeeStick = new Joystick(2);
 
             //Drivetrain Initializations
-            rightDrive1 = new WPI_TalonSRX(RIGHT1);
-            rightDrive2 = new WPI_TalonSRX(RIGHT2);
-            leftDrive1 = new WPI_TalonSRX(LEFT1);
-            leftDrive2 = new WPI_TalonSRX(LEFT2);
+            rightDriveF = new WPI_TalonSRX(RIGHT1);
+            rightDriveR = new WPI_TalonSRX(RIGHT2);
+            rightDriveF = new WPI_TalonSRX(LEFT1);
+            rightDriveR = new WPI_TalonSRX(LEFT2);
 
-            //newHkDrive = new DifferentialDrive(rightDrive1, rightDrive2, leftDrive1, leftDrive2);
+            //newHkDrive = new DifferentialDrive(rightDriveF, rightDriveR, rightDriveF, rightDriveR);
 
             shootingPitchMotor = new Jaguar(JAW);
             shootingWheel1FWD = new WPI_TalonSRX(SHOOT1);
@@ -131,6 +139,66 @@ public class Robot extends IterativeRobot {
             System.out.println(e);
          }
 
+    }
+
+    
+    public void teleopPeriodic() {
+        shooting_motor_switch = false;
+         //climbRelaySwitchBack();
+        while (isOperatorControl() && isEnabled()) {
+
+    //         System.out.println("\n\t boundingRectWidth: " + boundingRectWidth + " ... angle: "+ current.current_y); //delete after test
+            
+            newCheckDrive();
+        	
+            if (frisbeeStick.getRawButton(5)) {
+                //loadingRelaySwitchFwd();
+            }
+            if (frisbeeStick.getRawButton(6)) {
+               // loadingRelaySwitchBack();
+            }
+            
+            /*
+            if (manipJoystick.getRawButton(11)) {
+                climbRelaySwitchFwd();
+            }
+            if (manipJoystick.getRawButton(12)) {
+                climbRelaySwitchBack();
+            }
+            */            
+            
+            if (pressureLimitSwitch.get() == false){
+                //compressorRelaySwitchOn();
+            }
+            
+            if (pressureLimitSwitch.get() == true){
+                //compressorRelaySwitchOff();
+            }
+
+            
+            if (frisbeeStick.getRawButton(3)) {
+                //compressorRelaySwitchOff();
+                //loadingRelaySwitchOff();
+                //climbRelaySwitchOff();
+            }
+            if (frisbeeStick.getRawButton(4)) {
+                //debug_CheckRelays();
+            }
+            //checkShootingPitchMotorButton();
+            newCheckPitchMotorButton();  //11 & 12
+            
+            checkShootingWheelButton();
+
+            //checkResetAlignment();
+
+            checkLaunchingButton();
+
+            //checkCameraButtons();
+            
+            //test_adjustRobotTurnSpeed();
+            
+            Timer.delay(0.01);
+        }
     }
     
 /*
@@ -676,19 +744,19 @@ public class Robot extends IterativeRobot {
     */
     public void newCheckDrive(){
     	
-    	double dSpeed = driveStick.getRawAxis(1);
-    	double dTurn  = driveStick.getRawAxis(0);
+    	double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
+    	double dTurn  = driveStick.getRawAxis(LEFT_X_AXIS);
     	newDrive(dSpeed * -1.0, dTurn * -1.0);
         
     }
     
-    //Replaces method from the RobotDrive class to use Jaguars
+    //Replaces method from the RobotDrive class to use WPI_TalonSRX
     public void newDrive(double dSpeed, double dTurn){
         
-        rightDrive1.set(dSpeed + dTurn);
-    	rightDrive2.set(dSpeed + dTurn);
-    	leftDrive1.set(dSpeed - dTurn);
-    	leftDrive2.set(dSpeed - dTurn);
+        rightDriveF.set(dSpeed + dTurn);
+    	rightDriveR.set(dSpeed + dTurn);
+    	rightDriveF.set(dSpeed - dTurn);
+    	rightDriveR.set(dSpeed - dTurn);
     	
     }
     
@@ -755,69 +823,4 @@ public class Robot extends IterativeRobot {
 
 */
 
-    public void operatorControl() {
-        shooting_motor_switch = false;
-         //climbRelaySwitchBack();
-        while (isOperatorControl() && isEnabled()) {
-
-    //         System.out.println("\n\t boundingRectWidth: " + boundingRectWidth + " ... angle: "+ current.current_y); //delete after test
-            
-            newCheckDrive();
-        	
-            if (frisbeeStick.getRawButton(5)) {
-                //loadingRelaySwitchFwd();
-            }
-            if (frisbeeStick.getRawButton(6)) {
-               // loadingRelaySwitchBack();
-            }
-            
-            /*
-            if (manipJoystick.getRawButton(11)) {
-                climbRelaySwitchFwd();
-            }
-            if (manipJoystick.getRawButton(12)) {
-                climbRelaySwitchBack();
-            }
-            */            
-            
-            if (pressureLimitSwitch.get() == false){
-                //compressorRelaySwitchOn();
-            }
-            
-            if (pressureLimitSwitch.get() == true){
-                //compressorRelaySwitchOff();
-            }
-
-            
-            if (frisbeeStick.getRawButton(3)) {
-                //compressorRelaySwitchOff();
-                //loadingRelaySwitchOff();
-                //climbRelaySwitchOff();
-            }
-            if (frisbeeStick.getRawButton(4)) {
-                //debug_CheckRelays();
-            }
-            //checkShootingPitchMotorButton();
-            newCheckPitchMotorButton();  //11 & 12
-            
-            checkShootingWheelButton();
-
-            //checkResetAlignment();
-
-            checkLaunchingButton();
-
-            //checkCameraButtons();
-            
-            //test_adjustRobotTurnSpeed();
-            
-            Timer.delay(0.01);
-        }
-    }
 }
-
-
-
-
-
-
-//}
