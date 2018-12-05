@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.GenericHID;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -203,9 +204,9 @@ public class Robot extends IterativeRobot {
         
 
 
-        if (maniStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
+        if (frisbeeStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
             isManualCompFlag = true;
-        } else if(maniStick.getRawButton(AUTO_COMPRESSOR_BUTTON){
+        } else if(frisbeeStick.getRawButton(AUTO_COMPRESSOR_BUTTON)){
             isManualCompFlag = false;
         }
 
@@ -218,14 +219,6 @@ public class Robot extends IterativeRobot {
     }
 
 
-    public void checkComboLaunchingButton(){
-        if (frisbeeStick.getRawButton(3)) {
-            // compressorRelaySwitchOff();
-            // loadingRelaySwitchOff();
-            // climbRelaySwitchOff();
-        }
-
-    }
     public void checkLoadButtons(){
         if (frisbeeStick.getRawButton(LOAD_BUTTON)) {
             loadFrisbee();
@@ -266,6 +259,7 @@ public class Robot extends IterativeRobot {
 
     }
     
+    /*
     public void checkShootingJawMotorButton() {
         try {
             shootingJawMotor.set(0.0);
@@ -296,6 +290,7 @@ public class Robot extends IterativeRobot {
             System.out.println(e);
         }
     }
+    */
 
 /*
     public void checkResetAlignment() {
@@ -612,11 +607,11 @@ public class Robot extends IterativeRobot {
     	boolean JawDownVal = frisbeeStick.getRawButton(12);
         
     	if(JawUpVal){
-    		shootingJawMotor.set(JawSpeed * 1.0);
+    		//shootingJawMotor.set(JawSpeed * 1.0);
     	} else if (JawDownVal){
-    		shootingJawMotor.set(JawSpeed * -1.0);
+    		//shootingJawMotor.set(JawSpeed * -1.0);
     	}else{
-    		shootingJawMotor.set(0.0);
+    		//shootingJawMotor.set(0.0);
 
     	}
     		
