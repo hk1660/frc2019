@@ -203,6 +203,26 @@ public class Robot extends IterativeRobot {
             Timer.delay(0.01);
         }
     }
+
+
+    public void newCheckDrive() {
+
+        double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
+        double dTurn = driveStick.getRawAxis(LEFT_X_AXIS);
+        newDrive(dSpeed * 1.0, dTurn * -1.0);
+        System.out.println("Drive: dSpeed = " + dSpeed + ", dTurn= " + dTurn);
+
+    }
+
+    // Replaces method from the RobotDrive class to use WPI_TalonSRX
+    public void newDrive(double dSpeed, double dTurn) {
+
+        rightDriveF.set(dSpeed + dTurn);
+        rightDriveR.set(dSpeed + dTurn);
+        leftDriveF.set(dSpeed - dTurn);
+        leftDriveR.set(dSpeed - dTurn);
+
+    }
     
 /*
     public void checkResetAlignment() {
@@ -745,25 +765,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putDouble("ROBOT_TURN_SPEED", ROBOT_TURN_SPEED);
     }
     */
-    public void newCheckDrive(){
-    	
-    	double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
-    	double dTurn  = driveStick.getRawAxis(LEFT_X_AXIS);
-        newDrive(dSpeed * -1.0, dTurn * -1.0);
-        System.out.println("Drive: dSpeed = " + dSpeed + ", dTurn= "+ dTurn);
-
-        
-    }
-    
-    //Replaces method from the RobotDrive class to use WPI_TalonSRX
-    public void newDrive(double dSpeed, double dTurn){
-        
-        rightDriveF.set(dSpeed + dTurn);
-    	rightDriveR.set(dSpeed + dTurn);
-    	rightDriveF.set(dSpeed - dTurn);
-    	rightDriveR.set(dSpeed - dTurn);
-    	
-    }
+   
     
 /*
     
