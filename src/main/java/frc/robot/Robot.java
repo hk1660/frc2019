@@ -52,8 +52,8 @@ public class Robot extends IterativeRobot {
     int SHOOT4 = 55;
     int JAW = 0;
 
-    int LEFT_X_AXIS = 0;
-    int LEFT_Y_AXIS = 1;
+    int LEFT_X_AXIS = 1;
+    int LEFT_Y_AXIS = 0;
     int LEFT_TRIGGER = 2;
     int RIGHT_TRIGGER = 3;
     int RIGHT_X_AXIS = 4;
@@ -208,7 +208,7 @@ public class Robot extends IterativeRobot {
     public void newCheckDrive() {
 
         double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
-        double dTurn = driveStick.getRawAxis(LEFT_X_AXIS);
+        double dTurn = driveStick.getRawAxis(RIGHT_X_AXIS);
         newDrive(dSpeed * 1.0, dTurn * -1.0);
         System.out.println("Drive: dSpeed = " + dSpeed + ", dTurn= " + dTurn);
 
