@@ -52,22 +52,23 @@ public class Robot extends IterativeRobot {
     int SHOOT4 = 55;
     int JAW = 0;
 
-    int LEFT_X_AXIS = 1;
-    int LEFT_Y_AXIS = 0;
+    int LEFT_X_AXIS = 0;
+    int LEFT_Y_AXIS = 1;
     int LEFT_TRIGGER = 2;
     int RIGHT_TRIGGER = 3;
     int RIGHT_X_AXIS = 4;
     int RIGHT_Y_AXIS = 5;
 
+    //BUTTONS
+    int LOAD_BUTTON = 5;  //lb
+    int UNLOAD_BUTTON = 6;  //rb
+    int PRESSURE_OVERRIDE_BUTTON = 8; //START
+    int AUTO_COMPRESSOR_BUTTON = 7; //BACK
+    int SHOOTING_BUTTON = 1;  //a
+    int STOP_SHOOTING_BUTTON = 2;//b
+
+    //PCM PORTS
     int COMPRESSOR_PORT = 0;
-    int LOAD_BUTTON = 5;
-    int UNLOAD_BUTTON = 6;
-
-    int PRESSURE_OVERRIDE_BUTTON = 9; //???
-    int AUTO_COMPRESSOR_BUTTON = 10; //???
-
-    int SHOOTING_BUTTON = 9;
-    int STOP_SHOOTING_BUTTON = 10;
     int LOAD_CHANNEL = 1;
     int RELOAD_CHANNEL = 2;
 
@@ -116,7 +117,7 @@ public class Robot extends IterativeRobot {
 
         try {
             driveStick = new Joystick(1);
-            frisbeeStick = new Joystick(2);
+            //frisbeeStick = new Joystick(2);
 
             //Drivetrain Initializations
             rightDriveF = new WPI_TalonSRX(RIGHT1);
@@ -186,6 +187,83 @@ public class Robot extends IterativeRobot {
         }
     }
 
+/*
+    public void turnShootingWheelOn() {
+        if (isShootingWheelSpinning == false) {
+            try {
+                isShootingWheelSpinning = true;
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public void turnShootingWheelOff() {
+        if (isShootingWheelSpinning) {
+            try {
+                isShootingWheelSpinning = false;
+                shootingWheel1.set(0);
+                shootingWheel2.set(0);
+                shootingWheel3.set(0);
+                shootingWheel4.set(0);
+            } catch (Exception e) {
+            }
+        }
+    }
+*/
+    public void checkShootingWheelButton() {
+        try {
+
+            if (driveStick.getRawButton(SHOOTING_BUTTON)) {
+                shootingMotorFlag = true;
+            }
+            if (driveStick.getRawButton(STOP_SHOOTING_BUTTON)) {
+                shootingMotorFlag = false;
+            }
+
+            if (shootingMotorFlag == true) {
+                shootingWheel1.set(-1.0);
+                shootingWheel2.set(-1.0);
+                shootingWheel3.set(-1.0);
+                shootingWheel4.set(-1.0);
+
+            } else {
+                shootingWheel1.set(0);
+                shootingWheel2.set(0);
+                shootingWheel3.set(0);
+                shootingWheel4.set(0);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void checkComboLaunchingButton() {
+        if (frisbeeStick.getRawButton(1) && is_launching == false) {
+            is_launching = true;
+            shootingMotorFlag = true;
+            launchingTimer.reset();
+            launchingTimer.start();
+        }
+
+        if (is_launching) {
+            if (launchingTimer.get() < 0.4) {
+                // reloadFrisbee();
+            } else if (launchingTimer.get() > 0.4 && launchingTimer.get() < 0.8) {
+                // loadFrisbee();
+            } else {
+                is_launching = false;
+
+            }
+        }
+        if (launchingTimer.get() > 4) {
+            launchingTimer.stop();
+            shootingMotorFlag = false;
+        }
+    }
+
 
     // basic compressor functionality methods -Aldenis
     public void compressorCLOn() {
@@ -204,9 +282,9 @@ public class Robot extends IterativeRobot {
         
 
 
-        if (frisbeeStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
+        if (driveStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
             isManualCompFlag = true;
-        } else if(frisbeeStick.getRawButton(AUTO_COMPRESSOR_BUTTON)){
+        } else if(driveStick.getRawButton(AUTO_COMPRESSOR_BUTTON)){
             isManualCompFlag = false;
         }
 
@@ -220,10 +298,10 @@ public class Robot extends IterativeRobot {
 
 
     public void checkLoadButtons(){
-        if (frisbeeStick.getRawButton(LOAD_BUTTON)) {
+        if (driveStick.getRawButton(LOAD_BUTTON)) {
             loadFrisbee();
         }
-        if (frisbeeStick.getRawButton(UNLOAD_BUTTON)) {
+        if (driveStick.getRawButton(UNLOAD_BUTTON)) {
            reloadFrisbee();
         }
 
@@ -242,9 +320,9 @@ public class Robot extends IterativeRobot {
 
     public void newCheckDrive() {
 
-        double dSpeed = driveStick.getRawAxis(LEFT_Y_AXIS);
-        double dTurn = driveStick.getRawAxis(RIGHT_X_AXIS);
-        newDrive(dSpeed * 1.0, dTurn * -1.0);
+        double dSpeed = driveStick.getRawAxis(RIGHT_Y_AXIS);
+        double dTurn = driveStick.getRawAxis(LEFT_X_AXIS);
+        newDrive(dSpeed * 1.0, dTurn * 1.0);
         System.out.println("Drive: dSpeed = " + dSpeed + ", dTurn= " + dTurn);
 
     }
@@ -252,10 +330,12 @@ public class Robot extends IterativeRobot {
     // Replaces method from the RobotDrive class to use WPI_TalonSRX
     public void newDrive(double dSpeed, double dTurn) {
 
+        
+
         rightDriveF.set(dSpeed + dTurn);
         rightDriveR.set(dSpeed + dTurn);
-        leftDriveF.set(dSpeed - dTurn);
-        leftDriveR.set(dSpeed - dTurn);
+        leftDriveF.set(-(dSpeed - dTurn));
+        leftDriveR.set(-(dSpeed - dTurn));
 
     }
     
@@ -709,90 +789,6 @@ public class Robot extends IterativeRobot {
     }
 */
 
-    public void turnShootingWheelOn() 
-    {
-    if (isShootingWheelSpinning == false)
-    {
-        try {
-                isShootingWheelSpinning = true;
-                shootingWheel1.set(-1.0);
-                shootingWheel2.set(-1.0);
-                shootingWheel3.set(-1.0);
-                shootingWheel4.set(-1.0);
-        }
-        catch (Exception e) 
-        {
-        }
-    }
-    }
-    public void turnShootingWheelOff() 
-    {
-    if (isShootingWheelSpinning)
-    {
-        try {
-        isShootingWheelSpinning = false;
-                shootingWheel1.set(0);
-                shootingWheel2.set(0);
-                shootingWheel3.set(0);
-                shootingWheel4.set(0);
-        }
-        catch (Exception e)
-        {   
-        }   
-    }
-    }
-    public void checkShootingWheelButton() {
-        try {
-
-            if (frisbeeStick.getRawButton(SHOOTING_BUTTON)) {
-                shootingMotorFlag = true;
-            } 
-            if (frisbeeStick.getRawButton(STOP_SHOOTING_BUTTON)) {
-                shootingMotorFlag = false;
-            }
-
-            if (shootingMotorFlag == true) {
-                shootingWheel1.set(-1.0);
-                shootingWheel2.set(-1.0);
-                shootingWheel3.set(-1.0);
-                shootingWheel4.set(-1.0);
-
-            } else {
-                shootingWheel1.set(0);
-                shootingWheel2.set(0);
-                shootingWheel3.set(0);
-                shootingWheel4.set(0);
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    public void checkComboLaunchingButton() {
-        if (frisbeeStick.getRawButton(1) && is_launching == false) {
-            is_launching = true;
-            shootingMotorFlag = true;
-            launchingTimer.reset();
-            launchingTimer.start();
-        }
-
-        if (is_launching) {
-            if (launchingTimer.get() < 0.4) {
-                //reloadFrisbee();
-            } 
-            else if ( launchingTimer.get() > 0.4 && launchingTimer.get() < 0.8 ){
-                //loadFrisbee();
-            }
-            else {   
-                is_launching = false;
-                
-            }
-        }
-        if(launchingTimer.get()> 4)
-        {
-            launchingTimer.stop();
-            shootingMotorFlag = false;
-        }
-    }
     /*
     public void test_adjustRobotTurnSpeed()
     {
