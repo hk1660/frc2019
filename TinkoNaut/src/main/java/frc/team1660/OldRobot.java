@@ -3,7 +3,8 @@
  * online repository: www.github.com/hk1660/frc2018
  */
 
-package org.usfirst.frc.team1660.robot;
+package frc.team1660;
+
 
 
 /*-----IMPORTED LIBRARIES-----*/

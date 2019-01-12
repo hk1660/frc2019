@@ -1,4 +1,4 @@
-package org.team1660.utils;
+package frc.team1660.utils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
