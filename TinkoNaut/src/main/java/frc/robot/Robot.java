@@ -23,11 +23,16 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
+  
+  public static OI oi;
+  public static ExampleSubsystem subsystem;
+  public static CargoGrabber cargoGrabber;
+  public static I2C i2c;
+	public static DriverStation driverstation;
+	public static PowerDistribution pdp;
 
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  Command autonomousCommand;
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -35,10 +40,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    m_chooser.addDefault("Default Auto", new ExampleCommand());
+    oi = new OI();
+    subsystem = new ExampleSubsystem();
+    cargoGrabber = new CargoGrabber();
+    i2c = new I2C(I2C.Port.kOnboard, 8);
+
+
+    chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    SmartDashboard.putData("Auto mode", chooser);
   }
 
   /**
@@ -80,7 +90,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    autonomousCommand = chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -90,8 +100,8 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+    if (autonomousCommand != null) {
+      autonomousCommand.start();
     }
   }
 
@@ -109,8 +119,8 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autonomousCommand != null) {
+      autonomousCommand.cancel();
     }
   }
 
@@ -119,7 +129,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
     Scheduler.getInstance().run();
+
   }
 
   /**

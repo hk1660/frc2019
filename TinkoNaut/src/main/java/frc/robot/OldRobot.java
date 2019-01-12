@@ -21,8 +21,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 
 public class Robot<m_robotDrive> extends IterativeRobot {
 
-	Joystick driverStick = new Joystick(RobotMap.DRIVER_JOYSTICK_PORT);
-	Joystick maniStick = new Joystick(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+
 	HKDrive hkdrive = new HKDrive(driverStick);
 	Lift liftMani = new Lift(maniStick);
 	Mouth mouthMani = new Mouth(maniStick);
