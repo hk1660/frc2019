@@ -16,7 +16,7 @@ import frc.team1660.Robot;
 public class MoveDrivetrain extends Command {
   public MoveDrivetrain() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoGrabber);
+    requires(Robot.hkDrive);
   }
 
   // Called just before this Command runs the first time
@@ -27,7 +27,8 @@ public class MoveDrivetrain extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoGrabber.moveRoller(1.0);
+    Robot.hkDrive.drive(0.0, 1.0, 0.0, 0.0);
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +41,7 @@ public class MoveDrivetrain extends Command {
   @Override
   protected void end() {
 
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.hkDrive.drive(0.0, 0.0, 0.0, 0.0);
 
   }
 
@@ -48,6 +49,6 @@ public class MoveDrivetrain extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.hkDrive.drive(0.0, 0.0, 0.0, 0.0);
   }
 }
