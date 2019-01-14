@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static ExampleSubsystem subsystem;
   public static CargoGrabber cargoGrabber;
+  public static HKDrive hkDrive;
   public static I2C i2c;
 	public static DriverStation driverstation;
 	public static PowerDistribution pdp;

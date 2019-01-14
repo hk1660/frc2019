@@ -105,9 +105,11 @@ public class HKDrive implements PIDOutput {
 	}
 
 
-	public void drive() {
+	public void drive(strafeParameter, forwardParameter, turnParameter, angleParameter) {
 		mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
+	}
 
+	/*
 		//Prints
 		SmartDashboard.putNumber("forwardParam",	forwardParameter);
 		SmartDashboard.putNumber("strafeParam",	strafeParameter);
@@ -131,6 +133,9 @@ public class HKDrive implements PIDOutput {
 
 		
 	}
+*/
+
+
 
 	//method to drive straight in AUTO
 	public void autoDriveStraight(double fwdSpeed){
