@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team1660.commands.DriveJoystick;
+
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -394,6 +396,7 @@ public class HKDrive extends Subsystem implements PIDOutput {
 	public void initDefaultCommand() {
 	  // Set the default command for a subsystem here.
 	  // setDefaultCommand(new MySpecialCommand());
+	  setDefaultCommand(new DriveJoystick());
 	}
 
 }
