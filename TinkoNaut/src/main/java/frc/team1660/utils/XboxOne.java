@@ -2,6 +2,9 @@ package frc.team1660.utils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.team1660.utils.*;
+//import frc.team1660.utils.JoystickPOVButton;
+
 
 /**
  * Class to encapsulate all XboxOne functionality. No need to have multiple copies
@@ -280,6 +283,8 @@ public class XboxOne extends Joystick {
 		return new JoystickAnalogButton(this, AXIS_Right_SHOULDER_TRIGGER, 0.5);
 	}
 
+
+	/*
 	public JoystickPOVButton ButtonUpDPad() {
 		return new JoystickPOVButton(this, DPAD_UP);
 	}
@@ -295,4 +300,7 @@ public class XboxOne extends Joystick {
 	public JoystickPOVButton ButtonLeftDPad() {
 		return new JoystickPOVButton(this, DPAD_LEFT);
 	}
+
+
+	*/
 }

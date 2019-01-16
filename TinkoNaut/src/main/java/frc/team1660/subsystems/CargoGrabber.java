@@ -4,6 +4,7 @@ package frc.team1660.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team1660.RobotMap;
 
 
 public class CargoGrabber extends Subsystem{
@@ -12,7 +13,8 @@ public class CargoGrabber extends Subsystem{
 
     public CargoGrabber(){
 
-        cargoRollerMotor = new WPI_TalonsSRX(RobotMap.CARGO_ROLLER_CHANNEL);
+        cargoRollerMotor = new WPI_TalonSRX(RobotMap.CARGO_ROLLER_CHANNEL);
+
     }
 
 

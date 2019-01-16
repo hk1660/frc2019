@@ -10,6 +10,8 @@ package frc.team1660;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import frc.team1660.utils.XboxOne;
+import frc.team1660.commands.*;
+import frc.team1660.commands.EatCargo;
 
 
 /**
@@ -49,10 +51,13 @@ public class OI {
 	public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
 	public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
 
+  public OI(){
+
   //EatCargo button code -Adlecai
-  manipStick.ButtonA().whileHeld(new EatCargo());
+   manipStick.ButtonA().whileHeld(new EatCargo());
+  
 
-
+  }
 
 
 

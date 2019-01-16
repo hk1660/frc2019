@@ -30,12 +30,11 @@ import frc.team1660.subsystems.*;
 public class Robot extends TimedRobot {
   
   public static OI oi;
-  public static ExampleSubsystem subsystem;
   public static CargoGrabber cargoGrabber;
   public static HKDrive hkDrive;
-  public static I2C i2c;
-	public static DriverStation driverstation;
-	public static PowerDistribution pdp;
+  //public static I2C i2c;
+  // public static DriverStation driverstation;
+	// public static PowerDistribution pdp;
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -47,12 +46,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    subsystem = new ExampleSubsystem();
     cargoGrabber = new CargoGrabber();
-    i2c = new I2C(I2C.Port.kOnboard, 8);
+    // i2c = new I2C(I2C.Port.kOnboard, 8);
 
 
-    chooser.addDefault("Default Auto", new ExampleCommand());
+    chooser.addDefault("Default Auto", new EatCargo());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
   }

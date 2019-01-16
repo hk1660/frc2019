@@ -9,6 +9,8 @@ package frc.team1660.subsystems;
  */
 
 /*-----IMPORTED LIBRARIES-----*/
+
+import frc.team1660.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,7 +25,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
-public class HKDrive extends Subystem implements PIDOutput {
+public class HKDrive extends Subsystem implements PIDOutput {
 
 	/*----DECLARED GLOBAL VARIABLES-------*/
 
@@ -388,6 +390,10 @@ public class HKDrive extends Subystem implements PIDOutput {
 
 	}
 
-
+	@Override
+	public void initDefaultCommand() {
+	  // Set the default command for a subsystem here.
+	  // setDefaultCommand(new MySpecialCommand());
+	}
 
 }
