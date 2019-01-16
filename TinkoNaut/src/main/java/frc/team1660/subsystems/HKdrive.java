@@ -52,17 +52,23 @@ public class HKDrive implements PIDOutput {
 	double rotateToAngleRate;
 
 	//drive parameters
-	double strafeParameter = 0.0;
-	double forwardParameter = 0.0;
-	double turnParameter = 0.0;
-	double angleParameter = 0.0;
+	//double strafeParameter = 0.0;
+	//double forwardParameter = 0.0;
+	//double turnParameter = 0.0;
+	//double angleParameter = 0.0;
 
 
 	//Joystick fields
-	private Joystick driverStick;
-
+	//private Joystick driverStick;
+/*
 	public HKDrive(Joystick joy){
 		this.driverStick = joy;
+	}
+*/
+	
+	public HKDrive(){
+	
+
 	}
 
 	//HKDrive init method
@@ -105,7 +111,7 @@ public class HKDrive implements PIDOutput {
 	}
 
 
-	public void drive() {
+	public void drive(double strafeParameter, double forwardParameter, double turnParameter, double angleParameter) {
 		mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
 
 		//Prints
@@ -132,6 +138,8 @@ public class HKDrive implements PIDOutput {
 		
 	}
 
+
+	/*
 	//method to drive straight in AUTO
 	public void autoDriveStraight(double fwdSpeed){
 		strafeParameter = 0.0;
@@ -359,6 +367,8 @@ public class HKDrive implements PIDOutput {
 		angleParameter = 0.0;
 		drive();
 	}
+
+	*/
 
 	@Override
 	/* This function is invoked periodically by the PID Controller, */
