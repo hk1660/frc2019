@@ -17,12 +17,13 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
-public class HKDrive implements PIDOutput {
+public class HKDrive extends Subystem implements PIDOutput {
 
 	/*----DECLARED GLOBAL VARIABLES-------*/
 
@@ -113,7 +114,9 @@ public class HKDrive implements PIDOutput {
 
 	public void drive(double strafeParameter, double forwardParameter, double turnParameter, double angleParameter) {
 		mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
+	}
 
+	/*
 		//Prints
 		SmartDashboard.putNumber("forwardParam",	forwardParameter);
 		SmartDashboard.putNumber("strafeParam",	strafeParameter);
@@ -137,6 +140,9 @@ public class HKDrive implements PIDOutput {
 
 		
 	}
+*/
+
+
 
 
 	/*
