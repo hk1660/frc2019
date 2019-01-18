@@ -8,7 +8,7 @@ import frc.team1660.utils.*;
 
 /**
  * Class to encapsulate all XboxOne functionality. No need to have multiple copies
- * in OI all the time
+ * in OI all the time.  Revised from team2168.org's F310 Class.
  *
  * @author Aldecai
  */
@@ -16,24 +16,28 @@ import frc.team1660.utils.*;
 public class XboxOne extends Joystick {
 
     
-    // Xbox controller button mappings
-    public final static int A_BUTTON = 1;
-    public final static int B_BUTTON = 2;
-    public final static int X_BUTTON = 3;
-    public final static int Y_BUTTON = 4;
-    public final static int LB_BUTTON = 5;
-    public final static int RB_BUTTON = 6;
-    public final static int BACK_BUTTON = 7;
-    public final static int START_BUTTON = 8;
-    public final static int LEFT_JOY_BUTTON = 9;
-    public final static int RIGHT_JOY_BUTTON = 10;
-    public final static int LEFT_X_AXIS = 0;
-    public final static int LEFT_Y_AXIS = 1;
-    public final static int LT_AXIS = 2;
-    public final static int RT_AXIS = 3;
-    public final static int RIGHT_X_AXIS = 4;
-    public final static int RIGHT_Y_AXIS = 5;
-    public final static int POV_UP = 0;
+	// XBoxOne axes
+	public static final int AXIS_LEFT_X = 0;
+	public static final int AXIS_LEFT_Y = 1;
+	public static final int AXIS_LEFT_TRIGGER = 2;
+	public static final int AXIS_RIGHT_TRIGGER = 3;
+	public static final int AXIS_RIGHT_X = 4;
+	public static final int AXIS_RIGHT_Y = 5;
+
+	// XBoxOne buttons
+	public static final int BUTTON_A = 1;
+	public static final int BUTTON_B = 2;
+	public static final int BUTTON_X = 3;
+	public static final int BUTTON_Y = 4;
+	public static final int BUTTON_LB = 5;
+	public static final int BUTTON_RB = 6;
+	public static final int BUTTON_BACK = 7;
+	public static final int BUTTON_START = 8;
+	public static final int BUTTON_LEFT_JOY = 9;
+	public static final int BUTTON_RIGHT_JOY = 10;
+
+	// XboxOne POV (D-Pad) buttons
+	public final static int POV_UP = 0;
     public final static int POV_UP_RIGHT = 45;
     public final static int POV_RIGHT = 90;
     public final static int POV_DOWN_RIGHT = 135;
@@ -41,35 +45,6 @@ public class XboxOne extends Joystick {
     public final static int POV_DOWN_LEFT = 225;
     public final static int POV_LEFT = 270;
     public final static int POV_UP_LEFT = 315;
-
-	// Gamepad axis ports
-	public static final int AXIS_LEFT_X = 0;
-	public static final int AXIS_LEFT_Y = 1;
-	public static final int AXIS_Left_SHOULDER_TRIGGER = 2;
-	public static final int AXIS_Right_SHOULDER_TRIGGER = 3;
-	public static final int AXIS_RIGHT_X = 4;
-	public static final int AXIS_RIGHT_Y = 5;
-
-	// Gamepad buttons
-	public static final int BUTTON_A = 1;
-	public static final int BUTTON_B = 2;
-	public static final int BUTTON_X = 3;
-	public static final int BUTTON_Y = 4;
-	public static final int BUTTON_SHOULDER_LEFT_BUMPER = 5;
-	public static final int BUTTON_SHOULDER_RIGHT_BUMPER = 6;
-	public static final int BUTTON_BACK = 7;
-	public static final int BUTTON_START = 8;
-	public static final int BUTTON_LEFT_STICK = 9;
-	public static final int BUTTON_RIGHT_STICK = 10;
-
-	// POV (D-Pad) buttons
-	public static final int DPAD_UP = 0;
-	public static final int DPAD_RIGHT = 90;
-	public static final int DPAD_DOWN = 180;
-	public static final int DPAD_LEFT = 270;
-
-	// private static final int BUTTON_MODE = -1;
-	// private static final int BUTTON_LOGITECH = -1;
 
 	/**
 	 * Default constructor
@@ -80,6 +55,9 @@ public class XboxOne extends Joystick {
 	public XboxOne(int port) {
 		super(port);
 	}
+
+
+	///////////////////////// AXIS ACCESSOR METHODS ///////////////////////////
 
 	/**
 	 * Returns the X position of the left stick.
@@ -123,7 +101,7 @@ public class XboxOne extends Joystick {
 	 * @return 1.0 to 0.0 (1.0 when depressed)
 	 */
 	public double getLeftTriggerAxisRaw() {
-		return getRawAxis(AXIS_Left_SHOULDER_TRIGGER);
+		return getRawAxis(AXIS_LEFT_TRIGGER);
 	}
 
 	/**
@@ -132,8 +110,11 @@ public class XboxOne extends Joystick {
 	 * @return 1.0 to 0.0 (1.0 when depressed)
 	 */
 	public double getRightTriggerAxisRaw() {
-		return getRawAxis(AXIS_Right_SHOULDER_TRIGGER);
+		return getRawAxis(AXIS_RIGHT_TRIGGER);
 	}
+
+
+	///////////////////// BUTTON ACCESSOR METHODS /////////////////////////
 
 	/**
 	 * Checks whether Button A is being pressed
@@ -171,12 +152,12 @@ public class XboxOne extends Joystick {
 		return getRawButton(BUTTON_Y);
 	}
 
-	public boolean isPressedButtonLeftBumper() {
-		return getRawButton(BUTTON_SHOULDER_LEFT_BUMPER);
+	public boolean isPressedButtonLB() {
+		return getRawButton(BUTTON_LB);
 	}
 
-	public boolean isPressedButtonRightBumper() {
-		return getRawButton(BUTTON_SHOULDER_RIGHT_BUMPER);
+	public boolean isPressedButtonRB() {
+		return getRawButton(BUTTON_RB);
 	}
 
 	public boolean isPressedButtonBack() {
@@ -187,12 +168,12 @@ public class XboxOne extends Joystick {
 		return getRawButton(BUTTON_START);
 	}
 
-	public boolean isPressedButtonLeftStick() {
-		return getRawButton(BUTTON_LEFT_STICK);
+	public boolean isPressedButtonLeftJoy() {
+		return getRawButton(BUTTON_LEFT_JOY);
 	}
 
-	public boolean isPressedButtonRightStick() {
-		return getRawButton(BUTTON_RIGHT_STICK);
+	public boolean isPressedButtonRightJoy() {
+		return getRawButton(BUTTON_RIGHT_JOY);
 	}
 
 	public boolean isPressedButtonLeftTrigger() {
@@ -202,6 +183,9 @@ public class XboxOne extends Joystick {
 	public boolean isPressedButtonRightTrigger() {
 		return ButtonRightTrigger().get();
 	}
+
+
+	/////////////////////// BUTTON OBJECT METHODS //////////////////////////
 
 	/**
 	 * Returns an object of Button A.
@@ -254,8 +238,8 @@ public class XboxOne extends Joystick {
 	 * 
 	 * @return the state of the left shoulder
 	 */
-	public JoystickButton ButtonLeftBumper() {
-		return new JoystickButton(this, BUTTON_SHOULDER_LEFT_BUMPER);
+	public JoystickButton ButtonLB() {
+		return new JoystickButton(this, BUTTON_LB);
 	}
 
 	/**
@@ -263,42 +247,42 @@ public class XboxOne extends Joystick {
 	 * 
 	 * @return the state of the right shoulder
 	 */
-	public JoystickButton ButtonRightBumper() {
-		return new JoystickButton(this, BUTTON_SHOULDER_RIGHT_BUMPER);
+	public JoystickButton ButtonRB() {
+		return new JoystickButton(this, BUTTON_RB);
 	}
 
-	public JoystickButton ButtonLeftStick() {
-		return new JoystickButton(this, BUTTON_LEFT_STICK);
+	public JoystickButton ButtonLeftJoy() {
+		return new JoystickButton(this, BUTTON_LEFT_JOY);
 	}
 
-	public JoystickButton ButtonRightStick() {
-		return new JoystickButton(this, BUTTON_RIGHT_STICK);
+	public JoystickButton ButtonRightJoy() {
+		return new JoystickButton(this, BUTTON_RIGHT_JOY);
 	}
 
 	public JoystickAnalogButton ButtonLeftTrigger() {
-		return new JoystickAnalogButton(this, AXIS_Left_SHOULDER_TRIGGER, 0.5);
+		return new JoystickAnalogButton(this, AXIS_LEFT_TRIGGER, 0.5);
 	}
 
 	public JoystickAnalogButton ButtonRightTrigger() {
-		return new JoystickAnalogButton(this, AXIS_Right_SHOULDER_TRIGGER, 0.5);
+		return new JoystickAnalogButton(this, AXIS_RIGHT_TRIGGER, 0.5);
 	}
 
 
 	/*
-	public JoystickPOVButton ButtonUpDPad() {
-		return new JoystickPOVButton(this, DPAD_UP);
+	public JoystickPOVButton ButtonPOVUp() {
+		return new JoystickPOVButton(this, POV_UP);
 	}
 
-	public JoystickPOVButton ButtonRightDPad() {
-		return new JoystickPOVButton(this, DPAD_RIGHT);
+	public JoystickPOVButton ButtonPOVRight() {
+		return new JoystickPOVButton(this, POV_RIGHT);
 	}
 
-	public JoystickPOVButton ButtonDownDPad() {
-		return new JoystickPOVButton(this, DPAD_DOWN);
+	public JoystickPOVButton ButtonPOVDown() {
+		return new JoystickPOVButton(this, POV_DOWN);
 	}
 
-	public JoystickPOVButton ButtonLeftDPad() {
-		return new JoystickPOVButton(this, DPAD_LEFT);
+	public JoystickPOVButton ButtonPOVLeft() {
+		return new JoystickPOVButton(this, POV_LEFT);
 	}
 
 

@@ -53,9 +53,9 @@ public class OI {
 
   public OI(){
 
-  //EatCargo button code -Adlecai
-   manipStick.ButtonA().whileHeld(new EatCargo());
-  
+    //EatCargo button code -Adlecai
+    manipStick.ButtonA().whileHeld(new EatCargo());
+    
 
   }
 
