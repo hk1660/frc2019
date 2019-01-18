@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -10,15 +10,16 @@ package frc.team1660.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team1660.Robot;
 
-/**
- * An example command.  You can replace me with your own command.
- */
-public class EatCargo extends Command {
-  public EatCargo() {
+public class SpitCargo extends Command {
+  public SpitCargo() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoGrabber);
+    // eg. requires(chassis);
 
-  }
+      requires(Robot.cargoGrabber);
+  
+    }
+  
+  
 
   // Called just before this Command runs the first time
   @Override
@@ -28,9 +29,9 @@ public class EatCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoGrabber.moveRoller(1.0);
-  }
+    Robot.cargoGrabber.moveRoller(-1.0);
 
+  }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -41,7 +42,7 @@ public class EatCargo extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
+    
     Robot.cargoGrabber.moveRoller(0.0);
 
   }
