@@ -27,7 +27,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
-public class HKDrive extends Subsystem implements PIDOutput {
+public class HKdrive extends Subsystem implements PIDOutput {
 
 	/*----DECLARED GLOBAL VARIABLES-------*/
 
@@ -71,7 +71,7 @@ public class HKDrive extends Subsystem implements PIDOutput {
 	}
 */
 	
-	public HKDrive(){
+	public HKdrive(){
 	
 
 	}
