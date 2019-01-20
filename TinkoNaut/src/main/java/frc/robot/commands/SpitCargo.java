@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1660.commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team1660.Robot;
+import frc.robot.Robot;
 
 public class SpitCargo extends Command {
   public SpitCargo() {

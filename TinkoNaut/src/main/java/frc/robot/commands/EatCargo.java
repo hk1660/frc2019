@@ -5,18 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1660.commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.team1660.Robot;
+import frc.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class DriveJoystick extends Command {
-  public DriveJoystick() {
+public class EatCargo extends Command {
+  public EatCargo() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.hkDrive);
+    requires(Robot.cargoGrabber);
+
   }
 
   // Called just before this Command runs the first time
@@ -27,15 +28,9 @@ public class DriveJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    double forward = Robot.oi.driverStick.getRightStickRaw_Y();
-    double turn = Robot.oi.driverStick.getLeftStickRaw_X();
-    double strafe = Robot.oi.driverStick.getRightStickRaw_X();
-    double angle = 0.0;
-
-    Robot.hkDrive.drive(strafe, forward, turn, angle);
-    
+    Robot.cargoGrabber.moveRoller(1.0);
   }
+
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -47,7 +42,7 @@ public class DriveJoystick extends Command {
   @Override
   protected void end() {
 
-    Robot.hkDrive.drive(0.0, 0.0, 0.0, 0.0);
+    Robot.cargoGrabber.moveRoller(0.0);
 
   }
 
@@ -55,6 +50,6 @@ public class DriveJoystick extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hkDrive.drive(0.0, 0.0, 0.0, 0.0);
+    Robot.cargoGrabber.moveRoller(0.0);
   }
 }

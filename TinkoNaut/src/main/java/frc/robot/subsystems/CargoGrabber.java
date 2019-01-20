@@ -1,10 +1,10 @@
-package frc.team1660.subsystems;
+package frc.robot.subsystems;
 
 /*-----IMPORTED LIBRARIES-----*/
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team1660.RobotMap;
+import frc.robot.RobotMap;
 
 
 public class CargoGrabber extends Subsystem{
@@ -24,6 +24,10 @@ public class CargoGrabber extends Subsystem{
 
     }
 
+    public void log() {
+    }
+
+    
     @Override
     public void initDefaultCommand() {
       // Set the default command for a subsystem here.
