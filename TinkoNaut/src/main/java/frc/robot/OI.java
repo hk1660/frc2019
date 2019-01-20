@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.utils.XboxOne;
-
 import frc.robot.commands.Autonomous;
+import frc.robot.commands.EatCargo;
+import frc.robot.commands.SpitCargo;
+import frc.robot.commands.SetElevatorSetpoint;
+
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.Pickup;
 import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
-import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.SetWristSetpoint;
 
 /**
@@ -26,12 +28,20 @@ import frc.robot.commands.SetWristSetpoint;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+  //make 2 joysticks for the robot driving
+  public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
+  public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
   private final XboxOne m_joystick = new XboxOne(0);
 
   /**
    * Construct the OI and all of the buttons on it.
    */
   public OI() {
+    //EatCargo button code -Adlecai
+    manipStick.ButtonA().whileHeld(new EatCargo());
+    manipStick.ButtonB().whileHeld(new SpitCargo());
+
+
     // Put Some buttons on the SmartDashboard
     SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
     SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));

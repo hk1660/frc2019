@@ -11,12 +11,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.commands.Autonomous;
-import frc.robot.subsystems.Claw;
+
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.CargoGrabber;
+
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +33,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static Elevator m_elevator;
+  public static CargoGrabber cargoGrabber;
   public static Wrist m_wrist;
   public static Claw m_claw;
   public static OI m_oi;
@@ -43,6 +47,7 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     m_elevator = new Elevator();
+    cargoGrabber = new CargoGrabber();
     m_wrist = new Wrist();
     m_claw = new Claw();
     m_oi = new OI();
@@ -52,6 +57,7 @@ public class Robot extends TimedRobot {
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
+    SmartDashboard.putData(cargoGrabber);
     SmartDashboard.putData(m_elevator);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
@@ -100,9 +106,10 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
-    m_wrist.log();
-    m_elevator.log();
     m_drivetrain.log();
+    cargoGrabber.log();
+    m_elevator.log();
+    m_wrist.log();
     m_claw.log();
   }
 }
