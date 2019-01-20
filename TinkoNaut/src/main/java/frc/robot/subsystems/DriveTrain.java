@@ -112,18 +112,18 @@ public class DriveTrain extends Subsystem {
 
 
   public void drive(double strafeParameter, double forwardParameter, double turnParameter, double angleParameter) {
+
     mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
-       //m_drive.tankDrive(left, right);
 	}
 
   /**
    * Tank style driving for the DriveTrain.
    *
-   * @param joy The ps3 style joystick to use to drive tank style.
+   * @param joy The xboxone joystick to use to drive mecanum style.
    */
   public void drive(XboxOne joy) {
 
-    drive(-joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X(), 0);
+    drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X(), 0);
   }
 
   /**
