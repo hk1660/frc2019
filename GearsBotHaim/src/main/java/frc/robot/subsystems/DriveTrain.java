@@ -123,7 +123,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(XboxOne joy) {
 
-    drive(-joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X(), 0);
+    drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X(), 0);
   }
 
   /**
