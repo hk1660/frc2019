@@ -38,8 +38,6 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
 	private MecanumDrive mecDrive;
-	private AHRS navx;
-
 
   // private final DifferentialDrive m_drive
   //     = new DifferentialDrive(m_leftMotor, m_rightMotor);
@@ -57,7 +55,7 @@ public class DriveTrain extends Subsystem {
   public DriveTrain() {
     super();
 
-    		//Drivetrain Initializations
+    //Drivetrain Initializations
 		frontLeft = new WPI_TalonSRX(RobotMap.DRIVE_FRONT_LEFT_CHANNEL);
 		backLeft = new WPI_TalonSRX(RobotMap.DRIVE_BACK_LEFT_CHANNEL);
 		frontRight = new WPI_TalonSRX(RobotMap.DRIVE_FRONT_RIGHT_CHANNEL);
