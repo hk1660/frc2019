@@ -43,16 +43,16 @@ public class HatchPanelPanel extends Subsystem {
    */
   public void push() {
 
-    // hpPiston.set(DoubleSolenoid.Value.kOff);
-    // hpPiston.set(DoubleSolenoid.Value.kForward);
-    // hpPiston.set(DoubleSolenoid.Value.kReverse);
+    hpPiston.set(DoubleSolenoid.Value.kOff);
+    hpPiston.set(DoubleSolenoid.Value.kForward);
+    hpPiston.set(DoubleSolenoid.Value.kReverse);
   }
 
   /**
    * Retracts the hpPistons.
    */
   public void stop() {
-    ///m_motor.set(0);
+    /m_motor.set(0);
   }
 
 
