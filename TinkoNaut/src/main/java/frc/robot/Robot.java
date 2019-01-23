@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
 
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.ElevatorWinch;
 import frc.robot.subsystems.CargoGrabber;
 
 import frc.robot.subsystems.Claw;
@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  public static Elevator m_elevator;
+  public static ElevatorWinch m_elevatorWinch;
   public static CargoGrabber cargoGrabber;
   public static Wrist m_wrist;
   public static Claw m_claw;
@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
-    m_elevator = new Elevator();
+    m_elevatorWinch = new ElevatorWinch();
     cargoGrabber = new CargoGrabber();
     m_wrist = new Wrist();
     m_claw = new Claw();
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(cargoGrabber);
-    SmartDashboard.putData(m_elevator);
+    SmartDashboard.putData(m_elevatorWinch);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
   }
@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
   private void log() {
     m_drivetrain.log();
     cargoGrabber.log();
-    m_elevator.log();
+    m_elevatorWinch.log();
     m_wrist.log();
     m_claw.log();
   }

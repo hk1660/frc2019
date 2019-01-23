@@ -22,19 +22,19 @@ public class SetElevatorSetpoint extends Command {
 
   public SetElevatorSetpoint(double setpoint) {
     m_setpoint = setpoint;
-    requires(Robot.m_elevator);
+    requires(Robot.m_elevatorWinch);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_elevator.enable();
-    Robot.m_elevator.setSetpoint(m_setpoint);
+    Robot.m_elevatorWinch.enable();
+    Robot.m_elevatorWinch.setSetpoint(m_setpoint);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_elevator.onTarget();
+    return Robot.m_elevatorWinch.onTarget();
   }
 }

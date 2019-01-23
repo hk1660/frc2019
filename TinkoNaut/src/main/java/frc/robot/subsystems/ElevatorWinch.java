@@ -20,7 +20,7 @@ import frc.robot.Robot;
  * it's current state PID values for simulation are different than in the real
  * world do to minor differences.
  */
-public class Elevator extends PIDSubsystem {
+public class ElevatorWinch extends PIDSubsystem {
   private final Victor m_motor;
   private final AnalogPotentiometer m_pot;
 
@@ -32,7 +32,7 @@ public class Elevator extends PIDSubsystem {
   /**
    * Create a new elevator subsystem.
    */
-  public Elevator() {
+  public ElevatorWinch() {
     super(kP_real, kI_real, 0);
     if (Robot.isSimulation()) { // Check for simulation and update PID values
       getPIDController().setPID(kP_simulation, kI_simulation, 0, 0);

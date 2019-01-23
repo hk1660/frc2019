@@ -15,16 +15,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.kauailabs.navx.frc.AHRS;
 
 
+public class NavX { //extends PIDSubsystem{
 
-    public class NavX extends PIDSubsystem{
+	AHRS navx;
 
-        AHRS navx;
-
-
-        //navx intialization
+	public NavX(){
+		//navx intialization
 		try {
 			navx = new AHRS(SPI.Port.kMXP); //navX-MXP initialized with (SPI, I2C, TTL UART) and USB //http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
 		} catch (RuntimeException ex ) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
-    }
+	}
+}
