@@ -17,7 +17,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 public class NavX { //extends PIDSubsystem{
 
-	AHRS navx;
+	private AHRS navx;
 
 	public NavX(){
 		//navx intialization
@@ -25,6 +25,12 @@ public class NavX { //extends PIDSubsystem{
 			navx = new AHRS(SPI.Port.kMXP); //navX-MXP initialized with (SPI, I2C, TTL UART) and USB //http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
 		} catch (RuntimeException ex ) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
+
+
+		public static int getCurrentAngle(){
+			int rawAngle = navx.getAngle();
+			SmartDashboard.putNumber("rawAngle", rawAngle);
 		}
 	}
 }
