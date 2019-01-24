@@ -28,10 +28,11 @@ public class NavX { //extends PIDSubsystem{
 		}
 
 
-		public static int getCurrentAngle(){
-			int rawAngle = navx.getAngle();
+		
+	}
+	public static int getCurrentAngle(){
+			int rawAngle = (int) (navx.getAngle());
 			SmartDashboard.putNumber("rawAngle", rawAngle);
 			return rawAngle;
 		}
-	}
 }
