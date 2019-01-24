@@ -1,6 +1,8 @@
-public class Pneumantics{
+package frc.robot.subsystems;
 
-    public Pneumantics(){
+public class Pneumatics{
+
+    public Pneumatics(){
         
     }
 

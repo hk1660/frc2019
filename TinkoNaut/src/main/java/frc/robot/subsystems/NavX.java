@@ -26,12 +26,15 @@ public class NavX { //extends PIDSubsystem{
 		} catch (RuntimeException ex ) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+	
+		// public static int getCurrentAngle(){
+		// 	int rawAngle = navx.getAngle();
+		// 	SmartDashboard.putNumber("rawAngle", rawAngle);
+		// 	return rawAngle;
+		// }
+	
 
-
-		public static int getCurrentAngle(){
-			int rawAngle = navx.getAngle();
-			SmartDashboard.putNumber("rawAngle", rawAngle);
-			return rawAngle;
-		}
 	}
+
+	
 }
