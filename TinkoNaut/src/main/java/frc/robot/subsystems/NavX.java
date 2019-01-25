@@ -15,9 +15,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.kauailabs.navx.frc.AHRS;
 
 
-public class NavX { //extends PIDSubsystem{
+public class NavX implements PIDOutput { //extends PIDSubsystem
 
-	private AHRS navx;
+	private static AHRS navx;
+	double rotateToAngleRate;
 
 	public NavX(){
 		//navx intialization
@@ -25,14 +26,16 @@ public class NavX { //extends PIDSubsystem{
 			navx = new AHRS(SPI.Port.kMXP); //navX-MXP initialized with (SPI, I2C, TTL UART) and USB //http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
 		} catch (RuntimeException ex ) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
-
-
-		
+		}		
 	}
+	
 	public static int getCurrentAngle(){
 			int rawAngle = (int) (navx.getAngle());
 			SmartDashboard.putNumber("rawAngle", rawAngle);
 			return rawAngle;
+		}
+
+		public void pidWrite(double output) {
+			rotateToAngleRate = output;
 		}
 }
