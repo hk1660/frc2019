@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
@@ -43,16 +44,27 @@ public class HatchPanelPanel extends Subsystem {
    */
   public void push() {
 
-    // hpPiston.set(DoubleSolenoid.Value.kOff);
-    // hpPiston.set(DoubleSolenoid.Value.kForward);
-    // hpPiston.set(DoubleSolenoid.Value.kReverse);
+    
+    hpPiston.set(DoubleSolenoid.Value.kForward);
+    
+    
   }
-
   /**
+   * Pulls hpPistons in
+   */
+  public void pull() {
+
+
+    hpPiston.set(DoubleSolenoid.Value.kReverse)
+
+
+  }
+  
+    /**
    * Retracts the hpPistons.
    */
   public void stop() {
-    //m_motor.set(0);
+    hpPiston.set(DoubleSolenoid.Value.kOff)
   }
 
 
