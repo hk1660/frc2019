@@ -55,7 +55,7 @@ public class HatchPanelPanel extends Subsystem {
   public void pull() {
 
 
-    hpPiston.set(DoubleSolenoid.Value.kReverse)
+    hpPiston.set(DoubleSolenoid.Value.kReverse);
 
 
   }
@@ -64,7 +64,7 @@ public class HatchPanelPanel extends Subsystem {
    * Retracts the hpPistons.
    */
   public void stop() {
-    hpPiston.set(DoubleSolenoid.Value.kOff)
+    hpPiston.set(DoubleSolenoid.Value.kOff);
   }
 
 

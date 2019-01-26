@@ -16,7 +16,7 @@ import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorWinch;
 import frc.robot.subsystems.CargoGrabber;
-
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
@@ -37,6 +37,7 @@ public class Robot extends TimedRobot {
   public static Wrist m_wrist;
   public static Claw m_claw;
   public static OI m_oi;
+  public static Limelight m_limelight;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
     m_wrist = new Wrist();
     m_claw = new Claw();
     m_oi = new OI();
+    m_limelight = new Limelight();
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();
@@ -61,6 +63,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_elevatorWinch);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
+    SmartDashboard.putData(m_limelight);
   }
 
   @Override
@@ -111,5 +114,6 @@ public class Robot extends TimedRobot {
     m_elevatorWinch.log();
     m_wrist.log();
     m_claw.log();
+    m_limelight.log();
   }
 }

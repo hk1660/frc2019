@@ -5,34 +5,44 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 
-public class Limelight{
 
+public class Limelight extends Subsystem{
+
+        NetworkTable table;
+        NetworkTableEntry tx;
+        NetworkTableEntry ty;
+        NetworkTableEntry ta;
 
 
     public Limelight(){
-
+        table = NetworkTableInstance.getDefault().getTable("limelight");
+ 
     }
-
-    public void getUpdates(){
-        
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-        NetworkTableEntry tx = table.getEntry("tx");
-        NetworkTableEntry ty = table.getEntry("ty");
-        NetworkTableEntry ta = table.getEntry("ta");
-
+ 
+    
+public void Update(){
+        tx = table.getEntry("tx");
+        ty = table.getEntry("ty");
+        ta = table.getEntry("ta");
+}
+      // //post to smart dashboard periodically
+     public void log() {
+        Update();
         // //read values periodically
         double x = tx.getDouble(0.0);
         double y = ty.getDouble(0.0);
         double area = ta.getDouble(0.0);
 
-        // //post to smart dashboard periodically
         SmartDashboard.putNumber("LimelightX", x);
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
+  }
 
-    }
-
+  @Override
+  public void initDefaultCommand() {
+  }
 
 }
