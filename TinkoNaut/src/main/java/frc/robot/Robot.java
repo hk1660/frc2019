@@ -18,7 +18,7 @@ import frc.robot.subsystems.ElevatorWinchManual;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.HatchPanelPanel;
-
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   public static Claw m_claw;
   public static OI m_oi;
   public static Limelight m_limelight;
+  public static Pneumatics m_pneumatics;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
     m_claw = new Claw();
     m_oi = new OI();
     m_limelight = new Limelight();
+    m_pneumatics = new Pneumatics();
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();

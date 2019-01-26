@@ -89,7 +89,9 @@ public class RobotMap {
 
     public final static int PDP_ID = 0; //fix this???
   
-  
+  //Compressor 
+  public final static int COMPRESSOR_PORT  = 8; 
+
 
 
 }

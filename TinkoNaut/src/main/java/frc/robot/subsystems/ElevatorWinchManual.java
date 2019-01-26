@@ -37,8 +37,8 @@ public class ElevatorWinchManual extends Subsystem {
   }
 
   /**
-   * When no other command is running let the operator drive around using the
-   * PS3 joystick.
+   * When no other command is running let the operator control eleavtor (up & down) using the
+   * x box joystick. 
    */
   @Override
   public void initDefaultCommand() {

@@ -16,13 +16,13 @@ import frc.robot.Robot;
  */
 public class ElevatorWithJoystick extends Command {
   public ElevatorWithJoystick() {
-    requires(Robot.m_drivetrain);
+    requires(Robot.m_elevatorWinch);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drivetrain.drive(Robot.m_oi.getDriverStick());
+    Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipStick());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,6 +34,6 @@ public class ElevatorWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_drivetrain.drive(0, 0, 0, 0);
+    Robot.m_elevatorWinch.elevate(0.0);
   }
 }
