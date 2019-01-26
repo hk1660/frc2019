@@ -7,21 +7,22 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.utils.XboxOne;
 import frc.robot.commands.Autonomous;
-import frc.robot.commands.EatCargo;
-import frc.robot.commands.SpitCargo;
-import frc.robot.commands.SetElevatorSetpoint;
-
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.OpenClaw;
 import frc.robot.commands.Pickup;
+import frc.robot.commands.PistIn;
+import frc.robot.commands.PistOut;
+import frc.robot.commands.EatCargo;
+import frc.robot.commands.SpitCargo;
+
 import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
+//import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.SetWristSetpoint;
+import frc.robot.utils.XboxOne;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -31,21 +32,24 @@ public class OI {
   //make 2 joysticks for the robot driving
   public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
   public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-  private final XboxOne m_joystick = new XboxOne(0);
+  //private final XboxOne m_joystick = new XboxOne(0);
 
   /**
    * Construct the OI and all of the buttons on it.
    */
   public OI() {
-    //EatCargo button code -Adlecai
-    manipStick.ButtonA().whileHeld(new EatCargo());
-    manipStick.ButtonB().whileHeld(new SpitCargo());
+
+    manipStick.ButtonA().whileHeld(new PistIn());
+    manipStick.ButtonB().whileHeld(new PistOut());
+
+    manipStick.ButtonLB().whileHeld(new EatCargo());
+    manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
 
 
     // Put Some buttons on the SmartDashboard
-    SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
-    SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
-    SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
+    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
+    // SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
+    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
 
     SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
     SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
@@ -55,29 +59,35 @@ public class OI {
 
     SmartDashboard.putData("Deliver Soda", new Autonomous());
 
-    // Create some buttons
-    final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
-    final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
-    final JoystickButton dpadDown = new JoystickButton(m_joystick, 7);
-    final JoystickButton dpadLeft = new JoystickButton(m_joystick, 8);
-    final JoystickButton l2 = new JoystickButton(m_joystick, 9);
-    final JoystickButton r2 = new JoystickButton(m_joystick, 10);
-    final JoystickButton l1 = new JoystickButton(m_joystick, 11);
-    final JoystickButton r1 = new JoystickButton(m_joystick, 12);
+    // // Create some buttons
+    // final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
+    // final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
+    // final JoystickButton dpadDown = new JoystickButton(m_joystick, 7);
+    // final JoystickButton dpadLeft = new JoystickButton(m_joystick, 8);
+    // final JoystickButton l2 = new JoystickButton(m_joystick, 9);
+    // final JoystickButton r2 = new JoystickButton(m_joystick, 10);
+    // final JoystickButton l1 = new JoystickButton(m_joystick, 11);
+    // final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
-    // Connect the buttons to commands
-    dpadUp.whenPressed(new SetElevatorSetpoint(0.2));
-    dpadDown.whenPressed(new SetElevatorSetpoint(-0.2));
-    dpadRight.whenPressed(new CloseClaw());
-    dpadLeft.whenPressed(new OpenClaw());
+    // // Connect the buttons to commands
+    // dpadUp.whenPressed(new SetElevatorSetpoint(0.2));
+    // dpadDown.whenPressed(new SetElevatorSetpoint(-0.2));
+    // dpadRight.whenPressed(new CloseClaw());
+    // dpadLeft.whenPressed(new OpenClaw());
 
-    r1.whenPressed(new PrepareToPickup());
-    r2.whenPressed(new Pickup());
-    l1.whenPressed(new Place());
-    l2.whenPressed(new Autonomous());
+    // r1.whenPressed(new PrepareToPickup());
+    // r2.whenPressed(new Pickup());
+    // l1.whenPressed(new Place());
+    // l2.whenPressed(new Autonomous());
   }
 
-  public XboxOne getJoystick() {
-    return m_joystick;
+  public XboxOne getDriverStick() {
+    return this.driverStick;
   }
+
+  public XboxOne getManipStick() {
+    return this.manipStick;
+  }
+
+
 }

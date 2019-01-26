@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
-import frc.robot.commands.TankDriveWithJoystick;
+import frc.robot.commands.MecDriveWithJoystick;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -93,7 +93,7 @@ public class DriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TankDriveWithJoystick());
+    setDefaultCommand(new MecDriveWithJoystick());
   }
 
   /**

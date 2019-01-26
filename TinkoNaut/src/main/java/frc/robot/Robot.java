@@ -14,9 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
 
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ElevatorWinch;
+import frc.robot.subsystems.ElevatorWinchManual;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.HatchPanelPanel;
+
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 
@@ -32,8 +34,9 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  public static ElevatorWinch m_elevatorWinch;
+  public static ElevatorWinchManual m_elevatorWinch;
   public static CargoGrabber cargoGrabber;
+  public static HatchPanelPanel m_hatchPanelPanel;
   public static Wrist m_wrist;
   public static Claw m_claw;
   public static OI m_oi;
@@ -47,8 +50,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
-    m_elevatorWinch = new ElevatorWinch();
+    m_elevatorWinch = new ElevatorWinchManual();
     cargoGrabber = new CargoGrabber();
+    m_hatchPanelPanel = new HatchPanelPanel();
     m_wrist = new Wrist();
     m_claw = new Claw();
     m_oi = new OI();
@@ -95,6 +99,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+
     log();
   }
 

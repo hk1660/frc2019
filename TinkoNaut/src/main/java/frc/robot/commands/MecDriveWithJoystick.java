@@ -14,15 +14,15 @@ import frc.robot.Robot;
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class TankDriveWithJoystick extends Command {
-  public TankDriveWithJoystick() {
+public class MecDriveWithJoystick extends Command {
+  public MecDriveWithJoystick() {
     requires(Robot.m_drivetrain);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
+    Robot.m_drivetrain.drive(Robot.m_oi.getDriverStick());
   }
 
   // Make this return true when this Command no longer needs to run execute()

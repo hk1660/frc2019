@@ -78,7 +78,7 @@ public class RobotMap {
     public final static int MOUTH_LIMITER_CHANNEL = 0;
   
     // Lift motor channel
-    public final static int LIFT_MOTOR_CHANNEL = 7;
+    public final static int WINCH_MOTOR_CHANNEL = 7;
     public final static int LIFT_LIMIT_TOP_CHANNEL = 1;
       
     //NavX angles
