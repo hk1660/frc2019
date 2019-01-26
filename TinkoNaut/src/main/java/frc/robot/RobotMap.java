@@ -82,10 +82,16 @@ public class RobotMap {
     public final static int LIFT_LIMIT_TOP_CHANNEL = 1;
       
     //NavX angles
-    public final static double LEFT_WALL_ANGLE = -90.0; //270.0?
+    public final static double LEFT_WALL_ANGLE = -90.0;
     public final static double RIGHT_WALL_ANGLE = 90.0;
-    public final static double BACK_WALL_ANGLE = 179.9;
+    public final static double BACK_WALL_ANGLE = 179.99;
     public final static double FRONT_WALL_ANGLE = 0.0;
+
+    public final static double LEFT_ROCKET_FRONT_ANGLE = -29.0;
+    public final static double LEFT_ROCKET_BACK_ANGLE = -151.0;
+    public final static double RIGHT_ROCKET_FRONT_ANGLE = 29.0;
+    public final static double RIGHT_ROCKET_BACK_ANGLE = 151.0;
+
 
     public final static int PDP_ID = 0; //fix this???
   

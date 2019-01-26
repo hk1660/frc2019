@@ -18,11 +18,14 @@ import frc.robot.commands.PistOut;
 import frc.robot.commands.EatCargo;
 import frc.robot.commands.SpitCargo;
 
+
 import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
 //import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.SetWristSetpoint;
 import frc.robot.utils.XboxOne;
+import frc.robot.utils.JoystickPOVButton;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -45,6 +48,18 @@ public class OI {
     manipStick.ButtonLB().whileHeld(new EatCargo());
     manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
 
+    //autoo turning using navx for drive stick
+    driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
+    driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE));
+    driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE));
+    driverStick.ButtonPovDown().whileHeld(new TurnToAngle(RobotMap.FRONT_WALL_ANGLE));
+
+    /*
+    driverStick.ButtonPovUpRight().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
+    driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
+*/
 
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
