@@ -14,8 +14,8 @@ import frc.robot.Robot;
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class ElevatorWithJoystick extends Command {
-  public ElevatorWithJoystick() {
+public class ElevateWithJoystick extends Command {
+  public ElevateWithJoystick() {
     requires(Robot.m_elevatorWinch);
   }
 

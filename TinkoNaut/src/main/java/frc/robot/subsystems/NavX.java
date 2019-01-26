@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.kauailabs.navx.frc.AHRS;
 
-public class NavX implements PIDOutput { // extends PIDSubsystem
+public class NavX {
 
 	private static AHRS navx;
-	double rotateToAngleRate;
+	//double rotateToAngleRate;
 
 	public NavX() {
 		// navx intialization
@@ -35,7 +35,7 @@ public class NavX implements PIDOutput { // extends PIDSubsystem
 		return rawAngle;
 	}
 
-	public void pidWrite(double output) {
-		rotateToAngleRate = output;
-	}
+	// public void pidWrite(double output) {
+	// 	rotateToAngleRate = output;
+	// }
 }

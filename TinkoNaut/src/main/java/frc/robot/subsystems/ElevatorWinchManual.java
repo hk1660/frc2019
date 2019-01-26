@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.commands.ElevatorWithJoystick;
+import frc.robot.commands.ElevateWithJoystick;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -42,7 +42,7 @@ public class ElevatorWinchManual extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevatorWithJoystick());
+    setDefaultCommand(new ElevateWithJoystick());
   }
 
   /**

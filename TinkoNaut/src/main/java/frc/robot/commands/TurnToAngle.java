@@ -10,7 +10,7 @@ import frc.robot.Robot;
 public class TurnToAngle extends Command {
   private final PIDController m_pid;
 
-  public TurnToAngle(double distance) { // channge distance stuff to angle
+  public TurnToAngle(double angle) { 
 
     requires(Robot.m_drivetrain);
 
@@ -19,7 +19,7 @@ public class TurnToAngle extends Command {
 
       @Override
       public double pidGet() {
-        return Robot.m_drivetrain.getDistance(); // get nacvxasdfas angle
+        return Robot.m_navx.getCurrentAngle(); 
 
       }
 
@@ -32,10 +32,10 @@ public class TurnToAngle extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, d -> Robot.m_drivetrain.drive(0, d, 0, 0)); // mayg3 pass thru other argument too
+    }, turn -> Robot.m_drivetrain.drive(0, 0, turn, 0)); // mayg3 pass thru other argument too
 
     m_pid.setAbsoluteTolerance(0.01);
-    m_pid.setSetpoint(distance);
+    m_pid.setSetpoint(angle);
   }
 
   protected void initialize() {
@@ -48,7 +48,7 @@ public class TurnToAngle extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_wrist.onTarget();  //change to m_pid
+    return m_pid.onTarget();  //change to m_pid
   }
 
 }

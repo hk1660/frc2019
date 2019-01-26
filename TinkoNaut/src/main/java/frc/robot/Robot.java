@@ -21,7 +21,7 @@ import frc.robot.subsystems.HatchPanelPanel;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
-
+import frc.robot.subsystems.NavX;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Limelight m_limelight;
   public static Pneumatics m_pneumatics;
+  public static NavX m_navx;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -59,6 +60,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
+    m_navx = new NavX ();
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();
