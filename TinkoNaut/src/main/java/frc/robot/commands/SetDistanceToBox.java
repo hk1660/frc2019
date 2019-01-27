@@ -34,7 +34,8 @@ public class SetDistanceToBox extends Command {
 
       @Override
       public double pidGet() {
-        return Robot.m_drivetrain.getDistanceToObstacle();
+        //return Robot.m_drivetrain.getDistanceToObstacle();
+        return 0.0;
       }
 
       @Override
@@ -56,7 +57,7 @@ public class SetDistanceToBox extends Command {
   @Override
   protected void initialize() {
     // Get everything in a safe starting state.
-    Robot.m_drivetrain.reset();
+    //Robot.m_drivetrain.reset();
     m_pid.reset();
     m_pid.enable();
   }

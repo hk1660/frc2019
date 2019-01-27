@@ -2,20 +2,18 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.utils.*;
-//import frc.robot.utils.JoystickPOVButton;
-
+import frc.robot.utils.JoystickPovButton;
+import frc.robot.utils.JoystickAnalogButton;
 
 /**
- * Class to encapsulate all XboxOne functionality. No need to have multiple copies
- * in OI all the time.  Revised from team2168.org's F310 Class.
+ * Class to encapsulate all XboxOne functionality. No need to have multiple
+ * copies in OI all the time. Revised from team2168.org's F310 Class.
  *
  * @author Aldecai
  */
 
 public class XboxOne extends Joystick {
 
-    
 	// XBoxOne axes
 	public static final int AXIS_LEFT_X = 0;
 	public static final int AXIS_LEFT_Y = 1;
@@ -36,37 +34,27 @@ public class XboxOne extends Joystick {
 	public static final int BUTTON_LEFT_JOY = 9;
 	public static final int BUTTON_RIGHT_JOY = 10;
 
-	// XboxOne POV (D-Pad) buttons Manip
+	// XboxOne Pov (D-Pad) buttons Manip
 	public final static int POV_UP = 0;
-    public final static int POV_UP_RIGHT = 45;
-    public final static int POV_RIGHT = 90;
-    public final static int POV_DOWN_RIGHT = 135;
-    public final static int POV_DOWN = 180;
-    public final static int POV_DOWN_LEFT = 225;
-    public final static int POV_LEFT = 270;
+	public final static int POV_UP_RIGHT = 45;
+	public final static int POV_RIGHT = 90;
+	public final static int POV_DOWN_RIGHT = 135;
+	public final static int POV_DOWN = 180;
+	public final static int POV_DOWN_LEFT = 225;
+	public final static int POV_LEFT = 270;
 	public final static int POV_UP_LEFT = 315;
-	// XboxOne POV (D-Pad) buttons Drive
-
-	public final static int POV_UP_DRIVE = 0;
-	public final static int POV__RIGHT_DRIVE = 90;
-	public final static int POV_DOWN_DRIVE = 180;
-    public final static int POV_LEFT_DRIVE = -90;
-    
-    
 
 
 	/**
 	 * Default constructor
 	 * 
-	 * @param port
-	 *            the port the joystick is plugged into on the DS.
+	 * @param port the port the joystick is plugged into on the DS.
 	 */
 	public XboxOne(int port) {
 		super(port);
 	}
 
-
-	///////////////////////// AXIS ACCESSOR METHODS ///////////////////////////
+	/*----------------- AXIS ACCESSOR METHODS -------------------- */
 
 	/**
 	 * Returns the X position of the left stick.
@@ -122,8 +110,7 @@ public class XboxOne extends Joystick {
 		return getRawAxis(AXIS_RIGHT_TRIGGER);
 	}
 
-
-	///////////////////// BUTTON ACCESSOR METHODS /////////////////////////
+	/*----------------- Button Accessor Methods -------------------- */
 
 	/**
 	 * Checks whether Button A is being pressed
@@ -193,69 +180,41 @@ public class XboxOne extends Joystick {
 		return ButtonRightTrigger().get();
 	}
 
+	public boolean isPressedPovUp() {
+		return ButtonPovUp().get();
+	}
 
-	/////////////////////// BUTTON OBJECT METHODS //////////////////////////
 
-	/**
-	 * Returns an object of Button A.
-	 */
+	/*----------------- Button Objects -------------------- */
+
 	public JoystickButton ButtonA() {
 		return new JoystickButton(this, BUTTON_A);
 	}
 
-	/**
-	 * Returns an object of Button B.
-	 */
 	public JoystickButton ButtonB() {
 		return new JoystickButton(this, BUTTON_B);
 	}
 
-	/**
-	 * Returns an object of Button X.
-	 */
 	public JoystickButton ButtonX() {
 		return new JoystickButton(this, BUTTON_X);
 	}
 
-	/**
-	 * Returns an object of Button Y.
-	 */
 	public JoystickButton ButtonY() {
 		return new JoystickButton(this, BUTTON_Y);
 	}
 
-	/**
-	 * Gets Start button object
-	 * 
-	 * @return the Start button
-	 */
 	public JoystickButton ButtonStart() {
 		return new JoystickButton(this, BUTTON_START);
 	}
 
-	/**
-	 * Gets the Back button object
-	 * 
-	 * @return the Back button
-	 */
 	public JoystickButton ButtonBack() {
 		return new JoystickButton(this, BUTTON_BACK);
 	}
 
-	/**
-	 * Gets the state of the left shoulder
-	 * 
-	 * @return the state of the left shoulder
-	 */
 	public JoystickButton ButtonLB() {
 		return new JoystickButton(this, BUTTON_LB);
 	}
 
-	/**
-	 * Gets the state of the right shoulder
-	 * 
-	 * @return the state of the right shoulder
-	 */
 	public JoystickButton ButtonRB() {
 		return new JoystickButton(this, BUTTON_RB);
 	}
@@ -268,6 +227,8 @@ public class XboxOne extends Joystick {
 		return new JoystickButton(this, BUTTON_RIGHT_JOY);
 	}
 
+	/*----------------- Joystick Triggers (Analog Buttons) -------------------- */
+
 	public JoystickAnalogButton ButtonLeftTrigger() {
 		return new JoystickAnalogButton(this, AXIS_LEFT_TRIGGER, 0.5);
 	}
@@ -276,45 +237,38 @@ public class XboxOne extends Joystick {
 		return new JoystickAnalogButton(this, AXIS_RIGHT_TRIGGER, 0.5);
 	}
 
+	/* --------------------Pov Buttons -Marlahna & Haim -------------------------*/
 
-
-	public JoystickPOVButton ButtonPOVUp() {
-		return new JoystickPOVButton(this, POV_UP);
+	public JoystickPovButton ButtonPovUp() {
+		return new JoystickPovButton(this, POV_UP);
 	}
 
-	public JoystickPOVButton ButtonPOVRight() {
-		return new JoystickPOVButton(this, POV_RIGHT);
+	public JoystickPovButton ButtonPovRight() {
+		return new JoystickPovButton(this, POV_RIGHT);
 	}
 
-	public JoystickPOVButton ButtonPOVDown() {
-		return new JoystickPOVButton(this, POV_DOWN);
+	public JoystickPovButton ButtonPovDown() {
+		return new JoystickPovButton(this, POV_DOWN);
 	}
 
-	public JoystickPOVButton ButtonPOVLeft() {
-		return new JoystickPOVButton(this, POV_LEFT);
+	public JoystickPovButton ButtonPovLeft() {
+		return new JoystickPovButton(this, POV_LEFT);
 	}
 
-	/*todo add 4 more POVButton methods
-	
-	public JoystickPOVButton ButtonPOVUpRight() {
-		return new JoystickPOVButton(this, POV_UP);
+	public JoystickPovButton ButtonPovUpRight() {
+		return new JoystickPovButton(this, POV_UP_RIGHT);
 	}
 
-	public JoystickPOVButton ButtonPOVUPLeft() {
-		return new JoystickPOVButton(this, POV_RIGHT);
+	public JoystickPovButton ButtonPovUpLeft() {
+		return new JoystickPovButton(this, POV_UP_LEFT);
 	}
 
-	public JoystickPOVButton ButtonPOVDownRight() {
-		return new JoystickPOVButton(this, POV_DOWN);
+	public JoystickPovButton ButtonPovDownRight() {
+		return new JoystickPovButton(this, POV_DOWN_RIGHT);
 	}
 
-	public JoystickPOVButton ButtonPOVDownLeft() {
-		return new JoystickPOVButton(this, POV_LEFT);
+	public JoystickPovButton ButtonPovDownLeft() {
+		return new JoystickPovButton(this, POV_DOWN_LEFT);
 	}
-
-	
-	*/
-
-
 
 }

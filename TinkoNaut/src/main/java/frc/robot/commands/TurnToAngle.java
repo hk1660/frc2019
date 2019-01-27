@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class TurnToAngle extends Command {
+
   private final PIDController m_pid;
 
-  public TurnToAngle(double angle) { 
+  public TurnToAngle(double angle) {
 
     requires(Robot.m_drivetrain);
 
@@ -19,7 +20,7 @@ public class TurnToAngle extends Command {
 
       @Override
       public double pidGet() {
-        return Robot.m_navx.getCurrentAngle(); 
+        return Robot.m_navx.getCurrentAngle();
 
       }
 
@@ -40,7 +41,7 @@ public class TurnToAngle extends Command {
 
   protected void initialize() {
     // Get everything in a safe starting state.
-    Robot.m_drivetrain.reset();
+    //Robot.m_drivetrain.reset();
     m_pid.reset();
     m_pid.enable();
   }
@@ -48,7 +49,7 @@ public class TurnToAngle extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return m_pid.onTarget();  //change to m_pid
+    return m_pid.onTarget(); // change to m_pid
   }
 
 }

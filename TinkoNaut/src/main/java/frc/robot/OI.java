@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.OpenClaw;
@@ -17,14 +18,14 @@ import frc.robot.commands.PistIn;
 import frc.robot.commands.PistOut;
 import frc.robot.commands.EatCargo;
 import frc.robot.commands.SpitCargo;
-
-
+import frc.robot.commands.TurnToAngle;
 import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
 //import frc.robot.commands.SetElevatorSetpoint;
 import frc.robot.commands.SetWristSetpoint;
+
 import frc.robot.utils.XboxOne;
-import frc.robot.utils.JoystickPOVButton;
+import frc.robot.utils.JoystickPovButton;
 
 
 /**
@@ -32,10 +33,9 @@ import frc.robot.utils.JoystickPOVButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //make 2 joysticks for the robot driving
+  //make 2 joysticks for the robot driving & operation
   public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
   public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-  //private final XboxOne m_joystick = new XboxOne(0);
 
   /**
    * Construct the OI and all of the buttons on it.
@@ -44,22 +44,21 @@ public class OI {
 
     manipStick.ButtonA().whileHeld(new PistIn());
     manipStick.ButtonB().whileHeld(new PistOut());
-
     manipStick.ButtonLB().whileHeld(new EatCargo());
     manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
+    //tonsil eat
+    //tonsil spit
 
-    //autoo turning using navx for drive stick
+    //auto turning using navx for drive stick -MM
     driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
     driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE));
     driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE));
     driverStick.ButtonPovDown().whileHeld(new TurnToAngle(RobotMap.FRONT_WALL_ANGLE));
-
-    /*
-    driverStick.ButtonPovUpRight().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
+    driverStick.ButtonPovUpRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
     driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
-    driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE));
-    driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
-*/
+    driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
+    
 
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
@@ -68,32 +67,10 @@ public class OI {
 
     SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
     SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
-
     SmartDashboard.putData("Open Claw", new OpenClaw());
     SmartDashboard.putData("Close Claw", new CloseClaw());
-
     SmartDashboard.putData("Deliver Soda", new Autonomous());
 
-    // // Create some buttons
-    // final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
-    // final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
-    // final JoystickButton dpadDown = new JoystickButton(m_joystick, 7);
-    // final JoystickButton dpadLeft = new JoystickButton(m_joystick, 8);
-    // final JoystickButton l2 = new JoystickButton(m_joystick, 9);
-    // final JoystickButton r2 = new JoystickButton(m_joystick, 10);
-    // final JoystickButton l1 = new JoystickButton(m_joystick, 11);
-    // final JoystickButton r1 = new JoystickButton(m_joystick, 12);
-
-    // // Connect the buttons to commands
-    // dpadUp.whenPressed(new SetElevatorSetpoint(0.2));
-    // dpadDown.whenPressed(new SetElevatorSetpoint(-0.2));
-    // dpadRight.whenPressed(new CloseClaw());
-    // dpadLeft.whenPressed(new OpenClaw());
-
-    // r1.whenPressed(new PrepareToPickup());
-    // r2.whenPressed(new Pickup());
-    // l1.whenPressed(new Place());
-    // l2.whenPressed(new Autonomous());
   }
 
   public XboxOne getDriverStick() {
