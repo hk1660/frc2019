@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.RobotMap;
 
 
 /**
@@ -15,7 +16,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
  */
 public class HatchPanelPanel extends Subsystem {
 
-  private DoubleSolenoid hpPiston;
+  private DoubleSolenoid hpPistonFixed;
+  private DoubleSolenoid hpPistonElev;
 
   /**
    * Create a new claw subsystem.
@@ -23,10 +25,13 @@ public class HatchPanelPanel extends Subsystem {
   public HatchPanelPanel() {
     super();
 
-    hpPiston = new DoubleSolenoid(1, 2);
+    hpPistonElev = new DoubleSolenoid(RobotMap.PISTON_IN_ELEV_CHANNEL, RobotMap.PISTON_OUT_ELEV_CHANNEL);
+    hpPistonFixed = new DoubleSolenoid(RobotMap.PISTON_IN_FIXED_CHANNEL, RobotMap.PISTON_OUT_FIXED_CHANNEL);
 
     // Let's name everything on the LiveWindow
-    addChild("HatchPanelPanel", hpPiston);
+    addChild("hatchPanelFixed", hpPistonFixed);
+    addChild("hatchPanelElev", hpPistonElev);
+
   }
 
   @Override
@@ -41,9 +46,8 @@ public class HatchPanelPanel extends Subsystem {
    */
   public void push() {
 
-    
-    hpPiston.set(DoubleSolenoid.Value.kForward);
-    
+    hpPistonFixed.set(DoubleSolenoid.Value.kForward);
+    hpPistonElev.set(DoubleSolenoid.Value.kForward);
     
   }
   /**
@@ -51,9 +55,8 @@ public class HatchPanelPanel extends Subsystem {
    */
   public void pull() {
 
-
-    hpPiston.set(DoubleSolenoid.Value.kReverse);
-
+    hpPistonFixed.set(DoubleSolenoid.Value.kReverse);
+    hpPistonElev.set(DoubleSolenoid.Value.kReverse);
 
   }
   
@@ -61,7 +64,9 @@ public class HatchPanelPanel extends Subsystem {
    * Retracts the hpPistons.
    */
   public void stop() {
-    hpPiston.set(DoubleSolenoid.Value.kOff);
+    hpPistonFixed.set(DoubleSolenoid.Value.kOff);
+    hpPistonElev.set(DoubleSolenoid.Value.kOff);
+  
   }
 
 

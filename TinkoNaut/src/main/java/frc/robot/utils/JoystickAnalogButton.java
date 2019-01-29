@@ -12,7 +12,8 @@ public class JoystickAnalogButton extends Button {
 
 	private GenericHID m_joystick;
 	private int m_axisNumber;
-	private double THRESHOLD = 0.5;
+	private double m_threshhold = 0.5;
+	private int m_direction;
 
 	/**
 	 * Create a button for triggering commands off a joystick's analog axis
@@ -23,9 +24,10 @@ public class JoystickAnalogButton extends Button {
 	 * @param axisNumber
 	 *            The axis number
 	 */
-	public JoystickAnalogButton(GenericHID joystick, int axisNumber) {
+	public JoystickAnalogButton(GenericHID joystick, int axisNumber, int direction) {
 		m_joystick = joystick;
 		m_axisNumber = axisNumber;
+		m_direction = direction;
 	}
 
 	/**
@@ -39,10 +41,11 @@ public class JoystickAnalogButton extends Button {
 	 * @param threshold
 	 *            The threshold to trigger above (positive) or below (negative)
 	 */
-	public JoystickAnalogButton(GenericHID joystick, int axisNumber, double threshold) {
+	public JoystickAnalogButton(GenericHID joystick, int axisNumber, int direction, double threshold) {
 		m_joystick = joystick;
 		m_axisNumber = axisNumber;
-		THRESHOLD = threshold;
+		m_direction = direction;
+		m_threshhold = threshold;
 	}
 
 	/**
@@ -54,7 +57,7 @@ public class JoystickAnalogButton extends Button {
 	 *            the threshold value (1 to -1)
 	 */
 	public void setThreshold(double threshold) {
-		THRESHOLD = threshold;
+		m_threshhold = threshold;
 	}
 
 	/**
@@ -63,7 +66,7 @@ public class JoystickAnalogButton extends Button {
 	 * @return the threshold value
 	 */
 	public double getThreshold() {
-		return THRESHOLD;
+		return m_threshhold;
 	}
 
 	/**
@@ -72,12 +75,15 @@ public class JoystickAnalogButton extends Button {
 	 * @return true when the analog value exceeds the specified threshold.
 	 */
 	public boolean get() {
-		if (THRESHOLD < 0) {
-			// Return true if axis value is less than negative threshold
-			return m_joystick.getRawAxis(m_axisNumber) < THRESHOLD;
-		} else {
+
+		double rawAxisValue = m_joystick.getRawAxis(m_axisNumber);
+
+		if (m_direction > 0) {
 			// Return true if axis value is greater than positive threshold
-			return m_joystick.getRawAxis(m_axisNumber) > THRESHOLD;
+			return  rawAxisValue > m_threshhold;
+		} else {
+			// Return true if axis value is less than negative threshold
+			return rawAxisValue < -m_threshhold;
 		}
 	}
 

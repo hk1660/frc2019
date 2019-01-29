@@ -72,13 +72,19 @@ public class RobotMap {
     public final static int DRIVE_FRONT_RIGHT_CHANNEL = 1;
     public final static int DRIVE_BACK_RIGHT_CHANNEL = 3;
       
-    // Other channels
+    //Manip channels
     public final static int CARGO_ROLLER_CHANNEL = 6;
-    public final static int MOUTH_LEFT_CHANNEL = 5;
-    public final static int MOUTH_LIMITER_CHANNEL = 0;
-  
-    // Lift motor channel
+    public final static int TONSIL_CHANNEL = 5;
     public final static int WINCH_MOTOR_CHANNEL = 7;
+    
+    //PCM Channels
+    public final static int COMPRESSOR_PORT  = 0; 
+    public final static int PISTON_IN_ELEV_CHANNEL = 1;
+    public final static int PISTON_OUT_ELEV_CHANNEL = 2;
+    public final static int PISTON_IN_FIXED_CHANNEL = 3;
+    public final static int PISTON_OUT_FIXED_CHANNEL = 4;
+
+
     public final static int LIFT_LIMIT_TOP_CHANNEL = 1;
       
     //NavX angles
@@ -96,7 +102,7 @@ public class RobotMap {
     public final static int PDP_ID = 0; //fix this???
   
   //Compressor 
-  public final static int COMPRESSOR_PORT  = 8; 
+
 
 
 

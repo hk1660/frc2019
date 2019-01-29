@@ -230,11 +230,11 @@ public class XboxOne extends Joystick {
 	/*----------------- Joystick Triggers (Analog Buttons) -------------------- */
 
 	public JoystickAnalogButton ButtonLeftTrigger() {
-		return new JoystickAnalogButton(this, AXIS_LEFT_TRIGGER, 0.5);
+		return new JoystickAnalogButton(this, AXIS_LEFT_TRIGGER, 1);
 	}
 
 	public JoystickAnalogButton ButtonRightTrigger() {
-		return new JoystickAnalogButton(this, AXIS_RIGHT_TRIGGER, 0.5);
+		return new JoystickAnalogButton(this, AXIS_RIGHT_TRIGGER, 1);
 	}
 
 	/* --------------------Pov Buttons -Marlahna & Haim -------------------------*/

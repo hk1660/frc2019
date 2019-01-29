@@ -26,6 +26,7 @@ import frc.robot.commands.SetWristSetpoint;
 
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
+import frc.robot.utils.ButtonBoard;
 
 
 /**
@@ -36,18 +37,34 @@ public class OI {
   //make 2 joysticks for the robot driving & operation
   public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
   public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+  public static ButtonBoard manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+
+  private boolean BB = true;
 
   /**
    * Construct the OI and all of the buttons on it.
    */
   public OI() {
 
+    if(BB == false){
     manipStick.ButtonA().whileHeld(new PistIn());
     manipStick.ButtonB().whileHeld(new PistOut());
     manipStick.ButtonLB().whileHeld(new EatCargo());
     manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
     //tonsil eat
     //tonsil spit
+    } else {
+      manipBoard.ButtonA().whileHeld(new PistIn());
+      manipBoard.ButtonB().whileHeld(new PistOut());
+      manipBoard.ButtonLB().whileHeld(new EatCargo());
+      manipBoard.ButtonRB().whileHeld(new SpitCargo());
+      manipBoard.ButtonUp().whileHeld(new PistIn());
+      //tonsil eat
+      //tonsil spit
+
+
+
+    }
 
     //auto turning using navx for drive stick -MM
     driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
@@ -81,5 +98,8 @@ public class OI {
     return this.manipStick;
   }
 
+  public ButtonBoard getManipBoard() {
+    return this.manipBoard;
+  }
 
 }
