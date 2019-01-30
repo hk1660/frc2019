@@ -73,9 +73,9 @@ public class RobotMap {
     public final static int DRIVE_BACK_RIGHT_CHANNEL = 3;
       
     //Manip channels
-    public final static int CARGO_ROLLER_CHANNEL = 6;
+    public final static int CARGO_ROLLER_CHANNEL = 8;
     public final static int TONSIL_CHANNEL = 5;
-    public final static int WINCH_MOTOR_CHANNEL = 7;
+    public final static int WINCH_MOTOR_CHANNEL = 6;
     
     //PCM Channels
     public final static int COMPRESSOR_PORT  = 0; 
