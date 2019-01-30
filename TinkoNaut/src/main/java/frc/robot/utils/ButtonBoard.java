@@ -18,16 +18,16 @@ public class ButtonBoard extends Joystick {
 	public static final int AXIS_LEFT_Y = 1;
 	
 	//BB buttons
-	public static final int BUTTON_A = 1;
-	public static final int BUTTON_B = 2;
-	public static final int BUTTON_X = 3;
-	public static final int BUTTON_Y = 4;
-	public static final int BUTTON_LB = 5;
-	public static final int BUTTON_RB = 6;
-	public static final int BUTTON_BACK = 7;
-	public static final int BUTTON_START = 8;
-	public static final int BUTTON_LEFT_JOY = 9;
-	public static final int BUTTON_RIGHT_JOY = 10;
+	public static final int BUTTON_A = 1; //eat
+	public static final int BUTTON_B = 2; //spit
+	public static final int BUTTON_X = 3; //hatch push
+	public static final int BUTTON_Y = 4;//hatch pull
+	public static final int BUTTON_LB = 5; //ground level
+	public static final int BUTTON_RB = 6; //level 1.5
+	public static final int BUTTON_BACK = 7; //level 2
+	public static final int BUTTON_START = 8; //level 2.5
+	public static final int BUTTON_LEFT_JOY = 9; //level 3
+	public static final int BUTTON_RIGHT_JOY = 10; //level 3.5
 
 	// XboxOne Pov (D-Pad) buttons Manip
 	// public final static int POV_UP = 0;
