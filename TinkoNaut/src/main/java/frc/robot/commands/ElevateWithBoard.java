@@ -14,17 +14,15 @@ import frc.robot.Robot;
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class ElevateWithJoystick extends Command {
-  public ElevateWithJoystick() {
+public class ElevateWithBoard extends Command {
+  public ElevateWithBoard() {
     requires(Robot.m_elevatorWinch);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipStick().getRightStickRaw_Y());
-
+    Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipBoard().getRawAxis(0));
   }
 
   // Make this return true when this Command no longer needs to run execute()

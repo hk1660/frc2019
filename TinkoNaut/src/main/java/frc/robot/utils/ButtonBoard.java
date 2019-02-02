@@ -18,16 +18,16 @@ public class ButtonBoard extends Joystick {
 	public static final int AXIS_LEFT_Y = 1;
 	
 	//BB buttons
-	public static final int BUTTON_A = 1; //eat
-	public static final int BUTTON_B = 2; //spit
-	public static final int BUTTON_X = 3; //hatch push
-	public static final int BUTTON_Y = 4;//hatch pull
-	public static final int BUTTON_LB = 5; //ground level
-	public static final int BUTTON_RB = 6; //level 1.5
-	public static final int BUTTON_BACK = 7; //level 2
-	public static final int BUTTON_START = 8; //level 2.5
-	public static final int BUTTON_LEFT_JOY = 9; //level 3
-	public static final int BUTTON_RIGHT_JOY = 10; //level 3.5
+	public static final int BUTTON_ONE = 1; //eat
+	public static final int BUTTON_TWO = 2; //spit
+	public static final int BUTTON_THREE = 3; //hatch push
+	public static final int BUTTON_FOUR = 4;//hatch pull
+	public static final int BUTTON_FIVE = 5; //ground level
+	public static final int BUTTON_SIX = 6; //level 1.5
+	public static final int BUTTON_SEVEN = 7; //level 2
+	public static final int BUTTON_EIGHT = 8; //level 2.5
+	public static final int BUTTON_NINE = 9; //level 3
+	public static final int BUTTON_TEN = 10; //level 3.5
 
 	// XboxOne Pov (D-Pad) buttons Manip
 	// public final static int POV_UP = 0;
@@ -94,8 +94,8 @@ public class ButtonBoard extends Joystick {
 	 * 
 	 * @return true if pressed
 	 */
-	public boolean isPressedButtonA() {
-		return getRawButton(BUTTON_A);
+	public boolean isPressedButtonOne() {
+		return getRawButton(BUTTON_ONE);
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class ButtonBoard extends Joystick {
 	 * 
 	 * @return true if pressed
 	 */
-	public boolean isPressedButtonB() {
-		return getRawButton(BUTTON_B);
+	public boolean isPressedButtonTwo() {
+		return getRawButton(BUTTON_TWO);
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class ButtonBoard extends Joystick {
 	 * 
 	 * @return true if pressed
 	 */
-	public boolean isPressedButtonX() {
-		return getRawButton(BUTTON_X);
+	public boolean isPressedButtonThree() {
+		return getRawButton(BUTTON_THREE);
 	}
 
 	/**
@@ -121,32 +121,32 @@ public class ButtonBoard extends Joystick {
 	 * 
 	 * @return true if pressed
 	 */
-	public boolean isPressedButtonY() {
-		return getRawButton(BUTTON_Y);
+	public boolean isPressedButtonFour() {
+		return getRawButton(BUTTON_FOUR);
 	}
 
-	public boolean isPressedButtonLB() {
-		return getRawButton(BUTTON_LB);
+	public boolean isPressedButtonFive() {
+		return getRawButton(BUTTON_FIVE);
 	}
 
-	public boolean isPressedButtonRB() {
-		return getRawButton(BUTTON_RB);
+	public boolean isPressedButtonSix() {
+		return getRawButton(BUTTON_SIX);
 	}
 
-	public boolean isPressedButtonBack() {
-		return getRawButton(BUTTON_BACK);
+	public boolean isPressedButtonSeven() {
+		return getRawButton(BUTTON_SEVEN);
 	}
 
-	public boolean isPressedButtonStart() {
-		return getRawButton(BUTTON_START);
+	public boolean isPressedButtonEight() {
+		return getRawButton(BUTTON_EIGHT);
 	}
 
-	public boolean isPressedButtonLeftJoy() {
-		return getRawButton(BUTTON_LEFT_JOY);
+	public boolean isPressedButtonNine() {
+		return getRawButton(BUTTON_NINE);
 	}
 
-	public boolean isPressedButtonRightJoy() {
-		return getRawButton(BUTTON_RIGHT_JOY);
+	public boolean isPressedButtonTen() {
+		return getRawButton(BUTTON_TEN);
 	}
 
 	
@@ -154,44 +154,44 @@ public class ButtonBoard extends Joystick {
 
 	/*----------------- Button Objects -------------------- */
 
-	public JoystickButton ButtonA() {
-		return new JoystickButton(this, BUTTON_A);
+	public JoystickButton ButtonOne() {
+		return new JoystickButton(this, BUTTON_ONE);
 	}
 
-	public JoystickButton ButtonB() {
-		return new JoystickButton(this, BUTTON_B);
+	public JoystickButton ButtonTwo() {
+		return new JoystickButton(this, BUTTON_TWO);
 	}
 
-	public JoystickButton ButtonX() {
-		return new JoystickButton(this, BUTTON_X);
+	public JoystickButton ButtonThree() {
+		return new JoystickButton(this, BUTTON_THREE);
 	}
 
-	public JoystickButton ButtonY() {
-		return new JoystickButton(this, BUTTON_Y);
+	public JoystickButton ButtonFour() {
+		return new JoystickButton(this, BUTTON_FOUR);
 	}
 
-	public JoystickButton ButtonStart() {
-		return new JoystickButton(this, BUTTON_START);
+	public JoystickButton ButtonFive() {
+		return new JoystickButton(this, BUTTON_EIGHT);
 	}
 
-	public JoystickButton ButtonBack() {
-		return new JoystickButton(this, BUTTON_BACK);
+	public JoystickButton ButtonSix() {
+		return new JoystickButton(this, BUTTON_SEVEN);
 	}
 
-	public JoystickButton ButtonLB() {
-		return new JoystickButton(this, BUTTON_LB);
+	public JoystickButton ButtonSeven() {
+		return new JoystickButton(this, BUTTON_FIVE);
 	}
 
-	public JoystickButton ButtonRB() {
-		return new JoystickButton(this, BUTTON_RB);
+	public JoystickButton ButtonEight() {
+		return new JoystickButton(this, BUTTON_SIX);
 	}
 
-	public JoystickButton ButtonLeftJoy() {
-		return new JoystickButton(this, BUTTON_LEFT_JOY);
+	public JoystickButton ButtonNine() {
+		return new JoystickButton(this, BUTTON_NINE);
 	}
 
-	public JoystickButton ButtonRightJoy() {
-		return new JoystickButton(this, BUTTON_RIGHT_JOY);
+	public JoystickButton ButtonTen() {
+		return new JoystickButton(this, BUTTON_TEN);
 	}
 
 

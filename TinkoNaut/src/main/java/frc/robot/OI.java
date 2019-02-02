@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -28,45 +29,52 @@ import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;
 
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //make 2 joysticks for the robot driving & operation
-  public static XboxOne driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
-  public static XboxOne manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-  public static ButtonBoard manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
 
-  private boolean BB = true;
+  public static boolean BB = true;
+
+  // make 2 joysticks for the robot driving & operation
+  public static XboxOne driverStick;
+  public static XboxOne manipStick;
+  public static ButtonBoard manipBoard;
 
   /**
    * Construct the OI and all of the buttons on it.
    */
   public OI() {
-
-    if(BB == false){
-    manipStick.ButtonA().whileHeld(new PistIn());
-    manipStick.ButtonB().whileHeld(new PistOut());
-    manipStick.ButtonLB().whileHeld(new EatCargo());
-    manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
-    //tonsil eat
-    //tonsil spit
+    //initialize
+    driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
+    if(BB){
+      manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
     } else {
-      manipBoard.ButtonA().whileHeld(new PistIn());
-      manipBoard.ButtonB().whileHeld(new PistOut());
-      manipBoard.ButtonLB().whileHeld(new EatCargo());
-      manipBoard.ButtonRB().whileHeld(new SpitCargo());
+      manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+    }
+  
+
+
+    if (BB == false) {
+      manipStick.ButtonA().whileHeld(new PistIn());
+      manipStick.ButtonB().whileHeld(new PistOut());
+      manipStick.ButtonLB().whileHeld(new EatCargo());
+      manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
+      // tonsil eat
+      // tonsil spit
+    } else {
+      manipBoard.ButtonFour().whileHeld(new PistIn());
+      manipBoard.ButtonThree().whileHeld(new PistOut());
+      manipBoard.ButtonOne().whileHeld(new EatCargo());
+      manipBoard.ButtonTwo().whileHeld(new SpitCargo());
       manipBoard.ButtonUp().whileHeld(new PistIn());
-      //tonsil eat
-      //tonsil spit
-
-
+      // tonsil eat
+      // tonsil spit
 
     }
 
-    //auto turning using navx for drive stick -MM
+    // auto turning using navx for drive stick -MM
     driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
     driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE));
     driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE));
@@ -75,7 +83,6 @@ public class OI {
     driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
     driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
     driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
-    
 
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
