@@ -49,11 +49,11 @@ public class OI {
     //initialize
     driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
     if(BB){
-      manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-    } else {
       manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-    }
-  
+    } else {
+      manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+    } 
+   
 
 
     if (BB == false) {
