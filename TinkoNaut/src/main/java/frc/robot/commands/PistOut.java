@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command. You can replace me with your own command.
  */
 public class PistOut extends Command {
 
@@ -28,7 +28,6 @@ public class PistOut extends Command {
   protected void execute() {
     Robot.m_hatchPanelPanel.push();
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

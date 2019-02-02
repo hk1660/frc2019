@@ -9,25 +9,24 @@ import frc.robot.RobotMap;
 
 public class Tonsils extends Subsystem{
 
-    private WPI_TalonSRX tonsilsMotor;
+    private WPI_TalonSRX tonsilMotorLeft;
+    private WPI_TalonSRX tonsilMotorRight;
 
     public Tonsils(){
-
-        tonsilsMotor = new WPI_TalonSRX(RobotMap.CARGO_ROLLER_CHANNEL);
-
+        //Tonsil Motor prime = tonsil motor left
+        tonsilMotorLeft = new WPI_TalonSRX(RobotMap.TONSIL_PRIME_CHANNEL);
+        tonsilMotorRight = new WPI_TalonSRX(RobotMap.TONSIL_CHANNEL);
     }
 
-
-    public void moveRoller(double speed){
-
-        tonsilsMotor.set(speed);
-
+    public void moveRollers(double speed){
+        tonsilMotorLeft.set(speed);
+        tonsilMotorRight.set(-speed);
     }
 
     public void log() {
     }
 
-    
+
     @Override
     public void initDefaultCommand() {
       // Set the default command for a subsystem here.

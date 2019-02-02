@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * An example command. You can replace me with your own command.
  */
 public class EatCargo extends Command {
   public EatCargo() {
@@ -30,7 +30,6 @@ public class EatCargo extends Command {
   protected void execute() {
     Robot.cargoGrabber.moveRoller(1.0);
   }
-
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

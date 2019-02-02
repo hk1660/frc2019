@@ -48,31 +48,35 @@ public class OI {
   public OI() {
     //initialize
     driverStick = new XboxOne(RobotMap.DRIVER_JOYSTICK_PORT);
-    if(BB){
-      manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-    } else {
-      manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
-    } 
+  //  if(BB){
+  //     manipBoard = new ButtonBoard(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+  //   } else {
+  //     manipStick = new XboxOne(RobotMap.MANIPULATOR_JOYSTICK_PORT);
+  //   } 
    
 
 
-    if (BB == false) {
-      manipStick.ButtonA().whileHeld(new PistIn());
-      manipStick.ButtonB().whileHeld(new PistOut());
-      manipStick.ButtonLB().whileHeld(new EatCargo());
-      manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
-      // tonsil eat
-      // tonsil spit
-    } else {
-      manipBoard.ButtonFour().whileHeld(new PistIn());
-      manipBoard.ButtonThree().whileHeld(new PistOut());
-      manipBoard.ButtonOne().whileHeld(new EatCargo());
-      manipBoard.ButtonTwo().whileHeld(new SpitCargo());
-      manipBoard.ButtonUp().whileHeld(new PistIn());
-      // tonsil eat
-      // tonsil spit
+  //   if (BB == false) {
+  //     manipStick.ButtonA().whileHeld(new PistIn());
+  //     manipStick.ButtonB().whileHeld(new PistOut());
 
-    }
+  //     manipStick.ButtonLB().whileHeld(new EatCargo());
+  //     manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
+  //     // tonsil eat
+  //     // tonsil spit
+  //   } else {
+  //     manipBoard.ButtonFour().whileHeld(new PistIn());
+  //     manipBoard.ButtonThree().whileHeld(new PistOut());
+
+  //     manipBoard.ButtonOne().whileHeld(new EatCargo());
+  //     manipBoard.ButtonTwo().whileHeld(new SpitCargo());
+      
+  //     manipBoard.ButtonUp().whileHeld(new PistIn());
+      
+  //     // tonsil eat
+  //     // tonsil spit
+
+  //   }
 
     // auto turning using navx for drive stick -MM
     driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
