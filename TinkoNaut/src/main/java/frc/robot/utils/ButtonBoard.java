@@ -18,11 +18,11 @@ public class ButtonBoard extends Joystick {
 	public static final int AXIS_LEFT_Y = 1;
 	
 	//BB buttons
-	public static final int BUTTON_ONE = 1; //eat
+	public static final int BUTTON_ONE = 5; //eat
 	public static final int BUTTON_TWO = 2; //spit
 	public static final int BUTTON_THREE = 3; //hatch push
 	public static final int BUTTON_FOUR = 4;//hatch pull
-	public static final int BUTTON_FIVE = 5; //ground level
+	public static final int BUTTON_FIVE = 11; //ground level
 	public static final int BUTTON_SIX = 6; //level 1.5
 	public static final int BUTTON_SEVEN = 7; //level 2
 	public static final int BUTTON_EIGHT = 8; //level 2.5
@@ -201,7 +201,6 @@ public class ButtonBoard extends Joystick {
 	public JoystickAnalogButton ButtonUp() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_Y, -1);
 	}
-
 	public JoystickAnalogButton ButtonDown() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_Y, 1);
 	}
