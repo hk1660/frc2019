@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static ElevatorWinchManual m_elevatorWinch;
-  public static CargoGrabber cargoGrabber;
+  public static CargoGrabber m_cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
   public static Wrist m_wrist;
   public static Claw m_claw;
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
   public static Limelight m_limelight;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
-  public static Tonsils tonsils;
+  public static Tonsils m_tonsils;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     m_elevatorWinch = new ElevatorWinchManual();
-    cargoGrabber = new CargoGrabber();
+    m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_wrist = new Wrist();
     m_claw = new Claw();
@@ -63,19 +63,19 @@ public class Robot extends TimedRobot {
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
-    tonsils = new Tonsils();
+    m_tonsils = new Tonsils();
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    SmartDashboard.putData(cargoGrabber);
+    SmartDashboard.putData(m_cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
-    SmartDashboard.putData(tonsils);
+    SmartDashboard.putData(m_tonsils);
   }
 
   @Override
@@ -123,11 +123,13 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
+    
     m_drivetrain.log();
-    cargoGrabber.log();
+    m_cargoGrabber.log();
     m_elevatorWinch.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
+    m_tonsils.log();
   }
 }

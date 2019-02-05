@@ -15,7 +15,7 @@ public class SpitCargo extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
 
-      requires(Robot.cargoGrabber);
+      requires(Robot.m_cargoGrabber);
   
     }
   
@@ -29,7 +29,7 @@ public class SpitCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoGrabber.moveRoller(-1.0);
+    Robot.m_cargoGrabber.moveRoller(-1.0);
 
   }
 
@@ -43,7 +43,7 @@ public class SpitCargo extends Command {
   @Override
   protected void end() {
     
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.m_cargoGrabber.moveRoller(0.0);
 
   }
 
@@ -51,6 +51,6 @@ public class SpitCargo extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.m_cargoGrabber.moveRoller(0.0);
   }
 }

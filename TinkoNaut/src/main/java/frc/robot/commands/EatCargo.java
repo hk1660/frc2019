@@ -16,7 +16,7 @@ import frc.robot.Robot;
 public class EatCargo extends Command {
   public EatCargo() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.cargoGrabber);
+    requires(Robot.m_cargoGrabber);
 
   }
 
@@ -28,7 +28,7 @@ public class EatCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoGrabber.moveRoller(1.0);
+    Robot.m_cargoGrabber.moveRoller(1.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +41,7 @@ public class EatCargo extends Command {
   @Override
   protected void end() {
 
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.m_cargoGrabber.moveRoller(0.0);
 
   }
 
@@ -49,6 +49,6 @@ public class EatCargo extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.cargoGrabber.moveRoller(0.0);
+    Robot.m_cargoGrabber.moveRoller(0.0);
   }
 }

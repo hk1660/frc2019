@@ -8,7 +8,7 @@ public class TonsilSpit extends Command {
     public TonsilSpit() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.tonsils);
+        requires(Robot.m_tonsils);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class TonsilSpit extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.tonsils.moveRollers(1.0);
+        Robot.m_tonsils.moveRollers(1.0);
 
     }
 
@@ -33,7 +33,7 @@ public class TonsilSpit extends Command {
     @Override
     protected void end() {
 
-        Robot.tonsils.moveRollers(0.0);
+        Robot.m_tonsils.moveRollers(0.0);
 
     }
 
@@ -41,6 +41,6 @@ public class TonsilSpit extends Command {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.tonsils.moveRollers(0.0);
+        Robot.m_tonsils.moveRollers(0.0);
     }
 }

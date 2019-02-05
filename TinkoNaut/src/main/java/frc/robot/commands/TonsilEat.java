@@ -7,7 +7,7 @@ public class TonsilEat extends Command {
     public TonsilEat() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.tonsils);
+        requires(Robot.m_tonsils);
     }
 
     // Called just before this Command runs the first time
@@ -18,7 +18,7 @@ public class TonsilEat extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.tonsils.moveRollers(-1.0);
+        Robot.m_tonsils.moveRollers(-1.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,13 +30,13 @@ public class TonsilEat extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        Robot.tonsils.moveRollers(0.0);
+        Robot.m_tonsils.moveRollers(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
-        Robot.tonsils.moveRollers(0.0);
+        Robot.m_tonsils.moveRollers(0.0);
     }
 }
