@@ -15,6 +15,7 @@ import frc.robot.commands.Autonomous;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorWinchManual;
+import frc.robot.subsystems.ElevatorWinchPID;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.HatchPanelPanel;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static ElevatorWinchManual m_elevatorWinch;
+  public static ElevatorWinchPID m_elevatorWinchPID;
   public static CargoGrabber m_cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
   public static Wrist m_wrist;
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     m_elevatorWinch = new ElevatorWinchManual();
+    m_elevatorWinchPID = new ElevatorWinchPID();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_wrist = new Wrist();
@@ -72,6 +75,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
+    SmartDashboard.putData(m_elevatorWinchPID);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
@@ -127,6 +131,7 @@ public class Robot extends TimedRobot {
     m_drivetrain.log();
     m_cargoGrabber.log();
     m_elevatorWinch.log();
+    m_elevatorWinchPID.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();

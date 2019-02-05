@@ -8,11 +8,14 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 
 /**
@@ -23,6 +26,7 @@ import frc.robot.Robot;
 public class ElevatorWinchPID extends PIDSubsystem {
   private final Victor m_motor;
   private final AnalogPotentiometer m_pot;
+  private DoubleSolenoid theLocker;
 
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
@@ -48,6 +52,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
     } else {
       m_pot = new AnalogPotentiometer(2); // Defaults to meters
     }
+    //Creates new double solonoid for locking and unlocking winch
+      theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL,RobotMap.PISTON_OUT_WINCH_CHANNEL);
 
     // Let's name everything on the LiveWindow
     addChild("Motor", m_motor);
@@ -63,6 +69,20 @@ public class ElevatorWinchPID extends PIDSubsystem {
    */
   public void log() {
     SmartDashboard.putData("Elevator Pot", (AnalogPotentiometer) m_pot);
+  }
+  //Lock method will lock the winch's gearbox
+  public void lock(){
+    theLocker.set(DoubleSolenoid.Value.kForward);
+  }
+
+  //Unlock method does opposite of above method
+  public void unlock(){
+      theLocker.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  //Stops the solenoid
+  public void stop(){
+    theLocker.set(DoubleSolenoid.Value.kOff);
   }
 
   /**

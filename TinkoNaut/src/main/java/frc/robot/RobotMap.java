@@ -79,11 +79,13 @@ public class RobotMap {
     public final static int WINCH_MOTOR_CHANNEL = 6;
     
     //PCM Channels
-    public final static int COMPRESSOR_PORT  = 0; 
-    public final static int PISTON_IN_ELEV_CHANNEL = 1;
-    public final static int PISTON_OUT_ELEV_CHANNEL = 2;
-    public final static int PISTON_IN_FIXED_CHANNEL = 3;
-    public final static int PISTON_OUT_FIXED_CHANNEL = 4;
+    //public final static int COMPRESSOR_PORT  = 0; 
+    public final static int PISTON_IN_ELEV_CHANNEL = 0;
+    public final static int PISTON_OUT_ELEV_CHANNEL = 1;
+    public final static int PISTON_IN_FIXED_CHANNEL = 2;
+    public final static int PISTON_OUT_FIXED_CHANNEL = 3;
+    public final static int PISTON_IN_WINCH_CHANNEL = 4;
+    public final static int PISTON_OUT_WINCH_CHANNEL = 5;
 
 
     public final static int LIFT_LIMIT_TOP_CHANNEL = 1;
