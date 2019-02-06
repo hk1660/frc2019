@@ -26,8 +26,8 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_SIX = 6; //level 1.5
 	public static final int BUTTON_SEVEN = 7; //level 2
 	public static final int BUTTON_EIGHT = 8; //level 2.5
-	public static final int BUTTON_NINE = 9; //level 3
-	public static final int BUTTON_TEN = 10; //level 3.5
+	public static final int BUTTON_NINE = 9; //level 3 & LOCK
+	public static final int BUTTON_TEN = 10; //level 3.5 & UNLOCK
 
 	// XboxOne Pov (D-Pad) buttons Manip
 	// public final static int POV_UP = 0;
