@@ -12,10 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
-
+import frc.robot.commands.TonsilEat;
+import frc.robot.commands.TonsilSpit;
+import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorWinchManual;
-import frc.robot.subsystems.ElevatorWinchPID;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.HatchPanelPanel;
@@ -23,7 +24,7 @@ import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 import frc.robot.subsystems.NavX;
-import frc.robot.subsystems.Tonsils;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,8 +38,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static ElevatorWinchManual m_elevatorWinch;
-  public static ElevatorWinchPID m_elevatorWinchPID;
-  public static CargoGrabber m_cargoGrabber;
+  public static CargoGrabber cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
   public static Wrist m_wrist;
   public static Claw m_claw;
@@ -46,7 +46,6 @@ public class Robot extends TimedRobot {
   public static Limelight m_limelight;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
-  public static Tonsils m_tonsils;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -57,8 +56,7 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     m_elevatorWinch = new ElevatorWinchManual();
-    m_elevatorWinchPID = new ElevatorWinchPID();
-    m_cargoGrabber = new CargoGrabber();
+    cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_wrist = new Wrist();
     m_claw = new Claw();
@@ -66,25 +64,26 @@ public class Robot extends TimedRobot {
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
-    m_tonsils = new Tonsils();
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    SmartDashboard.putData(m_cargoGrabber);
+    SmartDashboard.putData(cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
-    SmartDashboard.putData(m_elevatorWinchPID);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
-    SmartDashboard.putData(m_tonsils);
+    
+    
   }
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand.start(); // schedule the autonomous command (example)
+
+
+   m_autonomousCommand.start(); // schedule the autonomous command (example)
   }
 
   /**
@@ -94,6 +93,14 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     log();
+    
+    if(m_navx.getCurrentAngle()!= 90.0){
+
+      
+      Robot.m_drivetrain.drive(0, 0 ,0 , 90.0 );
+
+    }
+
   }
 
   @Override
@@ -127,14 +134,12 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
-    
     m_drivetrain.log();
-    m_cargoGrabber.log();
+    cargoGrabber.log();
     m_elevatorWinch.log();
-    m_elevatorWinchPID.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
-    m_tonsils.log();
+    
   }
 }

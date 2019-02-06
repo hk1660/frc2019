@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.commands.TurnToAngle;
 import frc.robot.Robot;
+import frc.robot.subsystems.NavX;
 
 /**
  * Drive the given distance straight (negative values go backwards). Uses a
@@ -22,11 +23,13 @@ import frc.robot.Robot;
  */
 public class DriveStraight extends Command {
   private final PIDController m_pid;
+ // private double turnAngle = 90.0;
 
   /**
    * Create a new DriveStraight command.
    * @param distance The distance to drive
    */
+  
   public DriveStraight(double distance) {
     requires(Robot.m_drivetrain);
     m_pid = new PIDController(4, 0, 0, new PIDSource() {
@@ -47,7 +50,8 @@ public class DriveStraight extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, d -> Robot.m_drivetrain.drive(0, d,0,0));
+    }, d -> Robot.m_drivetrain.drive(0, 1.0,0,0));
+ 
 
     m_pid.setAbsoluteTolerance(0.01);
     m_pid.setSetpoint(distance);

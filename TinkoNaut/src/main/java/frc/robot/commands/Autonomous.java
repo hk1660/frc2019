@@ -28,5 +28,6 @@ public class Autonomous extends CommandGroup {
     // is broken
     addParallel(new SetWristSetpoint(-45));
     addSequential(new CloseClaw());
+    
   }
 }
