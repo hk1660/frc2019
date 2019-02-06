@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.RobotMap;
 
 public class Pneumatics {
-    Compressor comp = new Compressor(RobotMap.COMPRESSOR_PORT);
+    Compressor comp = new Compressor(); //no compressor port needed for pcm?
 
     public Pneumatics() {
         this.comp.setClosedLoopControl(true);
