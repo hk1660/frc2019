@@ -14,9 +14,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.TonsilEat;
 import frc.robot.commands.TonsilSpit;
+import frc.robot.subsystems.Tonsils;
 import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorWinchManual;
+import frc.robot.subsystems.ElevatorWinchPID;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.HatchPanelPanel;
@@ -38,8 +40,10 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static ElevatorWinchManual m_elevatorWinch;
-  public static CargoGrabber cargoGrabber;
+  public static ElevatorWinchPID m_elevatorWinchPID;
+  public static CargoGrabber m_cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
+  public static Tonsils m_tonsils;
   public static Wrist m_wrist;
   public static Claw m_claw;
   public static OI m_oi;
@@ -56,8 +60,10 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     m_elevatorWinch = new ElevatorWinchManual();
-    cargoGrabber = new CargoGrabber();
+    m_elevatorWinchPID = new ElevatorWinchPID();
+    m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
+    m_tonsils = new Tonsils();
     m_wrist = new Wrist();
     m_claw = new Claw();
     m_oi = new OI();
@@ -70,8 +76,9 @@ public class Robot extends TimedRobot {
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    SmartDashboard.putData(cargoGrabber);
+    SmartDashboard.putData(m_cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
+    SmartDashboard.putData(m_elevatorWinchPID);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
@@ -135,8 +142,9 @@ public class Robot extends TimedRobot {
    */
   private void log() {
     m_drivetrain.log();
-    cargoGrabber.log();
+    m_cargoGrabber.log();
     m_elevatorWinch.log();
+    m_elevatorWinchPID.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
