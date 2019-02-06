@@ -23,9 +23,12 @@ import frc.robot.commands.TurnToAngle;
 import frc.robot.commands.Place;
 import frc.robot.commands.PrepareToPickup;
 // import frc.robot.commands.SetElevatorSetpoint;
+import frc.robot.commands.TonsilEat;
+import frc.robot.commands.TonsilSpit;
 import frc.robot.commands.ElevateWithBoard;
 import frc.robot.commands.SetWristSetpoint;
-
+import frc.robot.commands.LockWinch;
+import frc.robot.commands.UnlockWinch;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;
@@ -74,8 +77,13 @@ public class OI {
       
       manipBoard.ButtonRight().whileHeld(new ElevateWithBoard());
       manipBoard.ButtonLeft().whileHeld(new ElevateWithBoard());
-      // tonsil eat
-      // tonsil spit
+      // tonsils CHANGE BUTTONS LATER 
+      manipBoard.ButtonOne().whileHeld(new TonsilEat());
+      manipBoard.ButtonTwo().whileHeld(new TonsilSpit());
+  
+      // lock mechannims
+      manipBoard.ButtonNine().whenPressed(new LockWinch()); 
+      manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
 
     // }
 
