@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj.Encoder;
 public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
-  private WPI_TalonSRX winchMotorTwo;
   
 
   /**
@@ -37,7 +36,6 @@ public class ElevatorWinchManual extends Subsystem {
 
     //Drivetrain Initializations
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
-    winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
     winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
   }
 
@@ -56,20 +54,22 @@ public class ElevatorWinchManual extends Subsystem {
   public void log() {
     SmartDashboard.putBoolean("WinchManualMoving?", true);
     SmartDashboard.putData(winchMotor);
-    SmartDashboard.putData(winchMotorTwo);
     SmartDashboard.putNumber("Encoder stuff", this.getEncoderVal());
   }
 
   public void elevate(double speed) {
 
     winchMotor.set(speed);
-    winchMotorTwo.set(speed);
    
 
 
   }
   public int getEncoderVal(){
     return winchMotor.getSelectedSensorPosition();
+  }
+
+  public void zeroEncoder() {
+    winchMotor.setSelectedSensorPosition(0);
   }
 
   /**

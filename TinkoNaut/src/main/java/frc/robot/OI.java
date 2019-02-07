@@ -29,6 +29,7 @@ import frc.robot.commands.ElevateWithBoard;
 import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
+import frc.robot.commands.*;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;
@@ -82,7 +83,7 @@ public class OI {
       // lock mechannims
       manipBoard.ButtonNine().whenPressed(new LockWinch()); 
       manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
-
+      manipBoard.ButtonEight().whenPressed(new EncoderZero());
     }
 
     // auto turning using navx for drive stick -MM
