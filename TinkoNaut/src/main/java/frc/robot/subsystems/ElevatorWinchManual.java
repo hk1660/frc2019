@@ -77,7 +77,7 @@ public class ElevatorWinchManual extends Subsystem {
    *
    * @param joy The xboxone joystick to use to drive mecanum style.
    */
-  public void elevate(XboxOne joy) {
+  public void elevateJ(XboxOne joy) {
 
     elevate(joy.getRightStickRaw_Y());
   }
