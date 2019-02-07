@@ -47,7 +47,7 @@ public class ElevatorWinchManual extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ElevateWithJoystick());
+    //setDefaultCommand(new ElevateWithJoystick());
   }
 
   /**
