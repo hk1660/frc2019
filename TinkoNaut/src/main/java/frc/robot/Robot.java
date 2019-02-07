@@ -98,6 +98,7 @@ public class Robot extends TimedRobot {
 
 
    m_autonomousCommand.start(); // schedule the autonomous command (example)
+   DriveStraight();
   }
 
   /**
@@ -108,6 +109,8 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     log();
     
+
+
    /* if(m_navx.getCurrentAngle()!= 90.0){
 
       
