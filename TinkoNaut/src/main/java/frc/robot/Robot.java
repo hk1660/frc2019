@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
 
 
    m_autonomousCommand.start(); // schedule the autonomous command (example)
-   DriveStraight();
+   DriveStraight(1.0);
   }
 
   /**
