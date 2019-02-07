@@ -20,7 +20,7 @@ public class CargoGrabber extends Subsystem{
 
     public void moveRoller(double speed){
 
-        cargoRollerMotor.set(speed);
+        cargoRollerMotor.set(-speed);
 
     }
 

@@ -19,7 +19,7 @@ public class TonsilSpit extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.m_tonsils.moveRollers(1.0);
+        Robot.m_tonsils.moveRollers(-1.0);
 
     }
 

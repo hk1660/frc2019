@@ -23,7 +23,12 @@ public class ElevateWithJoystick extends Command {
   @Override
   protected void execute() {
 
-    Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipStick().getRightStickRaw_Y());
+    if( Robot.m_oi.BB){
+      Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipBoard().getRawAxis(0));
+    } else {
+      Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipStick().getRightStickRaw_Y());
+    }
+    
 
   }
 

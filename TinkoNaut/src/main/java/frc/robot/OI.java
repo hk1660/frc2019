@@ -39,7 +39,7 @@ import frc.robot.utils.ButtonBoard;
  */
 public class OI {
 
-  public static boolean BB = true;
+  public static boolean BB = false;
 
   // make 2 joysticks for the robot driving & operation
   public static XboxOne driverStick;

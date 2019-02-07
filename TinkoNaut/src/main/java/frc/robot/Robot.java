@@ -59,8 +59,15 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
+
+
+    if(m_oi.BB){
+
+    }
     m_elevatorWinch = new ElevatorWinchManual();
     m_elevatorWinchPID = new ElevatorWinchPID();
+    
+    
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_tonsils = new Tonsils();
@@ -101,13 +108,13 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     log();
     
-    if(m_navx.getCurrentAngle()!= 90.0){
+   /* if(m_navx.getCurrentAngle()!= 90.0){
 
       
       Robot.m_drivetrain.drive(0, 0 ,0 , 90.0 );
 
     }
-
+*/
   }
 
   @Override

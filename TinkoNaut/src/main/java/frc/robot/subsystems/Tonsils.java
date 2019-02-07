@@ -14,13 +14,13 @@ public class Tonsils extends Subsystem{
 
     public Tonsils(){
         //Tonsil Motor prime = tonsil motor left
-        tonsilMotorLeft = new WPI_TalonSRX(RobotMap.TONSIL_PRIME_CHANNEL);
+        //tonsilMotorLeft = new WPI_TalonSRX(RobotMap.TONSIL_PRIME_CHANNEL);
         tonsilMotorRight = new WPI_TalonSRX(RobotMap.TONSIL_CHANNEL);
     }
 
     public void moveRollers(double speed){
-        tonsilMotorLeft.set(speed);
-        tonsilMotorRight.set(-speed);
+        //tonsilMotorLeft.set(speed);
+        tonsilMotorRight.set(speed);
     }
 
     public void log() {

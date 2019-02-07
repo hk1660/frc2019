@@ -9,11 +9,14 @@ package frc.robot.subsystems;
 
 import frc.robot.utils.XboxOne;
 import frc.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.commands.ElevateWithJoystick;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -23,7 +26,8 @@ import frc.robot.commands.ElevateWithJoystick;
 public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
-
+  private WPI_TalonSRX winchMotorTwo;
+  
 
   /**
    * Create a new drive train subsystem.
@@ -33,7 +37,8 @@ public class ElevatorWinchManual extends Subsystem {
 
     //Drivetrain Initializations
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
-   
+    winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
+    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
   }
 
   /**
@@ -50,13 +55,22 @@ public class ElevatorWinchManual extends Subsystem {
    */
   public void log() {
     SmartDashboard.putBoolean("WinchManualMoving?", true);
- 
+    SmartDashboard.putData(winchMotor);
+    SmartDashboard.putData(winchMotorTwo);
+    SmartDashboard.putNumber("Encoder stuff", this.getEncoderVal());
   }
 
   public void elevate(double speed) {
 
     winchMotor.set(speed);
-	}
+    winchMotorTwo.set(speed);
+   
+
+
+  }
+  public int getEncoderVal(){
+    return winchMotor.getSelectedSensorPosition();
+  }
 
   /**
    * Tank style driving for the DriveTrain.
