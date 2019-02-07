@@ -57,8 +57,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
   }
 
   protected void usePIDOutput(double output) {
-    winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to
-                                 // the motor
+    winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
   }
 
   public void moveWinch(double speed) {
@@ -69,7 +68,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    //SmartDashboard.putData("Elevator Pot", encoder);
+    SmartDashboard.putNumber("Encoder stuff", encoder);
   }
 
   // Lock method will lock the winch's gearbox
