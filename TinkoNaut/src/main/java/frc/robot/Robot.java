@@ -139,6 +139,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     log();
+    SmartDashboard.putData(m_elevatorWinch);
   }
 
   /**
