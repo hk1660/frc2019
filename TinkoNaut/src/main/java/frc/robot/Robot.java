@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 
 
    m_autonomousCommand.start(); // schedule the autonomous command (example)
-   DriveStraight(1.0);
+   DriveStraight autoFor = new DriveStraight(1.0);
   }
 
   /**
