@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.commands.ElevateWithJoystick;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTable;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -27,6 +29,7 @@ public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
   NetworkTableEntry height;
+  NetworkTable table;
   /**
    * Create a new drive train subsystem.
    */
