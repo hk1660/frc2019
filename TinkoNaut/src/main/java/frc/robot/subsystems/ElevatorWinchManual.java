@@ -53,11 +53,11 @@ public class ElevatorWinchManual extends Subsystem {
   /**
    * The log method puts interesting information to the SmartDashboard.
    */
-   public void update() {
+   /*public void update() {
      height = table.getEntry("height");
-    }
+    }*/
   public void log() {
-    update();
+    //update();
     double y = this.getEncoderVal();
     SmartDashboard.putBoolean("WinchManualMoving?", true);
     SmartDashboard.putData(winchMotor);
