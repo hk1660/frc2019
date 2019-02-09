@@ -26,8 +26,7 @@ import edu.wpi.first.wpilibj.Encoder;
 public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
-  
-
+  NetworkTableEntry height;
   /**
    * Create a new drive train subsystem.
    */
@@ -51,10 +50,15 @@ public class ElevatorWinchManual extends Subsystem {
   /**
    * The log method puts interesting information to the SmartDashboard.
    */
+   public void update() {
+     height = table.getEntry("height");
+    }
   public void log() {
+    update();
+    double y = this.getEncoderVal();
     SmartDashboard.putBoolean("WinchManualMoving?", true);
     SmartDashboard.putData(winchMotor);
-    SmartDashboard.putNumber("Encoder stuff", this.getEncoderVal());
+    SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
   }
 
   public void elevate(double speed) {

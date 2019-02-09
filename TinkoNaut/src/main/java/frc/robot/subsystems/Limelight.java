@@ -36,7 +36,15 @@ public class Limelight extends Subsystem {
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
     }
-
+    public int getTX(){
+        return (int)tx;
+    }
+    public int getTY(){
+        return (int)ty;
+    }
+    public int getTA(){
+        return (int)ta;
+    }
     @Override
     public void initDefaultCommand() {
     }
