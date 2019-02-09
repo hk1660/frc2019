@@ -24,22 +24,23 @@ public class LLScore extends Command {
     }
 
       // Called repeatedly when this Command is scheduled to run
-    /* @Override
+     @Override
      protected void execute(){
-        if ((Robot.m_limelight.getTXdouble() >= targetLeftThresh) 
-            || (  Robot.m_limelight.getTXdouble() <= targetRightThresh)) {
-            if((targetLeftThresh - Robot.m_limelight.getTXdouble()) < 0 && Robot.m_limelight.getTXdouble() != 0){
-                Robot.m_drivetrain.drive(strafeRightSpeed,0.0,0.0,0.0);
-            }
-            else if((targetRightThresh - Robot.m_limelight.getTXdouble()) > 0&& Robot.m_limelight.getTXdouble() != 0){
-                Robot.m_drivetrain.drive(strafeLeftSpeed,0.0,0.0,0.0);
-            }
+        if(Robot.m_limelight.getTXdouble() < targetLeftThresh) {               
+            Robot.m_drivetrain.drive(strafeRightSpeed,0.0,0.0,0.0);
         }
+        else if(Robot.m_limelight.getTXdouble() > targetRightThresh){
+                Robot.m_drivetrain.drive(strafeLeftSpeed,0.0,0.0,0.0);
+        }
+        else {
+            System.out.println("Looks like there's no target, BOTTOM TEXT");
+        }
+        
         // if (Robot.m_limelight.getTXdouble() == targetLeftThresh - targetRightThresh &&  Robot.m_limelight.getXA != targetAreaScore) {
         //     Robot.m_drivetrain.drive(0.0,0.1,0.0,0.0);
         // }
 
-    }*/
+    }
     // Make this return true when this Command no longer needs to run execute()
     @Override
         protected boolean isFinished() {
