@@ -98,8 +98,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
 
-   m_autonomousCommand.start(); // schedule the autonomous command (example)
-   DriveStraight autoFor = new DriveStraight(1.0);
+   //m_autonomousCommand.start(); // schedule the autonomous command (example)
+   //DriveStraight autoFor = new DriveStraight(1.0);
   // TurnToAngle turnAngle = new TurnToAngle(90.0);
   }
 
@@ -108,8 +108,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
-    log();
+    //Scheduler.getInstance().run();
+    //log();
     
 
 
@@ -128,6 +128,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     m_autonomousCommand.cancel();
     
     
@@ -138,9 +139,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
+    
   }
 
   /**
