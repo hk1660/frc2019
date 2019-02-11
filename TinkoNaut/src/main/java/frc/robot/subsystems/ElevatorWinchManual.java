@@ -28,6 +28,7 @@ import edu.wpi.first.networktables.NetworkTable;
 public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
+  private WPI_TalonSRX winchMotorTwo;
   NetworkTableEntry height;
   NetworkTable table;
   /**
@@ -38,6 +39,7 @@ public class ElevatorWinchManual extends Subsystem {
 
     //Drivetrain Initializations
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
+    winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
     winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
   }
 
