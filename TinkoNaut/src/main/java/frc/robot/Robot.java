@@ -58,7 +58,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
-    m_drivetrain = new DriveTrain();
+    drivetrain = new DriveTrain(0.5);
+    m_navx = new TurnToAngle(180.0);
 
 
     if(m_oi.BB){
@@ -99,6 +100,7 @@ public class Robot extends TimedRobot {
 
    m_autonomousCommand.start(); // schedule the autonomous command (example)
    DriveStraight autoFor = new DriveStraight(1.0);
+   TurnToAngle turnAngle = new TurnToAngle(90.0);
   }
 
   /**
