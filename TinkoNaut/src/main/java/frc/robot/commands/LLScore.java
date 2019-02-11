@@ -6,17 +6,16 @@ import frc.robot.Robot;
 import  frc.robot.subsystems.DriveTrain;
 
 public class LLScore extends Command {
-    
     int targetLeftThresh = 280;
     int targetRightThresh = 320;
     int targetAreaScore = 400;
 
     double strafeRightSpeed = 0.5;
     double strafeLeftSpeed = -strafeRightSpeed;
-
     public LLScore() {
         requires(Robot.m_limelight);
     }
+
 
     // Called just before this Command runs the first time
     @Override
@@ -26,7 +25,7 @@ public class LLScore extends Command {
       // Called repeatedly when this Command is scheduled to run
      @Override
      protected void execute(){
-        if(Robot.m_limelight.getTXdouble() < targetLeftThresh) {               
+        if(Robot.m_limelight.getTXdouble() < targetLeftThresh) {
             Robot.m_drivetrain.drive(strafeRightSpeed,0.0,0.0,0.0);
         }
         else if(Robot.m_limelight.getTXdouble() > targetRightThresh){
