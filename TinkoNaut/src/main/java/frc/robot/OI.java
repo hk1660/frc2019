@@ -30,6 +30,7 @@ import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
 import frc.robot.commands.*;
+import frc.robot.commands.EncoderZero;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;

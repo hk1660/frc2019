@@ -69,10 +69,10 @@ public class ElevatorWinchManual extends Subsystem {
   public void elevate(double speed) {
 
     winchMotor.set(speed);
-   
-
-
+    winchMotorTwo.set(speed);
+  
   }
+
   public int getEncoderVal(){
     return winchMotor.getSelectedSensorPosition();
   }
