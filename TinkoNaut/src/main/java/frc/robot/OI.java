@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.OpenClaw;
@@ -30,7 +31,6 @@ import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
 import frc.robot.commands.*;
-import frc.robot.commands.EncoderZero;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;
@@ -74,6 +74,7 @@ public class OI {
       manipBoard.ButtonThree().whileHeld(new PistOut());
       manipBoard.ButtonOne().whileHeld(new EatCargo());
       manipBoard.ButtonTwo().whileHeld(new SpitCargo());
+      manipBoard.ButtonFive().whenPressed(new LLScore());
       
       manipBoard.ButtonRight().whileHeld(new ElevateWithBoard());
       manipBoard.ButtonLeft().whileHeld(new ElevateWithBoard());
