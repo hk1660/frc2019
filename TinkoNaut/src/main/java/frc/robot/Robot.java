@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
     m_elevatorWinch = new ElevatorWinchManual();
     m_elevatorWinchPID = new ElevatorWinchPID();
     
-    
+    m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_tonsils = new Tonsils();
