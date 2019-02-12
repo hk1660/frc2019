@@ -30,6 +30,7 @@ import frc.robot.commands.ElevateWithBoard;
 import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
+import frc.robot.commands.LLScore;
 import frc.robot.commands.*;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
@@ -74,7 +75,7 @@ public class OI {
       manipBoard.ButtonThree().whileHeld(new PistOut());
       manipBoard.ButtonOne().whileHeld(new EatCargo());
       manipBoard.ButtonTwo().whileHeld(new SpitCargo());
-      manipBoard.ButtonFive().whenPressed(new LLScore());
+      
       
       manipBoard.ButtonRight().whileHeld(new ElevateWithBoard());
       manipBoard.ButtonLeft().whileHeld(new ElevateWithBoard());
@@ -89,7 +90,7 @@ public class OI {
     }
 
     // auto turning using navx for drive stick -MM
-    driverStick.ButtonA().whenPressed(new TurnToAngle(-12.3));
+   // driverStick.ButtonA().whenPressed(new TurnToAngle(-12.3));
      driverStick.ButtonPovRight().whenPressed(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
     driverStick.ButtonPovLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE));
     driverStick.ButtonPovUp().whenPressed(new TurnToAngle(RobotMap.BACK_WALL_ANGLE));
@@ -98,6 +99,9 @@ public class OI {
     driverStick.ButtonPovDownRight().whenPressed(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
     driverStick.ButtonPovUpLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
     driverStick.ButtonPovDownLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
+
+    driverStick.ButtonA().whileHeld(new LLScore());
+
 
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));

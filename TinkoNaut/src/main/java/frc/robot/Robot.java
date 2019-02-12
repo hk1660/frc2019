@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
-import frc.robot.commands.TonsilEat;
-import frc.robot.commands.TonsilSpit;
 import frc.robot.subsystems.Tonsils;
 import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
@@ -61,23 +59,19 @@ public class Robot extends TimedRobot {
     // drivetrain = new DriveTrain(0.5);
     // m_navx = new TurnToAngle(180.0);
 
-
-    if(m_oi.BB){
-
-    }
     m_elevatorWinch = new ElevatorWinchManual();
-    m_elevatorWinchPID = new ElevatorWinchPID();
-    
+    m_elevatorWinchPID = new ElevatorWinchPID();    
     m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_tonsils = new Tonsils();
     m_wrist = new Wrist();
     m_claw = new Claw();
-    m_oi = new OI();
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
+
+    m_oi = new OI();
     
 
     // instantiate the command used for the autonomous period
@@ -143,7 +137,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
-    
+
   }
 
   /**

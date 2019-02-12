@@ -6,12 +6,13 @@ import frc.robot.Robot;
 import  frc.robot.subsystems.DriveTrain;
 
 public class LLScore extends Command {
-    int targetLeftThresh = 280;
-    int targetRightThresh = 320;
+    double targetLeftThresh = -3.5;
+    double targetRightThresh = -targetLeftThresh;
     int targetAreaScore = 400;
 
     double strafeRightSpeed = 0.5;
     double strafeLeftSpeed = -strafeRightSpeed;
+    
     public LLScore() {
         requires(Robot.m_limelight);
     }
@@ -26,13 +27,13 @@ public class LLScore extends Command {
      @Override
      protected void execute(){
         if(Robot.m_limelight.getTXdouble() < targetLeftThresh) {
-            Robot.m_drivetrain.drive(strafeRightSpeed,0.0,0.0,0.0);
+            Robot.m_drivetrain.drive(strafeLeftSpeed,0.0,0.0,0.0);
         }
         else if(Robot.m_limelight.getTXdouble() > targetRightThresh){
-                Robot.m_drivetrain.drive(strafeLeftSpeed,0.0,0.0,0.0);
+                Robot.m_drivetrain.drive(strafeRightSpeed,0.0,0.0,0.0);
         }
         else {
-            System.out.println("Looks like there's no target, BOTTOM TEXT");
+            System.out.println("on trarget???");
         }
         
         // if (Robot.m_limelight.getTXdouble() == targetLeftThresh - targetRightThresh &&  Robot.m_limelight.getXA != targetAreaScore) {
