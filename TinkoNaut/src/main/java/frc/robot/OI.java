@@ -87,6 +87,15 @@ public class OI {
       manipBoard.ButtonNine().whenPressed(new LockWinch()); 
       manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
       manipBoard.ButtonEight().whenPressed(new EncoderZero());
+
+      
+      // Elevator Buttons
+      // manipBoard
+      // manipBoard
+      // manipBoard
+      // manipBoard
+      // manipBoard
+      // manipBoard
     }
 
     // auto turning using navx for drive stick -MM
