@@ -32,6 +32,7 @@ import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
 import frc.robot.commands.LLScore;
 import frc.robot.commands.*;
+import frc.robot.commads.getStrafeToTargetSpeed;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.ButtonBoard;
@@ -43,6 +44,7 @@ import frc.robot.utils.ButtonBoard;
 public class OI {
 
   public static boolean BB = false;
+  public static boolean LLAndAngle = true;
 
   // make 2 joysticks for the robot driving & operation
   public static XboxOne driverStick;
@@ -90,15 +92,18 @@ public class OI {
     }
 
     // auto turning using navx for drive stick -MM
-    driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE,0,0));
-    driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE,0,0));
-    driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE,0,0));
-    driverStick.ButtonPovDown().whileHeld(new TurnToAngle(RobotMap.FRONT_WALL_ANGLE,0,0));
-    driverStick.ButtonPovUpRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE,0,0));
-    driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE,0,0));
-    driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE,0,0));
-    driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE,0,0));
-
+    if(LLAndAngle){
+    driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovDown().whileHeld(new TurnToAngle(RobotMap.FRONT_WALL_ANGLE,new getStrafeToTargetSpeed(),0));
+    }else{
+    
+    driverStick.ButtonPovUpRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE,new getStrafeToTargetSpeed(),0));
+    driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE,new getStrafeToTargetSpeed(),0));
+    }
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
     // SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
