@@ -56,13 +56,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
-<<<<<<< HEAD
-    m_navx = new TurnToAngle(180.0);
-=======
-    // drivetrain = new DriveTrain(0.5);
-    // m_navx = new TurnToAngle(180.0);
->>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
-
     m_elevatorWinch = new ElevatorWinchManual();
     m_elevatorWinchPID = new ElevatorWinchPID();    
     m_drivetrain = new DriveTrain();
@@ -75,7 +68,7 @@ public class Robot extends TimedRobot {
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
 
-    m_oi = new OI();
+    m_oi = new OI();  //save OI for last so that when it calls subsystems they are not null
     
 
     // instantiate the command used for the autonomous period
@@ -90,15 +83,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
     
-<<<<<<< HEAD
-
-
-
-
-    
-    
-=======
->>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
   }
 
   @Override

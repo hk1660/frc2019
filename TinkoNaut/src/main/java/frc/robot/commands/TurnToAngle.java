@@ -12,15 +12,11 @@ public class TurnToAngle extends Command {
 
   private final PIDController m_pid;
 
-<<<<<<< HEAD
-  public TurnToAngle(double angle,double strafeSpeed, double forwardSpeed) {
-=======
-  public double kp = 1.0;
-  public double ki = 0.1;
-  public double kd = 0.1;
+  private double kp = 1.0;
+  private double ki = 0.1;
+  private double kd = 0.1;
 
-  public TurnToAngle(double angle) {
->>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
+  public TurnToAngle(double angle, double strafeSpeed, double forwardSpeed) {
 
     requires(Robot.m_drivetrain);
     SmartDashboard.putNumber("angle", angle);
@@ -51,10 +47,10 @@ public class TurnToAngle extends Command {
 
   protected void initialize() {
     // Get everything in a safe starting state.
-    //Robot.m_drivetrain.reset();
+    // Robot.m_drivetrain.reset();
     m_pid.reset();
     m_pid.enable();
-    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -62,13 +58,13 @@ public class TurnToAngle extends Command {
   protected boolean isFinished() {
     return m_pid.onTarget(); // change to m_pid
   }
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-      
-      m_pid.disable();
-  
-    }
 
- 
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+
+    m_pid.disable();
+
+  }
+
 }
