@@ -11,7 +11,7 @@ public class TurnToAngle extends Command {
 
   private final PIDController m_pid;
 
-  public TurnToAngle(double angle) {
+  public TurnToAngle(double angle,double strafeSpeed, double forwardSpeed) {
 
     requires(Robot.m_drivetrain);
 
@@ -33,7 +33,7 @@ public class TurnToAngle extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, turn -> Robot.m_drivetrain.drive(0, 0, turn, 0)); // mayg3 pass thru other argument too
+    }, turn -> Robot.m_drivetrain.drive(strafeSpeed, forwardSpeed, turn, 0)); // mayg3 pass thru other argument too
 
     m_pid.setAbsoluteTolerance(0.01);
     m_pid.setSetpoint(angle);
