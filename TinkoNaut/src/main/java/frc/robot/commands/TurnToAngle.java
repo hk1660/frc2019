@@ -3,19 +3,29 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.PIDBase.Tolerance;
 import edu.wpi.first.wpilibj.command.Command;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class TurnToAngle extends Command {
 
   private final PIDController m_pid;
 
+<<<<<<< HEAD
   public TurnToAngle(double angle,double strafeSpeed, double forwardSpeed) {
+=======
+  public double kp = 1.0;
+  public double ki = 0.1;
+  public double kd = 0.1;
+
+  public TurnToAngle(double angle) {
+>>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
 
     requires(Robot.m_drivetrain);
+    SmartDashboard.putNumber("angle", angle);
 
-    m_pid = new PIDController(2, 0, 0, new PIDSource() {
+    m_pid = new PIDController(kp, ki, kd, new PIDSource() {
       PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
       @Override
@@ -35,7 +45,7 @@ public class TurnToAngle extends Command {
       }
     }, turn -> Robot.m_drivetrain.drive(strafeSpeed, forwardSpeed, turn, 0)); // mayg3 pass thru other argument too
 
-    m_pid.setAbsoluteTolerance(0.01);
+    m_pid.setAbsoluteTolerance(1.0);
     m_pid.setSetpoint(angle);
   }
 
@@ -44,6 +54,7 @@ public class TurnToAngle extends Command {
     //Robot.m_drivetrain.reset();
     m_pid.reset();
     m_pid.enable();
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -51,5 +62,13 @@ public class TurnToAngle extends Command {
   protected boolean isFinished() {
     return m_pid.onTarget(); // change to m_pid
   }
+    // Called once after isFinished returns true
+    @Override
+    protected void end() {
+      
+      m_pid.disable();
+  
+    }
 
+ 
 }

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 import frc.robot.commands.Autonomous;
 import frc.robot.commands.CloseClaw;
 import frc.robot.commands.OpenClaw;
@@ -29,6 +30,7 @@ import frc.robot.commands.ElevateWithBoard;
 import frc.robot.commands.SetWristSetpoint;
 import frc.robot.commands.LockWinch;
 import frc.robot.commands.UnlockWinch;
+import frc.robot.commands.LLScore;
 import frc.robot.commands.*;
 import frc.robot.utils.XboxOne;
 import frc.robot.utils.JoystickPovButton;
@@ -40,7 +42,7 @@ import frc.robot.utils.ButtonBoard;
  */
 public class OI {
 
-  public static boolean BB = true;
+  public static boolean BB = false;
 
   // make 2 joysticks for the robot driving & operation
   public static XboxOne driverStick;
@@ -74,6 +76,7 @@ public class OI {
       manipBoard.ButtonOne().whileHeld(new EatCargo());
       manipBoard.ButtonTwo().whileHeld(new SpitCargo());
       
+      
       manipBoard.ButtonRight().whileHeld(new ElevateWithBoard());
       manipBoard.ButtonLeft().whileHeld(new ElevateWithBoard());
       // tonsils CHANGE BUTTONS LATER 
@@ -87,6 +90,7 @@ public class OI {
     }
 
     // auto turning using navx for drive stick -MM
+<<<<<<< HEAD
     driverStick.ButtonPovRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE,0,0));
     driverStick.ButtonPovLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE,0,0));
     driverStick.ButtonPovUp().whileHeld(new TurnToAngle(RobotMap.BACK_WALL_ANGLE,0,0));
@@ -95,6 +99,20 @@ public class OI {
     driverStick.ButtonPovDownRight().whileHeld(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE,0,0));
     driverStick.ButtonPovUpLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE,0,0));
     driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE,0,0));
+=======
+   // driverStick.ButtonA().whenPressed(new TurnToAngle(-12.3));
+     driverStick.ButtonPovRight().whenPressed(new TurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
+    driverStick.ButtonPovLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_WALL_ANGLE));
+    driverStick.ButtonPovUp().whenPressed(new TurnToAngle(RobotMap.BACK_WALL_ANGLE));
+    driverStick.ButtonPovDown().whenPressed(new TurnToAngle(RobotMap.FRONT_WALL_ANGLE));
+    driverStick.ButtonPovUpRight().whenPressed(new TurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownRight().whenPressed(new TurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
+    driverStick.ButtonPovUpLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownLeft().whenPressed(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
+
+    driverStick.ButtonA().whileHeld(new LLScore());
+
+>>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
 
     // Put Some buttons on the SmartDashboard
     // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));

@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous;
-import frc.robot.commands.TonsilEat;
-import frc.robot.commands.TonsilSpit;
 import frc.robot.subsystems.Tonsils;
 import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
@@ -58,25 +56,26 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
+<<<<<<< HEAD
     m_navx = new TurnToAngle(180.0);
+=======
+    // drivetrain = new DriveTrain(0.5);
+    // m_navx = new TurnToAngle(180.0);
+>>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
 
-
-    if(m_oi.BB){
-
-    }
     m_elevatorWinch = new ElevatorWinchManual();
-    m_elevatorWinchPID = new ElevatorWinchPID();
-    
-    
+    m_elevatorWinchPID = new ElevatorWinchPID();    
+    m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
     m_tonsils = new Tonsils();
     m_wrist = new Wrist();
     m_claw = new Claw();
-    m_oi = new OI();
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
+
+    m_oi = new OI();
     
 
     // instantiate the command used for the autonomous period
@@ -91,21 +90,24 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
     
+<<<<<<< HEAD
 
 
 
 
     
     
+=======
+>>>>>>> 96af0bc20b4152c9f8da5dd03205816bf452e552
   }
 
   @Override
   public void autonomousInit() {
 
 
-   m_autonomousCommand.start(); // schedule the autonomous command (example)
-   DriveStraight autoFor = new DriveStraight(1.0);
-   TurnToAngle turnAngle = new TurnToAngle(90.0);
+   //m_autonomousCommand.start(); // schedule the autonomous command (example)
+   //DriveStraight autoFor = new DriveStraight(1.0);
+  // TurnToAngle turnAngle = new TurnToAngle(90.0);
   }
 
   /**
@@ -113,8 +115,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
-    log();
+    //Scheduler.getInstance().run();
+    //log();
     
 
 
@@ -133,6 +135,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    
     m_autonomousCommand.cancel();
     
     
@@ -143,9 +146,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
+
   }
 
   /**

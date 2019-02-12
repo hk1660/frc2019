@@ -36,26 +36,50 @@ public class Limelight extends Subsystem {
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
     }
-    public NetworkTableEntry getTX(){
+
+    public NetworkTableEntry getTX() {
         return tx;
     }
-    public NetworkTableEntry getTY(){
+
+    public NetworkTableEntry getTY() {
         return ty;
     }
-    public NetworkTableEntry getTA(){
+
+    public NetworkTableEntry getTA() {
         return ta;
     }
-    public double getTXdouble(){
+
+    public double getTXdouble() {
         return tx.getDouble(-1.0);
     }
-    public double getTYdouble(){
+
+    public double getTYdouble() {
         return ty.getDouble(-1.0);
     }
-    public double getTAdouble(){
+
+    public double getTAdouble() {
         return ta.getDouble(-1.0);
     }
+
     @Override
     public void initDefaultCommand() {
+    }
+
+    public double getStrafeToTargetSpeed() {
+        double targetLeftThresh = -3.5;
+        double targetRightThresh = -targetLeftThresh;
+
+        double strafeRightSpeed = 0.5;
+        double strafeLeftSpeed = -strafeRightSpeed;
+
+        if (getTXdouble() < targetLeftThresh) {
+            return strafeLeftSpeed;
+        } else if (getTXdouble() > targetRightThresh) {
+            return strafeRightSpeed;
+        } else {
+            System.out.println("on trarget???");
+            return 0.0;
+        }
     }
 
 }

@@ -29,8 +29,12 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private final int encoder;
   private DoubleSolenoid theLocker;
 
-  // private static final double kP_real = 4;
-  // private static final double kI_real = 0.07;
+
+
+  
+  private static final double kP_real = 2.0;
+  private static final double kI_real = 0.0;
+  private static final double kD_real = 0.0;
   // private static final double kP_simulation = 18;
   // private static final double kI_simulation = 0.2;
 
@@ -38,13 +42,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
    * Create a new elevator subsystem.
    */
   public ElevatorWinchPID() {
-    super("Winch", 2.0, 0.0, 0.0);// The constructor passes a name for the subsystem and the P, I and D constants
+    super("Winch", kP_real, kI_real, kD_real);// The constructor passes a name for the subsystem and the P, I and D constants
                                   // that are used when computing the motor output
     setAbsoluteTolerance(0.05);
     getPIDController().setContinuous(false);
 
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
-    encoder = winchMotor.getSelectedSensorPosition(0);
+    encoder = winchMotor.getSelectedSensorPosition();
     theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
 
   }
