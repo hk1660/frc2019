@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     
     m_autonomousCommand.cancel();
+    Robot.m_navx.zeroAngle();
     
     
   }
@@ -122,7 +123,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    Robot.m_navx.zeroAngle();
+    
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
