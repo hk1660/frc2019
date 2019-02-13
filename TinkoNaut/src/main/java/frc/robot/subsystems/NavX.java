@@ -22,20 +22,37 @@ public class NavX {
 	public NavX() {
 		// navx intialization
 		try {
+			
 			navx = new AHRS(SPI.Port.kMXP); // navX-MXP initialized with (SPI, I2C, TTL UART) and USB
 											// //http://navx-mxp.kauailabs.com/guidance/selecting-an-interface.
+											
 		} catch (RuntimeException ex) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		
+	}
+	
+	public static void zeroAngle(){
+		navx.zeroYaw();
 	}
 
 	public static int getCurrentAngle() {
 		int rawAngle = (int) (navx.getAngle());
-		SmartDashboard.putNumber("rawAngle", rawAngle);
+		//SmartDashboard.putNumber("rawAngle", rawAngle);
 		return rawAngle;
 	}
 
+
+	    public void log() {
+		
+		SmartDashboard.putNumber("navxAngle", getCurrentAngle());
+		
+		}
 	// public void pidWrite(double output) {
 	// 	rotateToAngleRate = output;
 	// }
 }
+
+
+
+

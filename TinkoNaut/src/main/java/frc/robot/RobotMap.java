@@ -114,6 +114,9 @@ public class RobotMap {
   //Compressor 
 
 
+  public static boolean LL_FLAG = false;
+
+
 
 
 }

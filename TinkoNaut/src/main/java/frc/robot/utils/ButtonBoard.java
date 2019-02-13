@@ -18,7 +18,7 @@ public class ButtonBoard extends Joystick {
 	public static final int AXIS_LEFT_Y = 1;
 
 	// BB buttons
-	public static final int BUTTON_ONE = 5; // eat
+	public static final int BUTTON_ONE = 1; // eat
 	public static final int BUTTON_TWO = 2; // spit
 	public static final int BUTTON_THREE = 3; // hatch push
 	public static final int BUTTON_FOUR = 4;// hatch pull

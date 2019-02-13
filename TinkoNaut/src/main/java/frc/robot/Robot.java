@@ -44,8 +44,8 @@ public class Robot extends TimedRobot {
   public static Tonsils m_tonsils;
   public static Wrist m_wrist;
   public static Claw m_claw;
-  public static OI m_oi;
   public static Limelight m_limelight;
+  public static OI m_oi;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
 
@@ -102,15 +102,6 @@ public class Robot extends TimedRobot {
     //Scheduler.getInstance().run();
     //log();
     
-
-
-   /* if(m_navx.getCurrentAngle()!= 90.0){
-
-      
-      Robot.m_drivetrain.drive(0, 0 ,0 , 90.0 );
-
-    }
-*/
   }
 
   @Override
@@ -131,6 +122,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
+    Robot.m_navx.zeroAngle();
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
@@ -155,6 +147,8 @@ public class Robot extends TimedRobot {
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
+    m_navx.log();
     
+    // WELOME TO POWER MODE
   }
 }
