@@ -44,7 +44,7 @@
    */
   public class OI {
 
-    public static boolean BB = false;
+    public static boolean BB = true;
 
     // make 2 joysticks for the robot driving & operation
     public static XboxOne driverStick;
@@ -70,8 +70,9 @@
         manipStick.ButtonB().whileHeld(new PistOut());
         manipStick.ButtonLB().whileHeld(new EatCargo());
         manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
-        // tonsil eat
-        // tonsil spit
+        manipStick.ButtonX().whileHeld(new TonsilEat());
+        manipStick.ButtonY().whileHeld(new TonsilSpit());
+        
       } else {
         manipBoard.ButtonFour().whileHeld(new PistIn());
         manipBoard.ButtonThree().whileHeld(new PistOut());

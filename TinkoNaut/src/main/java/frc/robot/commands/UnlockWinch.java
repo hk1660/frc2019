@@ -22,7 +22,9 @@ public class UnlockWinch extends Command{
      // Called repeatedly when this Command is scheduled to run
      @Override
      protected void execute(){
-         Robot.m_elevatorWinchPID.unlock();
+         //Robot.m_elevatorWinchPID.unlock();
+         Robot.m_elevatorWinch.unlock();
+
      }
 
       // Make this return true when this Command no longer needs to run execute()
@@ -33,13 +35,16 @@ public class UnlockWinch extends Command{
        // Called once after isFinished returns true
        @Override
        protected void end(){
-           Robot.m_elevatorWinchPID.stop();
+            Robot.m_elevatorWinch.stop();
+           //Robot.m_elevatorWinchPID.stop();
        }
 
        // Called when another command which requires one or more of the same
        // subsystems is scheduled to run
        @Override
         protected void interrupted() {
-        Robot.m_elevatorWinchPID.stop();
+
+            Robot.m_elevatorWinch.stop();
+            //Robot.m_elevatorWinchPID.stop();
         }
 }

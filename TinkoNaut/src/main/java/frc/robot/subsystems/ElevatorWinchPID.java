@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
@@ -26,11 +27,10 @@ import frc.robot.RobotMap;
  */
 public class ElevatorWinchPID extends PIDSubsystem {
   private final WPI_TalonSRX winchMotor;
+  private final WPI_TalonSRX winchMotorTwo;
   private final int encoder;
   private DoubleSolenoid theLocker;
-
-
-
+  public DigitalInput limitSwitch;
   
   private static final double kP_real = 2.0;
   private static final double kI_real = 0.0;
@@ -48,9 +48,10 @@ public class ElevatorWinchPID extends PIDSubsystem {
     getPIDController().setContinuous(false);
 
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
+    winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
     encoder = winchMotor.getSelectedSensorPosition();
     theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
-
+    limitSwitch = new DigitalInput(RobotMap.DIGITAL_PORT_LIMIT);
   }
 
   public void initDefaultCommand() {
@@ -62,12 +63,31 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
   protected void usePIDOutput(double output) {
     winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
+    winchMotorTwo.pidWrite(output);
   }
 
   public void moveWinch(double speed) {
     winchMotor.set(speed);
+    winchMotorTwo.set(speed);
   }
 
+  public int getEncoderVal(){
+    return -winchMotor.getSelectedSensorPosition();
+  }
+
+  public void zeroEncoder() {
+    winchMotor.setSelectedSensorPosition(0);
+  }
+
+  public boolean isLimitPressed(){
+    return limitSwitch.get();
+  }
+
+  public void zeroWithLimitCheck(){
+    if(isLimitPressed()){
+      zeroEncoder();
+    }
+  }
   /**
    * The log method puts interesting information to the SmartDashboard.
    */

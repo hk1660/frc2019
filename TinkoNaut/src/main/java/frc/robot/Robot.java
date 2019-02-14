@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,7 +39,7 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   public static ElevatorWinchManual m_elevatorWinch;
-  public static ElevatorWinchPID m_elevatorWinchPID;
+ // public static ElevatorWinchPID m_elevatorWinchPID;
   public static CargoGrabber m_cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
   public static Tonsils m_tonsils;
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
 
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -57,7 +59,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_elevatorWinch = new ElevatorWinchManual();
-    m_elevatorWinchPID = new ElevatorWinchPID();    
+    //m_elevatorWinchPID = new ElevatorWinchPID();    
     m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
@@ -78,11 +80,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
-    SmartDashboard.putData(m_elevatorWinchPID);
+   // SmartDashboard.putData(m_elevatorWinchPID);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
-    
+  
   }
 
   @Override
@@ -123,7 +125,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    
+    this.m_elevatorWinch.zeroWithLimitCheck();
     Scheduler.getInstance().run();
     log();
     SmartDashboard.putData(m_elevatorWinch);
@@ -144,7 +146,7 @@ public class Robot extends TimedRobot {
     m_drivetrain.log();
     m_cargoGrabber.log();
     m_elevatorWinch.log();
-    m_elevatorWinchPID.log();
+   // m_elevatorWinchPID.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
