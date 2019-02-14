@@ -43,14 +43,12 @@ public class NavX {
 	}
 
 
-	    public void log() {
+	public void log() {
 		
 		SmartDashboard.putNumber("navxAngle", getCurrentAngle());
 		
-		}
-	// public void pidWrite(double output) {
-	// 	rotateToAngleRate = output;
-	// }
+	}
+
 }
 
 

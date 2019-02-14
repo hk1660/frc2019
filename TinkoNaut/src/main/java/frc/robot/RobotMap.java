@@ -112,13 +112,15 @@ public class RobotMap {
     public final static double LEVEL_3 = 109000.0;
     public final static double LEVEL_3_5 = 135000.0;
 
-    
-  //Compressor 
-
-  //Input Channel
+  
+  //Digital Input Channels
   public final static int DIGITAL_PORT_LIMIT = 7;
 
+
+  //Flags
   public static boolean LL_FLAG = false;
+  public static boolean WINCH_PID_FLAG = false;
+  public static boolean BB_FLAG = true;
 
 
 

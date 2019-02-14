@@ -15,6 +15,7 @@ public class TurnToAngle extends Command {
   private double kp = 1.0;
   private double ki = 0.1;
   private double kd = 0.1;
+  private double kToleranceDegrees = 1.0; //how off can a turn be?
 
   public TurnToAngle(double angle, double strafeSpeed, double forwardSpeed) {
 
@@ -41,8 +42,13 @@ public class TurnToAngle extends Command {
       }
     }, turn -> Robot.m_drivetrain.drive(strafeSpeed, forwardSpeed, turn, 0)); // mayg3 pass thru other argument too
 
-    m_pid.setAbsoluteTolerance(1.0);
+    m_pid.setAbsoluteTolerance(kToleranceDegrees);
+    m_pid.setInputRange(-180.0f,  180.0f);
+		m_pid.setOutputRange(-1.0, 1.0);
+    m_pid.setContinuous(true);
+    
     m_pid.setSetpoint(angle);
+		
   }
 
   protected void initialize() {

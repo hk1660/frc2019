@@ -15,10 +15,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.commands.ElevateWithJoystick;
+import frc.robot.commands.ElevateManual;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
 
@@ -31,7 +30,6 @@ public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
   private WPI_TalonSRX winchMotorTwo;
-  private final int encoder;
   private DoubleSolenoid theLocker;
   public DigitalInput limitSwitch;
 
@@ -46,8 +44,7 @@ public class ElevatorWinchManual extends Subsystem {
     //Drivetrain Initializations
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
     winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
-    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
-    encoder = winchMotor.getSelectedSensorPosition();
+    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
     limitSwitch = new DigitalInput(RobotMap.DIGITAL_PORT_LIMIT);
   }
