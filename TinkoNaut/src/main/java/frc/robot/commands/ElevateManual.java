@@ -10,22 +10,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class ElevateWithBoard extends Command {
-  public ElevateWithBoard() {
+public class ElevateManual extends Command {
+  public ElevateManual() {
     requires(Robot.m_elevatorWinch);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
+    if( RobotMap.BB_FLAG){
+      Robot.m_elevatorWinch.elevateManual(Robot.m_oi.getManipBoard().getRawAxis(0));
+    } else {
+      Robot.m_elevatorWinch.elevateManual(Robot.m_oi.getManipStick().getRightStickRaw_Y());
+    }
     
-    // Robot.m_elevatorWinch.elevate(1.0);
-  
-    Robot.m_elevatorWinch.elevate(Robot.m_oi.getManipBoard().getRawAxis(0));
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,6 +42,6 @@ public class ElevateWithBoard extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_elevatorWinch.elevate(0.0);
+    Robot.m_elevatorWinch.elevateManual(0.0);
   }
 }

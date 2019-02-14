@@ -105,13 +105,22 @@ public class RobotMap {
     public final static int PDP_ID = 0; //fix this???
 
     //Levels
-    public final static double LEVEL_1 = 20000.0;
-    public final static double LEVEL_1_5 = 30000.0;
-    public final static double LEVEL_2 = 40000.0;
-    public final static double LEVEL_2_5 = 50000.0;
-    public final static double LEVEL_3 = 60000.0;
-    
-  //Compressor 
+    public final static double LEVEL_1 = 200.0;
+    public final static double LEVEL_1_5 = 24000.0;
+    public final static double LEVEL_2 = 57000.0;
+    public final static double LEVEL_2_5 = 82000.0;
+    public final static double LEVEL_3 = 109000.0;
+    public final static double LEVEL_3_5 = 135000.0;
+
+  
+  //Digital Input Channels
+  public final static int DIGITAL_PORT_LIMIT = 7;
+
+
+  //Flags
+  public static boolean LL_FLAG = false;
+  public static boolean WINCH_PID_FLAG = false;
+  public static boolean BB_FLAG = true;
 
 
 

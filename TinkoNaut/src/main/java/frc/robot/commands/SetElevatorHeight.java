@@ -17,24 +17,28 @@ import frc.robot.Robot;
  * position. Other commands using the elevator should make sure they disable
  * PID!
  */
-// public class SetElevatorSetpoint extends Command {
-//   private final double m_setpoint;
+public class SetElevatorHeight extends Command {
+  private final double height;
 
-//   public SetElevatorSetpoint(double setpoint) {
-//     m_setpoint = setpoint;
-//     requires(Robot.m_elevatorWinch);
-//   }
+  public SetElevatorHeight(double height) { //height is the pid setpoint
+    this.height = height;
+    requires(Robot.m_elevatorWinch);
+  }
 
-//   // Called just before this Command runs the first time
-//   @Override
-//   protected void initialize() {
-//     Robot.m_elevatorWinch.enable();
-//     Robot.m_elevatorWinch.setSetpoint(m_setpoint);
-//   }
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+    Robot.m_elevatorWinch.enable();           //starts the pid loop
+    Robot.m_elevatorWinch.setSetpoint(height);  //method call for all pid controllers
+  }
 
-//   // Make this return true when this Command no longer needs to run execute()
-//   @Override
-//   protected boolean isFinished() {
-//     return Robot.m_elevatorWinch.onTarget();
-//   }
-// }
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return Robot.m_elevatorWinch.onTarget();
+  }
+
+  //no need for a execute method, because the pid controller will be
+  //constantly making the elevator move to its proper position
+
+}

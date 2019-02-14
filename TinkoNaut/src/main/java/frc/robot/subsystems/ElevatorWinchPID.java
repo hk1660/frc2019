@@ -8,14 +8,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.utils.XboxOne;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -25,31 +23,30 @@ import frc.robot.RobotMap;
  * world do to minor differences.
  */
 public class ElevatorWinchPID extends PIDSubsystem {
+
   private final WPI_TalonSRX winchMotor;
-  private final int encoder;
+  private final WPI_TalonSRX winchMotorTwo;
   private DoubleSolenoid theLocker;
-
-
-
+  public DigitalInput limitSwitch;
   
-  private static final double kP_real = 2.0;
-  private static final double kI_real = 0.0;
-  private static final double kD_real = 0.0;
-  // private static final double kP_simulation = 18;
-  // private static final double kI_simulation = 0.2;
+  private static final double kp = 2.0;
+  private static final double ki = 0.0;
+  private static final double kd = 0.0;
 
   /**
    * Create a new elevator subsystem.
    */
   public ElevatorWinchPID() {
-    super("Winch", kP_real, kI_real, kD_real);// The constructor passes a name for the subsystem and the P, I and D constants
+    super("Winch", kp, ki, kd);// The constructor passes a name for the subsystem and the P, I and D constants
                                   // that are used when computing the motor output
-    setAbsoluteTolerance(0.05);
+    setAbsoluteTolerance(500);
     getPIDController().setContinuous(false);
 
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
-    encoder = winchMotor.getSelectedSensorPosition();
+    winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
     theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
+    limitSwitch = new DigitalInput(RobotMap.DIGITAL_PORT_LIMIT);
+    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
 
   }
 
@@ -57,37 +54,80 @@ public class ElevatorWinchPID extends PIDSubsystem {
   }
 
   public double returnPIDInput() {
-    return encoder; // returns the sensor value that is providing the feedback for the system
+    return getEncoderVal(); // returns the sensor value that is providing the feedback for the system
   }
 
   protected void usePIDOutput(double output) {
-    winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
+
+    zeroWithLimitCheck();
+    
+    if(getEncoderVal() > 0 && getEncoderVal() < RobotMap.LEVEL_3){
+      winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
+      winchMotorTwo.pidWrite(output);
+    }
   }
 
-  public void moveWinch(double speed) {
-    winchMotor.set(speed);
+
+  public void elevateManual(double speed) {
+    zeroWithLimitCheck();
+    if(getEncoderVal() > 0 && getEncoderVal() < RobotMap.LEVEL_3){
+      winchMotor.set(speed);
+      winchMotorTwo.set(speed);
+    }
   }
+
+  public int getEncoderVal(){
+    return -winchMotor.getSelectedSensorPosition();
+  }
+
+  public void zeroEncoder() {
+    winchMotor.setSelectedSensorPosition(0);
+  }
+
+  public boolean isLimitPressed(){
+    return limitSwitch.get();
+  }
+
+  public void zeroWithLimitCheck(){
+    if(isLimitPressed()){
+      zeroEncoder();
+    }
+  }
+
+  // Lock method will lock the winch's gearbox
+  public void lockPiston() {
+    theLocker.set(DoubleSolenoid.Value.kForward);
+  }
+
+  // Unlock method does opposite of above method
+  public void unlockPiston() {
+    theLocker.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Stops the solenoid
+  public void stopPiston() {
+    theLocker.set(DoubleSolenoid.Value.kOff);
+  }
+
+
+   /**
+   * Tank style driving for the DriveTrain.
+   * @param joy The xboxone joystick to use to drive mecanum style.
+   */
+  public void elevateJoystick(XboxOne joy) {
+    elevateManual(joy.getRightStickRaw_Y());
+  }
+
 
   /**
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    SmartDashboard.putNumber("Encoder stuff", encoder);
-  }
-
-  // Lock method will lock the winch's gearbox
-  public void lock() {
-    theLocker.set(DoubleSolenoid.Value.kForward);
-  }
-
-  // Unlock method does opposite of above method
-  public void unlock() {
-    theLocker.set(DoubleSolenoid.Value.kReverse);
-  }
-
-  // Stops the solenoid
-  public void stop() {
-    theLocker.set(DoubleSolenoid.Value.kOff);
+    SmartDashboard.putBoolean("WinchPID?", true);
+    SmartDashboard.putData(winchMotor);
+    SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
+    SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
+ 
   }
 
 }

@@ -15,8 +15,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.commands.ElevateWithJoystick;
-import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.commands.ElevateManual;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTable;
 
@@ -29,6 +30,9 @@ public class ElevatorWinchManual extends Subsystem {
 
   private WPI_TalonSRX winchMotor;
   private WPI_TalonSRX winchMotorTwo;
+  private DoubleSolenoid theLocker;
+  public DigitalInput limitSwitch;
+
   NetworkTableEntry height;
   NetworkTable table;
   /**
@@ -40,7 +44,9 @@ public class ElevatorWinchManual extends Subsystem {
     //Drivetrain Initializations
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
     winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
-    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
+    winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
+    limitSwitch = new DigitalInput(RobotMap.DIGITAL_PORT_LIMIT);
   }
 
   /**
@@ -60,25 +66,38 @@ public class ElevatorWinchManual extends Subsystem {
     }*/
   public void log() {
     //update();
-    double y = this.getEncoderVal();
+ 
     SmartDashboard.putBoolean("WinchManualMoving?", true);
     SmartDashboard.putData(winchMotor);
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
+    SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
+    
   }
 
   public void elevate(double speed) {
-
-    winchMotor.set(speed);
-    winchMotorTwo.set(speed);
-  
+    zeroWithLimitCheck();
+    if(getEncoderVal() > 0 && getEncoderVal() < RobotMap.LEVEL_3){
+      winchMotor.set(speed);
+      winchMotorTwo.set(speed);
+    }
   }
 
   public int getEncoderVal(){
-    return winchMotor.getSelectedSensorPosition();
+    return -winchMotor.getSelectedSensorPosition();
   }
 
   public void zeroEncoder() {
     winchMotor.setSelectedSensorPosition(0);
+  }
+
+  public boolean isLimitPressed(){
+    return limitSwitch.get();
+  }
+
+  public void zeroWithLimitCheck(){
+    if(isLimitPressed()){
+      zeroEncoder();
+    }
   }
 
   /**
@@ -89,6 +108,22 @@ public class ElevatorWinchManual extends Subsystem {
   public void elevateJ(XboxOne joy) {
 
     elevate(joy.getRightStickRaw_Y());
+  }
+
+  
+  // Lock method will lock the winch's gearbox
+  public void lock() {
+    theLocker.set(DoubleSolenoid.Value.kForward);
+  }
+
+  // Unlock method does opposite of above method
+  public void unlock() {
+    theLocker.set(DoubleSolenoid.Value.kReverse);
+  }
+
+  // Stops the solenoid
+  public void stop() {
+    theLocker.set(DoubleSolenoid.Value.kOff);
   }
 
 

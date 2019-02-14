@@ -6,7 +6,7 @@ import frc.robot.utils.JoystickPovButton;
 import frc.robot.utils.JoystickAnalogButton;
 
 /**
- * Class to encapsulate all ButtonBoard functionality. 
+ * Class to encapsulate all ButtonBoard functionality.
  *
  * @author KT & JAB
  */
@@ -16,6 +16,7 @@ public class ButtonBoard extends Joystick {
 	// BB axes
 	public static final int AXIS_LEFT_X = 0;
 	public static final int AXIS_LEFT_Y = 1;
+<<<<<<< HEAD
 	
 	//BB buttons
 	public static final int BUTTON_ONE = 5; //eat
@@ -29,6 +30,21 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_NINE = 9; //level 3 & LOCK
 	public static final int BUTTON_TEN = 10; //level 3.5 & UNLOCK
 	public static final int BUTTON_ELEVEN = 11; //
+=======
+
+	// BB buttons
+	public static final int BUTTON_ONE = 1; // eat
+	public static final int BUTTON_TWO = 2; // spit
+	public static final int BUTTON_THREE = 3; // hatch push
+	public static final int BUTTON_FOUR = 4;// hatch pull
+	public static final int BUTTON_FIVE = 5; // ground level
+	public static final int BUTTON_SIX = 6; // level 1.5
+	public static final int BUTTON_SEVEN = 7; // level 2
+	public static final int BUTTON_EIGHT = 8; // level 2.5
+	public static final int BUTTON_NINE = 9; // level 3 & LOCK
+	public static final int BUTTON_TEN = 10; // level 3.5 & UNLOCK
+	public static final int BUTTON_ELEVEN = 11;
+>>>>>>> 828fb5ba96bb75a45372f00d2ed1ea79c01a4658
 	public static final int BUTTON_TWELVE = 12;
 
 	// XboxOne Pov (D-Pad) buttons Manip
@@ -41,7 +57,6 @@ public class ButtonBoard extends Joystick {
 	// public final static int POV_LEFT = 270;
 	// public final static int POV_UP_LEFT = 315;
 
-
 	/**
 	 * Default constructor
 	 * 
@@ -53,17 +68,16 @@ public class ButtonBoard extends Joystick {
 
 	/*----------------- AXIS ACCESSOR METHODS -------------------- */
 
-
 	public boolean isPressedRightDirection() {
-		if(getRawAxis(AXIS_LEFT_X) > 0.5){
+		if (getRawAxis(AXIS_LEFT_X) > 0.5) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean isPressedLeftDirection() {
-		if(getRawAxis(AXIS_LEFT_X) < -0.5){
+	public boolean isPressedLeftDirection() {	
+		if (getRawAxis(AXIS_LEFT_X) < -0.5) {
 			return true;
 		} else {
 			return false;
@@ -71,7 +85,7 @@ public class ButtonBoard extends Joystick {
 	}
 
 	public boolean isPressedUpDirection() {
-		if(getRawAxis(AXIS_LEFT_Y) < -0.5){
+		if (getRawAxis(AXIS_LEFT_Y) < -0.5) {
 			return true;
 		} else {
 			return false;
@@ -79,15 +93,12 @@ public class ButtonBoard extends Joystick {
 	}
 
 	public boolean isPressedDownDirection() {
-		if(getRawAxis(AXIS_LEFT_Y) > 0.5){
+		if (getRawAxis(AXIS_LEFT_Y) > 0.5) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-	
-
 
 	/*----------------- Button Accessor Methods -------------------- */
 
@@ -151,8 +162,13 @@ public class ButtonBoard extends Joystick {
 		return getRawButton(BUTTON_TEN);
 	}
 
-	
+	public boolean isPressedButtonEleven() {
+		return getRawButton(BUTTON_ELEVEN);
+	}
 
+	public boolean isPressedButtonTwelve() {
+		return getRawButton(BUTTON_TWELVE);
+	}
 
 	/*----------------- Button Objects -------------------- */
 
@@ -196,22 +212,30 @@ public class ButtonBoard extends Joystick {
 		return new JoystickButton(this, BUTTON_TEN);
 	}
 
+	public JoystickButton ButtonEleven() {
+		return new JoystickButton(this, BUTTON_ELEVEN);
+	}
 
+	public JoystickButton ButtonTwelve() {
+		return new JoystickButton(this, BUTTON_TWELVE);
+	}
 
 	/*----------------- Joystick Triggers (Analog Buttons) -------------------- */
 
 	public JoystickAnalogButton ButtonUp() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_Y, -1);
 	}
+
 	public JoystickAnalogButton ButtonDown() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_Y, 1);
 	}
+
 	public JoystickAnalogButton ButtonLeft() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_X, -1);
 	}
+
 	public JoystickAnalogButton ButtonRight() {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_X, 1);
 	}
-
 
 }

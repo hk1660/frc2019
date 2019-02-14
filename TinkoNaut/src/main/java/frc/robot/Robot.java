@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Autonomous;
+import frc.robot.auto_commands.Autonomous;
 import frc.robot.subsystems.Tonsils;
-import frc.robot.commands.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorWinchManual;
 import frc.robot.subsystems.ElevatorWinchPID;
@@ -37,17 +36,18 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  public static ElevatorWinchManual m_elevatorWinch;
-  public static ElevatorWinchPID m_elevatorWinchPID;
+  //public static ElevatorWinchManual m_elevatorWinch;
+  public static ElevatorWinchPID m_elevatorWinch;
   public static CargoGrabber m_cargoGrabber;
   public static HatchPanelPanel m_hatchPanelPanel;
   public static Tonsils m_tonsils;
   public static Wrist m_wrist;
   public static Claw m_claw;
-  public static OI m_oi;
   public static Limelight m_limelight;
+  public static OI m_oi;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -56,8 +56,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
-    m_elevatorWinch = new ElevatorWinchManual();
-    m_elevatorWinchPID = new ElevatorWinchPID();    
+
+    if(RobotMap.WINCH_PID_FLAG){
+      m_elevatorWinch = new ElevatorWinchPID();    
+    } else {
+      //m_elevatorWinch = new ElevatorWinchManual();
+    }
     m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
@@ -78,11 +82,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_cargoGrabber);
     SmartDashboard.putData(m_elevatorWinch);
-    SmartDashboard.putData(m_elevatorWinchPID);
     SmartDashboard.putData(m_wrist);
     SmartDashboard.putData(m_claw);
     SmartDashboard.putData(m_limelight);
-    
+  
   }
 
   @Override
@@ -102,15 +105,6 @@ public class Robot extends TimedRobot {
     //Scheduler.getInstance().run();
     //log();
     
-
-
-   /* if(m_navx.getCurrentAngle()!= 90.0){
-
-      
-      Robot.m_drivetrain.drive(0, 0 ,0 , 90.0 );
-
-    }
-*/
   }
 
   @Override
@@ -121,6 +115,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     
     m_autonomousCommand.cancel();
+    Robot.m_navx.zeroAngle();
     
     
   }
@@ -130,10 +125,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
+
+    m_elevatorWinch.zeroWithLimitCheck();
     Scheduler.getInstance().run();
     log();
-    SmartDashboard.putData(m_elevatorWinch);
 
   }
 
@@ -148,13 +143,17 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
+    
     m_drivetrain.log();
     m_cargoGrabber.log();
     m_elevatorWinch.log();
-    m_elevatorWinchPID.log();
     m_wrist.log();
     m_claw.log();
     m_limelight.log();
-    
+    m_navx.log();
+
+    SmartDashboard.putBoolean("LL_FLAG", RobotMap.LL_FLAG);
+    SmartDashboard.putBoolean("WINCH_PID_FLAG", RobotMap.WINCH_PID_FLAG);
+  
   }
 }

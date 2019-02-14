@@ -16,6 +16,7 @@ public class Limelight extends Subsystem {
 
     public Limelight() {
         table = NetworkTableInstance.getDefault().getTable("limelight");
+        update();
     }
 
     public void update() {
@@ -50,15 +51,15 @@ public class Limelight extends Subsystem {
     }
 
     public double getTXdouble() {
-        return tx.getDouble(-1.0);
+        return tx.getDouble(0.0);
     }
 
     public double getTYdouble() {
-        return ty.getDouble(-1.0);
+        return ty.getDouble(0.0);
     }
 
     public double getTAdouble() {
-        return ta.getDouble(-1.0);
+        return ta.getDouble(0.0);
     }
 
     @Override
@@ -68,7 +69,6 @@ public class Limelight extends Subsystem {
     public double getStrafeToTargetSpeed() {
         double targetLeftThresh = -3.5;
         double targetRightThresh = -targetLeftThresh;
-
         double strafeRightSpeed = 0.5;
         double strafeLeftSpeed = -strafeRightSpeed;
 
@@ -77,7 +77,7 @@ public class Limelight extends Subsystem {
         } else if (getTXdouble() > targetRightThresh) {
             return strafeRightSpeed;
         } else {
-            System.out.println("on trarget???");
+            System.out.println("on trrget???");
             return 0.0;
         }
     }
