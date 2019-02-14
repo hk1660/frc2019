@@ -16,21 +16,6 @@ public class ButtonBoard extends Joystick {
 	// BB axes
 	public static final int AXIS_LEFT_X = 0;
 	public static final int AXIS_LEFT_Y = 1;
-<<<<<<< HEAD
-	
-	//BB buttons
-	public static final int BUTTON_ONE = 5; //eat
-	public static final int BUTTON_TWO = 2; //spit
-	public static final int BUTTON_FOUR = 4; //hatch push
-	public static final int BUTTON_THREE = 3;//hatch pull
-	public static final int BUTTON_FIVE = 11; //ground level
-	public static final int BUTTON_SIX = 6; //level 1.5
-	public static final int BUTTON_SEVEN = 7; //level 2
-	public static final int BUTTON_EIGHT = 8; //level 2.5
-	public static final int BUTTON_NINE = 9; //level 3 & LOCK
-	public static final int BUTTON_TEN = 10; //level 3.5 & UNLOCK
-	public static final int BUTTON_ELEVEN = 11; //
-=======
 
 	// BB buttons
 	public static final int BUTTON_ONE = 1; // eat
@@ -44,7 +29,6 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_NINE = 9; // level 3 & LOCK
 	public static final int BUTTON_TEN = 10; // level 3.5 & UNLOCK
 	public static final int BUTTON_ELEVEN = 11;
->>>>>>> 828fb5ba96bb75a45372f00d2ed1ea79c01a4658
 	public static final int BUTTON_TWELVE = 12;
 
 	// XboxOne Pov (D-Pad) buttons Manip
