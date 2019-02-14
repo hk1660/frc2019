@@ -20,8 +20,8 @@ public class ButtonBoard extends Joystick {
 	//BB buttons
 	public static final int BUTTON_ONE = 5; //eat
 	public static final int BUTTON_TWO = 2; //spit
-	public static final int BUTTON_THREE = 3; //hatch push
-	public static final int BUTTON_FOUR = 4;//hatch pull
+	public static final int BUTTON_FOUR = 4; //hatch push
+	public static final int BUTTON_THREE = 3;//hatch pull
 	public static final int BUTTON_FIVE = 11; //ground level
 	public static final int BUTTON_SIX = 6; //level 1.5
 	public static final int BUTTON_SEVEN = 7; //level 2
