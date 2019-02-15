@@ -116,7 +116,7 @@ public class RobotMap {
   //Digital Input Channels
   public final static int DIGITAL_PORT_LIMIT = 7;
 
-  public final static int PWM BLINK_LED_PORT = 1;
+  public final static int  BLINK_LED_PORT = 1;
 
 
   //Flags

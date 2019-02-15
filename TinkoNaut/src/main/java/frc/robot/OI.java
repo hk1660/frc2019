@@ -57,23 +57,55 @@ public class OI {
     //-------------MANIPULATOR BUTTONS -------------------------//
     if (RobotMap.BB_FLAG) {
 
-      manipBoard.ButtonFour().whileHeld(new PistIn());
-      manipBoard.ButtonThree().whileHeld(new PistOut());
-      manipBoard.ButtonFive().whileHeld(new EatCargo());
+      /* Buttons 
+      Button 1 - Eat Cargo
+      Button 2 - Spit Cargo
+      Button 3 - Hatch Pull
+      Button 4 - Hatch Push
+      Button 5 - Tonsil Spit
+      Button 6 - Tonsil Eat
+      Button 7 - Level 1
+      Button 8 - Level 1.5
+      Button 9 - Level 2
+      Button 10 - Level 2.5
+      Button 11 - Level 3
+      Button 12 - 3.5
+      
+      Button POV L - Unlock
+      Button POV R - Lock
+      Button POV D - Encoder Zero
+      Button POV U - ????
+      */
+
+      manipBoard.ButtonOne().whileHeld(new EatCargo());
       manipBoard.ButtonTwo().whileHeld(new SpitCargo());
-      manipBoard.ButtonRight().whileHeld(new ElevateManual());
-      manipBoard.ButtonLeft().whileHeld(new ElevateManual());
+      manipBoard.ButtonThree().whileHeld(new PistIn());
+      manipBoard.ButtonFour().whileHeld(new PistOut());
+      manipBoard.ButtonFive().whileHeld(new TonsilSpit());
+      manipBoard.ButtonSix().whileHeld(new TonsilEat());
+
+      //manipBoard.ButtonRight().whileHeld(new ElevateManual());
+      //manipBoard.ButtonLeft().whileHeld(new ElevateManual());
       // tonsils CHANGE BUTTONS LATER 
-      manipBoard.ButtonFive().whileHeld(new TonsilEat());
-      manipBoard.ButtonTwo().whileHeld(new TonsilSpit());
+    
+      // manipBoard.ButtonFive().whileHeld(new TonsilEat());
+      // manipBoard.ButtonTwo().whileHeld(new TonsilSpit());
+      
       // lock mechannims
-      manipBoard.ButtonNine().whenPressed(new LockWinch()); 
-      manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
-      manipBoard.ButtonEight().whenPressed(new EncoderZero());
+      // Need to be changed
+      // manipBoard.ButtonNine().whenPressed(new LockWinch()); 
+      // manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
+      // manipBoard.ButtonEight().whenPressed(new EncoderZero());
+
 
       // Elevator Buttons
-      
-      
+      manipBoard.ButtonSeven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
+      manipBoard.ButtonEight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
+      manipBoard.ButtonNine().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
+      manipBoard.ButtonTen().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
+      manipBoard.ButtonEleven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
+      manipBoard.ButtonTwelve().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3_5));
+
     } else {
       manipStick.ButtonA().whileHeld(new PistIn());
       manipStick.ButtonB().whileHeld(new PistOut());

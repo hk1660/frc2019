@@ -32,13 +32,13 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_TWELVE = 12;
 
 	// XboxOne Pov (D-Pad) buttons Manip
-	// public final static int POV_UP = 0;
+	public final static int POV_UP = 0;
 	// public final static int POV_UP_RIGHT = 45;
-	// public final static int POV_RIGHT = 90;
+	public final static int POV_RIGHT = 90;
 	// public final static int POV_DOWN_RIGHT = 135;
-	// public final static int POV_DOWN = 180;
+	public final static int POV_DOWN = 180;
 	// public final static int POV_DOWN_LEFT = 225;
-	// public final static int POV_LEFT = 270;
+	public final static int POV_LEFT = 270;
 	// public final static int POV_UP_LEFT = 315;
 
 	/**
@@ -222,4 +222,20 @@ public class ButtonBoard extends Joystick {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_X, 1);
 	}
 
+	/**/ 
+	public JoystickPovButton ButtonPovUp() {
+		return new JoystickPovButton(this, POV_UP);
+	}
+
+	public JoystickPovButton ButtonPovRight() {
+		return new JoystickPovButton(this, POV_RIGHT);
+	}
+
+	public JoystickPovButton ButtonPovDown() {
+		return new JoystickPovButton(this, POV_DOWN);
+	}
+
+	public JoystickPovButton ButtonPovLeft() {
+		return new JoystickPovButton(this, POV_LEFT);
+	}
 }
