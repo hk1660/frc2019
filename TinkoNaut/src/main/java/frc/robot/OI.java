@@ -57,24 +57,23 @@ public class OI {
     //-------------MANIPULATOR BUTTONS -------------------------//
     if (RobotMap.BB_FLAG) {
 
-      /* Buttons 
-      Button 1 - Eat Cargo
-      Button 2 - Spit Cargo
-      Button 3 - Hatch Pull
-      Button 4 - Hatch Push
-      Button 5 - Tonsil Spit
-      Button 6 - Tonsil Eat
-      Button 7 - Level 1
-      Button 8 - Level 1.5
-      Button 9 - Level 2
-      Button 10 - Level 2.5
-      Button 11 - Level 3
-      Button 12 - 3.5
-      
-      Button POV L - Unlock
-      Button POV R - Lock
-      Button POV D - Encoder Zero
-      Button POV U - ????
+      /* Button Board ------------------ XBOX
+      Button 1 - Eat Cargo        LB
+      Button 2 - Spit Cargo       LTrig
+      Button 3 - Hatch Pull       A
+      Button 4 - Hatch Push       B
+      Button 5 - Tonsil Spit      Y
+      Button 6 - Tonsil Eat       X
+      Button 7 - Level 1          POV DOWN
+      Button 8 - Level 1.5        POV DOWN_LEFT
+      Button 9 - Level 2          POV_LEFT
+      Button 10 - Level 2.5       POV_UP_LEFT
+      Button 11 - Level 3         POV_UP
+      Button 12 - 3.5             POV_UP_RIGHT
+      Button X_AXIS_NEG L - Unlock    START
+      Button X_AXIS_POS - Lock         SELECT
+      Button Y_AXIS_NEG - Encoder Zero  RB
+      Button Y_AXIS_POS - ????          RT
       */
 
       manipBoard.ButtonOne().whileHeld(new EatCargo());
@@ -111,8 +110,20 @@ public class OI {
       manipStick.ButtonB().whileHeld(new PistOut());
       manipStick.ButtonLB().whileHeld(new EatCargo());
       manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
-      manipStick.ButtonX().whileHeld(new TonsilEat());
+      //manipStick.ButtonX().whileHeld(new TonsilEat());
       manipStick.ButtonY().whileHeld(new TonsilSpit());
+
+      manipStick.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
+      manipStick.ButtonPovDownLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
+      manipStick.ButtonPovLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
+      manipStick.ButtonPovUpLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
+      manipStick.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
+      manipStick.ButtonX().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
+
+      manipStick.ButtonStart().whenPressed(new UnlockWinch());
+      manipStick.ButtonBack().whenPressed(new LockWinch());
+      manipStick.ButtonRB().whenPressed(new EncoderZero());
+
 
     }
 

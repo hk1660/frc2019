@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 /**
@@ -23,11 +23,15 @@ public class SetElevatorHeight extends Command {
   public SetElevatorHeight(double height) { //height is the pid setpoint
     this.height = height;
     requires(Robot.m_elevatorWinch);
+    SmartDashboard.putNumber("Elev SetHeight", this.height);
+    System.out.println("We're in setElevatorHegiht constructor");
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("We're in setElevatorHegiht initialize()");
     Robot.m_elevatorWinch.enable();           //starts the pid loop
     Robot.m_elevatorWinch.setSetpoint(height);  //method call for all pid controllers
   }
@@ -35,7 +39,10 @@ public class SetElevatorHeight extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    System.out.println("We're in setElevatorHegiht isFinished()");
     return Robot.m_elevatorWinch.onTarget();
+    
+
   }
 
   //no need for a execute method, because the pid controller will be
