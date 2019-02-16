@@ -30,8 +30,14 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
   private MecanumDrive mecDrive;
+<<<<<<< HEAD
   
   
+=======
+  //backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
+
+
+>>>>>>> 9b900d085727f35732e6a46d93b449e083962b73
   //private final Encoder m_leftEncoder = new Encoder(1, 2);
   //private final AnalogInput m_rangefinder = new AnalogInput(6);
   

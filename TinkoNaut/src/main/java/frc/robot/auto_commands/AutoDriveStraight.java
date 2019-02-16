@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.auto_commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -80,7 +80,7 @@ public class AutoDriveStraight extends Command {
   protected void end() {
     // Stop PID and the wheels
     m_pid.disable();
-    Robot.m_drivetrain.drive(0, 0,0,0);
+    Robot.m_drivetrain.drive(0,0,0,0);
   }
 
   
