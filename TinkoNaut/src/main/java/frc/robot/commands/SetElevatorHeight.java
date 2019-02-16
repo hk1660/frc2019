@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.subsystems.ElevatorWinchPID;
 import frc.robot.Robot;
 
 /**
@@ -18,11 +18,11 @@ import frc.robot.Robot;
  * PID!
  */
 public class SetElevatorHeight extends Command {
-  private final double height;
+  private double height = 0;
 
   public SetElevatorHeight(double height) { //height is the pid setpoint
-    this.height = height;
     requires(Robot.m_elevatorWinch);
+    this.height = height;
   }
 
   // Called just before this Command runs the first time

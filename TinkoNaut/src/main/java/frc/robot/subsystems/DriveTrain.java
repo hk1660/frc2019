@@ -16,6 +16,7 @@ import frc.robot.RobotMap;
 import frc.robot.utils.XboxOne;
 import frc.robot.commands.MecDriveWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 //import com.kauailabs.navx.frc.AHRS;
 
 /**
@@ -29,9 +30,8 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
   private MecanumDrive mecDrive;
-  winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
-
-
+  
+  
   //private final Encoder m_leftEncoder = new Encoder(1, 2);
   //private final AnalogInput m_rangefinder = new AnalogInput(6);
   
@@ -40,20 +40,21 @@ public class DriveTrain extends Subsystem {
    */
   public DriveTrain() {
     super();
-
+    
     //Drivetrain Initializations
-		frontLeft = new WPI_TalonSRX(RobotMap.DRIVE_FRONT_LEFT_CHANNEL);
+    frontLeft = new WPI_TalonSRX(RobotMap.DRIVE_FRONT_LEFT_CHANNEL);
 		backLeft = new WPI_TalonSRX(RobotMap.DRIVE_BACK_LEFT_CHANNEL);
 		frontRight = new WPI_TalonSRX(RobotMap.DRIVE_FRONT_RIGHT_CHANNEL);
 		backRight = new WPI_TalonSRX(RobotMap.DRIVE_BACK_RIGHT_CHANNEL);
-
+    
 		//we think the constructor switched the 3rd & 4th parameters
     mecDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     
     //m_leftEncoder.setDistancePerPulse(0.042);
     addChild("Drive", mecDrive);    // Let's name the sensors on the LiveWindow
     //addChild("Left Encoder", m_leftEncoder);
-  
+    backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
+    
   }
   
   
@@ -66,10 +67,10 @@ public class DriveTrain extends Subsystem {
    * @param angleParameter The heading of the robot based off of a gyro/NavX
    */
   public void drive(double strafeParameter, double forwardParameter, double turnParameter, double angleParameter) {
-
+    
     mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
 	}
-
+  
   /**
    * Mecanum-style driving for the DriveTrain with a Joystick.
    *
@@ -135,7 +136,7 @@ SmartDashboard.putNumber("Distance(Inches)", getDistance());
   public double getDistance(){
     int clicks = getEncoderVal();
     int diameter = 6;
-    double inchesPerRev = Math.pi() * diameter;
+    double inchesPerRev = Math.PI * diameter;
     int clicksPerRev = 1000;
     double inchesPerClick = inchesPerRev/clicksPerRev ;
 
