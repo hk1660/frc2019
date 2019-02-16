@@ -10,6 +10,7 @@ package frc.robot.auto_commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * Make sure the robot is in a state to pickup Cargo
@@ -19,7 +20,7 @@ public class PrepareToPickup extends CommandGroup {
    * Create a new prepare to pickup command.
    */
   public PrepareToPickup() {
-    addSequential(new SetElevatorHeight(RobotMap.LEVEL_1));
+    //addSequential(new SetElevatorHeight(RobotMap.LEVEL_1));
     addParallel(new EatCargo(), 3.0);
     addParallel(new TonsilEat(), 3.0);
     

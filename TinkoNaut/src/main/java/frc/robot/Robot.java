@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.auto_commands.Autonomous;
+import frc.robot.auto_commands.AutoDriveStraight;
 import frc.robot.subsystems.Tonsils;
 import frc.robot.subsystems.DriveTrain;
 //import frc.robot.subsystems.ElevatorWinchManual;
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
 
     // instantiate the command used for the autonomous period
     m_autonomousCommand = new Autonomous();
+  
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
@@ -92,13 +94,17 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    
+    SmartDashboard.putString("Auto init?", "autonomous start");
     skipAuto = false;
     Robot.m_navx.zeroAngle();
+    
+    System.out.print("Checkpoint 1.0");
+    
 
-   //m_autonomousCommand.start(); // schedule the autonomous command (example)
+   m_autonomousCommand.start(); // schedule the autonomous command (example)
    //DriveStraight autoFor = new DriveStraight(1.0);
   // TurnToAngle turnAngle = new TurnToAngle(90.0);
+  System.out.print("Checkpoint 2.0");
 
   }
 
@@ -107,8 +113,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
+    //System.out.print("Checkpoint 3.0");
     log();
+    //System.out.print("Checkpoint 4.0");
     
   }
 
