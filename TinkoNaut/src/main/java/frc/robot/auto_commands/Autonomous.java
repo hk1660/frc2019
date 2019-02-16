@@ -25,7 +25,8 @@ public class Autonomous extends CommandGroup {
     SmartDashboard.putString("Auto?", "Auto work");
     
     // addSequential(new AutoDriveStraight(5)); // Use Encoders if ultrasonic is
-    addSequential(new EatCargo());
+    //addSequential(new EatCargo());
+    addSequential(new TonsilEat());
     // broken
     // addSequential(new Place());
     // addSequential(new SetDistanceToBox(0.60));
