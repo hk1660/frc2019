@@ -124,7 +124,7 @@ public class OI {
       //manipStick.ButtonStart().whenPressed(new UnlockWinch());
       //manipStick.ButtonBack().whenPressed(new LockWinch());
       manipStick.ButtonRB().whenPressed(new EncoderZero());
-      manipStick.ButtonStart().whenPressed(new setElevatorHeight(-5000));
+      manipStick.ButtonStart().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_0));
 
       //STICK manual joystick
       //???

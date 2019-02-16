@@ -29,10 +29,10 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private DoubleSolenoid theLocker;
   public DigitalInput limitSwitch;
   
-  private static final double kp = 2.0;
+  private static final double kp = 0.05;
   private static final double ki = 0.0;
-  private static final double kd = 0.0;
-  private static final double kElevatorTolerance = 500;
+  private static final double kd = 0.05;
+  private static final double kElevatorTolerance = 1000;
 
   /**
    * Create a new elevator subsystem.
@@ -50,7 +50,11 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
     getPIDController().setAbsoluteTolerance(kElevatorTolerance);
     getPIDController().setContinuous(false);
-  
+    
+
+    SmartDashboard.putNumber("Winch P", kp);
+    SmartDashboard.putNumber("Winch I ", ki);
+    SmartDashboard.putNumber("Winch D", kd);
   }
 
   public void initDefaultCommand() {
@@ -99,8 +103,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
     if(isLimitPressed()){
       //SmartDashboard.putBoolean("Test something", true);
       zeroEncoder();
-      if(getSetPoint() < RobotMap.LEVEL_0 + 100){
-        setSetpoint(0);
+      if(getSetpoint() < RobotMap.LEVEL_0 + 100){
+        setSetpoint(0.0);
       }
     }
   }
@@ -138,6 +142,12 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putData(winchMotor);
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
     SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
+
+    double xp = SmartDashboard.getNumber("Winch P", kp);
+    double xi = SmartDashboard.getNumber("Winch I ", ki);
+    double xd = SmartDashboard.getNumber("Winch D", kd);    
+
+    super.getPIDController().setPID(xp, xi, xd);
  
   }
 
