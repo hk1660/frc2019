@@ -64,10 +64,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
     zeroWithLimitCheck();
     
-    if(getEncoderVal() >= 0 && getEncoderVal() <= RobotMap.LEVEL_3){
       winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
       winchMotorTwo.pidWrite(output);
-    }
+  }
+
+
+  protected void toLimit(){
+
   }
 
 
@@ -92,9 +95,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
   }
 
   public void zeroWithLimitCheck(){
+
     if(isLimitPressed()){
-      SmartDashboard.putBoolean("Test something", true);
+      //SmartDashboard.putBoolean("Test something", true);
       zeroEncoder();
+      if(getSetPoint() < RobotMap.LEVEL_0 + 100){
+        setSetpoint(0);
+      }
     }
   }
 
