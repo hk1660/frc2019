@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
 
 /**
@@ -21,8 +22,9 @@ import frc.robot.subsystems.NavX;
  * command is running. The input is the averaged values of the left and right
  * encoders.
  */
-public class DriveStraight extends Command {
+public class AutoDriveStraight extends Command {
   private final PIDController m_pid;
+  private final int kWheelEncoderTolerance = 2000;
  // private double turnAngle = 90.0;
 
   /**
@@ -30,15 +32,15 @@ public class DriveStraight extends Command {
    * @param distance The distance to drive
    */
   
-  public DriveStraight(double distance) {
+  public AutoDriveStraight(double distance) {
     requires(Robot.m_drivetrain);
     m_pid = new PIDController(2, 0, 0, new PIDSource() {
       PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
       @Override
       public double pidGet() {
-        //return Robot.m_drivetrain.getDistance();
-        return 0.0;
+        return Robot.m_drivetrain.getDistance();
+        //return 0.0;
       }
 
       @Override
@@ -53,7 +55,7 @@ public class DriveStraight extends Command {
     }, d -> Robot.m_drivetrain.drive(0, 1.0,0,0));
  
 
-    m_pid.setAbsoluteTolerance(0.01);
+    m_pid.setAbsoluteTolerance(kWheelEncoderTolerance);
     m_pid.setSetpoint(distance);
   }
 
