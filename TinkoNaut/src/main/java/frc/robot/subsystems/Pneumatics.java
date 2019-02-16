@@ -14,4 +14,12 @@ public class Pneumatics {
         SmartDashboard.putString("compressorStatus", "is on");
     }
 
+    public double getAirPressure(){
+        return 0.0;
+    }
+
+    public void log(){
+        SmartDashboard.putNumber("Stored AirPressure", getAirPressure()); 
+    }
+
 }

@@ -32,6 +32,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private static final double kp = 2.0;
   private static final double ki = 0.0;
   private static final double kd = 0.0;
+  private static final double kElevatorTolerance = 500;
 
   /**
    * Create a new elevator subsystem.
@@ -39,15 +40,17 @@ public class ElevatorWinchPID extends PIDSubsystem {
   public ElevatorWinchPID() {
     super("Winch", kp, ki, kd);// The constructor passes a name for the subsystem and the P, I and D constants
                                   // that are used when computing the motor output
-    setAbsoluteTolerance(500);
-    getPIDController().setContinuous(false);
 
     winchMotor = new WPI_TalonSRX(RobotMap.WINCH_MOTOR_CHANNEL);
     winchMotorTwo = new WPI_TalonSRX(RobotMap.SECOND_WINCH_MOTOR_CHANNEL);
     theLocker = new DoubleSolenoid(RobotMap.PISTON_IN_WINCH_CHANNEL, RobotMap.PISTON_OUT_WINCH_CHANNEL);
     limitSwitch = new DigitalInput(RobotMap.DIGITAL_PORT_LIMIT);
+
     winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
 
+    getPIDController().setAbsoluteTolerance(kElevatorTolerance);
+    getPIDController().setContinuous(false);
+  
   }
 
   public void initDefaultCommand() {
@@ -61,7 +64,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
     zeroWithLimitCheck();
     
-    if(getEncoderVal() > 0 && getEncoderVal() < RobotMap.LEVEL_3){
+    if(getEncoderVal() >= 0 && getEncoderVal() <= RobotMap.LEVEL_3){
       winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
       winchMotorTwo.pidWrite(output);
     }

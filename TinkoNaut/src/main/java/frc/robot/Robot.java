@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.auto_commands.Autonomous;
 import frc.robot.subsystems.Tonsils;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ElevatorWinchManual;
+//import frc.robot.subsystems.ElevatorWinchManual;
 import frc.robot.subsystems.ElevatorWinchPID;
 import frc.robot.subsystems.CargoGrabber;
 import frc.robot.subsystems.Limelight;
@@ -47,6 +47,8 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
+
+  public boolean skipAuto = true;
 
 
   /**
@@ -90,11 +92,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
+    
+    skipAuto = false;
+    Robot.m_navx.zeroAngle();
 
    //m_autonomousCommand.start(); // schedule the autonomous command (example)
    //DriveStraight autoFor = new DriveStraight(1.0);
   // TurnToAngle turnAngle = new TurnToAngle(90.0);
+
   }
 
   /**
@@ -103,7 +108,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     //Scheduler.getInstance().run();
-    //log();
+    log();
     
   }
 
@@ -115,8 +120,10 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     
     m_autonomousCommand.cancel();
-    Robot.m_navx.zeroAngle();
     
+    if(skipAuto){
+      Robot.m_navx.zeroAngle();
+    }
     
   }
 
@@ -147,10 +154,10 @@ public class Robot extends TimedRobot {
     m_drivetrain.log();
     m_cargoGrabber.log();
     m_elevatorWinch.log();
-    m_wrist.log();
-    m_claw.log();
+    m_tonsils.log();
     m_limelight.log();
     m_navx.log();
+    m_pneumatics.log();
 
     SmartDashboard.putBoolean("LL_FLAG", RobotMap.LL_FLAG);
     SmartDashboard.putBoolean("WINCH_PID_FLAG", RobotMap.WINCH_PID_FLAG);

@@ -76,6 +76,7 @@ public class OI {
       Button Y_AXIS_POS - ????          RT
       */
 
+      //BOARD action buttons
       manipBoard.ButtonOne().whileHeld(new EatCargo());
       manipBoard.ButtonTwo().whileHeld(new SpitCargo());
       manipBoard.ButtonThree().whileHeld(new PistIn());
@@ -83,21 +84,7 @@ public class OI {
       manipBoard.ButtonFive().whileHeld(new TonsilSpit());
       manipBoard.ButtonSix().whileHeld(new TonsilEat());
 
-      //manipBoard.ButtonRight().whileHeld(new ElevateManual());
-      //manipBoard.ButtonLeft().whileHeld(new ElevateManual());
-      // tonsils CHANGE BUTTONS LATER 
-    
-      // manipBoard.ButtonFive().whileHeld(new TonsilEat());
-      // manipBoard.ButtonTwo().whileHeld(new TonsilSpit());
-      
-      // lock mechannims
-      // Need to be changed
-      // manipBoard.ButtonNine().whenPressed(new LockWinch()); 
-      // manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
-      // manipBoard.ButtonEight().whenPressed(new EncoderZero());
-
-
-      // Elevator Buttons
+      //BOARD Elevator Buttons
       manipBoard.ButtonSeven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
       manipBoard.ButtonEight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
       manipBoard.ButtonNine().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
@@ -105,7 +92,18 @@ public class OI {
       manipBoard.ButtonEleven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
       manipBoard.ButtonTwelve().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3_5));
 
+      // //BOARD extra buttons
+      // manipBoard.ButtonNine().whenPressed(new LockWinch()); 
+      // manipBoard.ButtonTen().whenPressed(new UnlockWinch()); 
+      // manipBoard.ButtonEight().whenPressed(new EncoderZero());
+
+      // //BOARD manual joystick
+      // manipBoard.ButtonRight().whileHeld(new ElevateManual());
+      // manipBoard.ButtonLeft().whileHeld(new ElevateManual());
+
     } else {
+
+      //STICK Action buttons
       manipStick.ButtonA().whileHeld(new PistIn());
       manipStick.ButtonB().whileHeld(new PistOut());
       manipStick.ButtonLB().whileHeld(new EatCargo());
@@ -113,17 +111,22 @@ public class OI {
       //manipStick.ButtonX().whileHeld(new TonsilEat());
       manipStick.ButtonY().whileHeld(new TonsilSpit());
 
+      //STICK Elevator buttons
       manipStick.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
       manipStick.ButtonPovDownLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
       manipStick.ButtonPovLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
       manipStick.ButtonPovUpLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
       manipStick.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
+      manipStick.ButtonPovUpRight().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
       manipStick.ButtonX().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
 
+      //STICK extra buttons
       manipStick.ButtonStart().whenPressed(new UnlockWinch());
       manipStick.ButtonBack().whenPressed(new LockWinch());
       manipStick.ButtonRB().whenPressed(new EncoderZero());
 
+      //STICK manual joystick
+      //???
 
     }
 
@@ -151,16 +154,16 @@ public class OI {
       driverStick.ButtonPovDownLeft().whileHeld(new TurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE, 0, 0));    
   }
 
-  //-------------SMARTDASHBOARD  -------------------------//
+  //-------------SMARTDASHBOARD COMMANDS  -------------------------//
   
-    // SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
-    // SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
-    // SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
-    // SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
-    // SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
-    // SmartDashboard.putData("Open Claw", new OpenClaw());
-    // SmartDashboard.putData("Close Claw", new CloseClaw());
-    // SmartDashboard.putData("Deliver Soda", new Autonomous());
+    SmartDashboard.putData("Elevator Level 1", new SetElevatorHeight(RobotMap.LEVEL_1));
+    SmartDashboard.putData("Elevator Level 1.5", new SetElevatorHeight(RobotMap.LEVEL_1_5));
+    SmartDashboard.putData("Elevator Level 3.5", new SetElevatorHeight(RobotMap.LEVEL_3_5));
+    //SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
+    //SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
+    SmartDashboard.putData("Eat Cargo", new EatCargo());
+    SmartDashboard.putData("Spit Cargo", new SpitCargo());
+    //SmartDashboard.putData("Deliver Soda", new Autonomous());
   
   }
 

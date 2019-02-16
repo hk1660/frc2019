@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-//import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -17,7 +16,6 @@ import frc.robot.utils.XboxOne;
 import frc.robot.commands.MecDriveWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-//import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -30,14 +28,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
   private MecanumDrive mecDrive;
-<<<<<<< HEAD
   
-  
-=======
-  //backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
-
-
->>>>>>> 9b900d085727f35732e6a46d93b449e083962b73
   //private final Encoder m_leftEncoder = new Encoder(1, 2);
   //private final AnalogInput m_rangefinder = new AnalogInput(6);
   
@@ -56,11 +47,11 @@ public class DriveTrain extends Subsystem {
 		//we think the constructor switched the 3rd & 4th parameters
     mecDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
     
-    //m_leftEncoder.setDistancePerPulse(0.042);
     addChild("Drive", mecDrive);    // Let's name the sensors on the LiveWindow
     //addChild("Left Encoder", m_leftEncoder);
-    backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder); 
-    
+
+    backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
   }
   
   
@@ -94,51 +85,14 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MecDriveWithJoystick());
-    
   }
 
-  /**
-   * The log method puts interesting information to the SmartDashboard.
-   */
-  public void log() {
-SmartDashboard.putNumber("Raw Encoder Distance", getEncoderVal());
-SmartDashboard.putNumber("Distance(Inches)", getDistance());
-
-    //SmartDashboard.putNumber("Left Distance", m_leftEncoder.getDistance());
-    //SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
-  }
-
-
-  /**
-   * Reset the robots sensors to the zero states.
-   */
-  // public void reset() {
-  //   m_leftEncoder.reset();
-  // }
-
-  /**
-   * Get the average distance of the encoders since the last reset.
-   *
-   * @return The distance driven (average of left and right encoders).
-   */
-  // public double getDistance() {
-  //   return (m_leftEncoder.getDistance() + m_rightEncoder.getDistance()) / 2;
-  // }
-
-  /**
-   * Get the distance to the obstacle.
-   *
-   * @return The distance to the obstacle detected by the rangefinder.
-   */
-  // public double getDistanceToObstacle() {
-  //   // Really meters in simulation since it's a rangefinder...
-  //   return m_rangefinder.getAverageVoltage();
-  // }
-
+  //Get the raw value from the encoder -Aldenis
   public int getEncoderVal(){
     return backLeft.getSelectedSensorPosition();
   }
 
+  //Get the distance traveled in inches -Aldenis
   public double getDistance(){
     int clicks = getEncoderVal();
     int diameter = 6;
@@ -149,8 +103,17 @@ SmartDashboard.putNumber("Distance(Inches)", getDistance());
     return clicks * inchesPerClick;
   }
 
+  //Set the encoder position back to zero -Aldenis
   public void zeroEncoder() {
     backLeft.setSelectedSensorPosition(0);
+  }
+
+    /**
+   * The log method puts interesting information to the SmartDashboard.
+   */
+  public void log() {
+    SmartDashboard.putNumber("Raw Encoder Distance", getEncoderVal());
+    SmartDashboard.putNumber("Distance(Inches)", getDistance());
   }
 
 
