@@ -28,7 +28,9 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX backLeft;
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
-	private MecanumDrive mecDrive;
+  private MecanumDrive mecDrive;
+  winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
+
 
   //private final Encoder m_leftEncoder = new Encoder(1, 2);
   //private final AnalogInput m_rangefinder = new AnalogInput(6);
@@ -85,12 +87,16 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new MecDriveWithJoystick());
+    
   }
 
   /**
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
+SmartDashboard.putNumber("Raw Encoder Distance", getEncoderVal());
+SmartDashboard.putNumber("Distance(Inches)", getDistance());
+
     //SmartDashboard.putNumber("Left Distance", m_leftEncoder.getDistance());
     //SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
@@ -121,5 +127,24 @@ public class DriveTrain extends Subsystem {
   //   // Really meters in simulation since it's a rangefinder...
   //   return m_rangefinder.getAverageVoltage();
   // }
+
+  public int getEncoderVal(){
+    return backLeft.getSelectedSensorPosition();
+  }
+
+  public double getDistance(){
+    int clicks = getEncoderVal();
+    int diameter = 6;
+    double inchesPerRev = Math.pi() * diameter;
+    int clicksPerRev = 1000;
+    double inchesPerClick = inchesPerRev/clicksPerRev ;
+
+    return clicks * inchesPerClick;
+  }
+
+  public void zeroEncoder() {
+    backLeft.setSelectedSensorPosition(0);
+  }
+
 
 }
