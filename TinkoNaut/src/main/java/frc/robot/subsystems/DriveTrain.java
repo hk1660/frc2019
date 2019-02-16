@@ -29,7 +29,7 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
   private MecanumDrive mecDrive;
-  winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
+  //backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
 
 
   //private final Encoder m_leftEncoder = new Encoder(1, 2);
@@ -135,7 +135,7 @@ SmartDashboard.putNumber("Distance(Inches)", getDistance());
   public double getDistance(){
     int clicks = getEncoderVal();
     int diameter = 6;
-    double inchesPerRev = Math.pi() * diameter;
+    double inchesPerRev = Math.PI * diameter;
     int clicksPerRev = 1000;
     double inchesPerClick = inchesPerRev/clicksPerRev ;
 
