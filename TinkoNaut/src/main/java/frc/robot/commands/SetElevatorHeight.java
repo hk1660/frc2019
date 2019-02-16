@@ -8,11 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-<<<<<<< HEAD
 import frc.robot.subsystems.ElevatorWinchPID;
-=======
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
->>>>>>> 9b900d085727f35732e6a46d93b449e083962b73
 import frc.robot.Robot;
 
 /**
