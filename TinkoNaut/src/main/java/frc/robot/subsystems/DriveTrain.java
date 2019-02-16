@@ -105,6 +105,7 @@ public class DriveTrain extends Subsystem {
 
   //Set the encoder position back to zero -Aldenis
   public void zeroEncoder() {
+    System.out.print("Something");
     backLeft.setSelectedSensorPosition(0);
   }
 

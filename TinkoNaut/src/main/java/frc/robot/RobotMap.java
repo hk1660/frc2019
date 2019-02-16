@@ -88,7 +88,7 @@ public class RobotMap {
     public final static int PISTON_OUT_WINCH_CHANNEL = 5;
 
 
-    public final static int LIFT_LIMIT_TOP_CHANNEL = 1;
+    public final static int LIFT_LIMIT_TOP_CHANNEL = 0;
       
     //NavX angles
     public final static double LEFT_WALL_ANGLE = -90.0;

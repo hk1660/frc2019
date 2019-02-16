@@ -93,6 +93,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
   public void zeroWithLimitCheck(){
     if(isLimitPressed()){
+      SmartDashboard.putBoolean("Test something", true);
       zeroEncoder();
     }
   }

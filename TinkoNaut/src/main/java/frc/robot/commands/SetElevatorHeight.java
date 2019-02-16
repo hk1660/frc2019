@@ -42,6 +42,12 @@ public class SetElevatorHeight extends Command {
   
   }
 
+  //Ends the command if it's interrupted
+  @Override
+  protected void interrupted(){
+    Robot.m_elevatorWinch.disable();
+  }
+
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
