@@ -5,24 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.auto_commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
-import frc.robot.subsystems.*;
 
 /**
- * Make sure the robot is in a state to pickup Cargo
+ * Command to take in cargo from ground
  */
-public class PrepareToPickup extends CommandGroup {
+public class DriveCombo extends CommandGroup {
   /**
-   * Create a new prepare to pickup command.
+   * Create a new autonomous command.
    */
-  public PrepareToPickup() {
-    //addSequential(new SetElevatorHeight(RobotMap.LEVEL_1));
-    addParallel(new CargoEat(), 3.0);
-    addParallel(new TonsilEat(), 3.0);
+  public DriveCombo(double turnAngle, boolean limelightTarget, boolean joystickForward) {
     
+    addParallel(new DriveTurnToAngle(turnAngle));
+
+    if(limelightTarget){
+      addParallel(new LLStrafe());
+    }
+
+    if(joystickForward){
+      addParallel(new DriveForwardJoystick());
+    }
+      
   }
 }

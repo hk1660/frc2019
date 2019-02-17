@@ -33,13 +33,13 @@ public class ButtonBoard extends Joystick {
 
 	// XboxOne Pov (D-Pad) buttons Manip
 	public final static int POV_UP = 0;
-	// public final static int POV_UP_RIGHT = 45;
+	public final static int POV_UP_RIGHT = 45;
 	public final static int POV_RIGHT = 90;
-	// public final static int POV_DOWN_RIGHT = 135;
+	public final static int POV_DOWN_RIGHT = 135;
 	public final static int POV_DOWN = 180;
-	// public final static int POV_DOWN_LEFT = 225;
+	public final static int POV_DOWN_LEFT = 225;
 	public final static int POV_LEFT = 270;
-	// public final static int POV_UP_LEFT = 315;
+	public final static int POV_UP_LEFT = 315;
 
 	/**
 	 * Default constructor
@@ -222,20 +222,37 @@ public class ButtonBoard extends Joystick {
 		return new JoystickAnalogButton(this, this.AXIS_LEFT_X, 1);
 	}
 
-	/**/ 
+	/* POV BUTTONS */ 
 	public JoystickPovButton ButtonPovUp() {
 		return new JoystickPovButton(this, POV_UP);
+	}
+
+	public JoystickPovButton ButtonPovUpRight() {
+		return new JoystickPovButton(this, POV_UP_RIGHT);
 	}
 
 	public JoystickPovButton ButtonPovRight() {
 		return new JoystickPovButton(this, POV_RIGHT);
 	}
 
+	public JoystickPovButton ButtonPovDownRight() {
+		return new JoystickPovButton(this, POV_DOWN_RIGHT);
+	}
+
 	public JoystickPovButton ButtonPovDown() {
 		return new JoystickPovButton(this, POV_DOWN);
+	}
+
+	public JoystickPovButton ButtonPovDownLeft() {
+		return new JoystickPovButton(this, POV_DOWN_LEFT);
 	}
 
 	public JoystickPovButton ButtonPovLeft() {
 		return new JoystickPovButton(this, POV_LEFT);
 	}
+
+	public JoystickPovButton ButtonPovUpLeft() {
+		return new JoystickPovButton(this, POV_UP_LEFT);
+	}
+
 }

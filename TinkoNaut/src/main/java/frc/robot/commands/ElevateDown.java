@@ -8,45 +8,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
- * Have the robot drive tank style using the PS3 Joystick until interrupted.
+ * Elevator goes up manually with a button push
  */
-public class ElevateManual extends Command {
-
-  private double speed;
-
-  public ElevateManual(double speed) {
+public class ElevateDown extends Command {
+  public ElevateDown() {
     requires(Robot.m_elevatorWinch);
-    this.speed = speed;
   }
-  
-  public ElevateManual() {
-    requires(Robot.m_elevatorWinch);
-    this.speed = 0.0;
-  }
-
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      Robot.m_elevatorWinch.getPIDController().disable();
+    Robot.m_elevatorWinch.getPIDController().disable();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    if( RobotMap.BB_FLAG){
-      Robot.m_elevatorWinch.elevateManual(speed);
-    } else {
-      Robot.m_elevatorWinch.elevateManual(Robot.m_oi.getManipStick().getRightStickRaw_Y());
-    }
-    
-
+      Robot.m_elevatorWinch.elevateManual(-1.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

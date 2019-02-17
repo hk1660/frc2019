@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.TurnToAngle;
+import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.NavX;
@@ -24,6 +24,7 @@ import frc.robot.subsystems.NavX;
  * encoders.
  */
 public class AutoDriveStraight extends Command {
+
   private final PIDController m_pid;
   private final int kWheelEncoderTolerance = 2000;
  // private double turnAngle = 90.0;
@@ -34,7 +35,9 @@ public class AutoDriveStraight extends Command {
    */
   
   public AutoDriveStraight(double distance) {
+
     requires(Robot.m_drivetrain);
+    
     m_pid = new PIDController(2, 0, 0, new PIDSource() {
       PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 

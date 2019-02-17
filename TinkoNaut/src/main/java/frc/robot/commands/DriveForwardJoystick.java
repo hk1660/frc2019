@@ -8,21 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 
 /**
- * Have the robot drive tank style using the PS3 Joystick until interrupted.
+ * Have the robot drive mecanum style using the XBOXONE Joystick until interrupted.
  */
-public class MecDriveWithJoystick extends Command {
-  public MecDriveWithJoystick() {
+public class DriveForwardJoystick extends Command {
+  public DriveForwardJoystick() {
     requires(Robot.m_drivetrain);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drivetrain.drive(Robot.m_oi.getDriverStick());
+    Robot.m_drivetrain.setForwardSpeed(Robot.m_oi.getDriverStick().getRightStickRaw_Y());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,6 +33,6 @@ public class MecDriveWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_drivetrain.drive(0, 0, 0, 0);
+    Robot.m_drivetrain.setForwardSpeed(0.0);
   }
 }

@@ -7,9 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LockWinch extends Command{
+public class WinchLock extends Command{
 
-    public LockWinch(){
+    public WinchLock(){
         //Gotta use that pid subsystem B
         requires(Robot.m_elevatorWinch);
     }

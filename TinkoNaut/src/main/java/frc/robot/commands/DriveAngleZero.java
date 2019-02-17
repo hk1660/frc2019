@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
-public class EncoderZero extends Command{
+public class DriveAngleZero extends Command{
     
-    public EncoderZero() {
-        requires(Robot.m_elevatorWinch);
+    public DriveAngleZero() {
+        requires(Robot.m_navx);
     }
 
     protected void execute() {
-        Robot.m_elevatorWinch.zeroEncoder();
+        Robot.m_navx.zeroAngle();
     }
 
     protected boolean isFinished() {

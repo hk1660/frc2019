@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class TurnToAngle extends Command {
+public class DriveTurnToAngle extends Command {
 
   private final PIDController m_pid;
 
@@ -17,7 +17,7 @@ public class TurnToAngle extends Command {
   private double kd = 0.1;
   private double kToleranceDegrees = 1.0; // how off can a turn be?
 
-  public TurnToAngle(double angle, double strafeSpeed, double forwardSpeed) {
+  public DriveTurnToAngle(double angle) {
 
     requires(Robot.m_drivetrain);
     SmartDashboard.putNumber("angle", angle);
@@ -43,7 +43,7 @@ public class TurnToAngle extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, turn -> Robot.m_drivetrain.drive(strafeSpeed, forwardSpeed, turn, 0)); // mayg3 pass thru other argument too
+    }, turn -> Robot.m_drivetrain.setTurnSpeed(turn));
 
     m_pid.setAbsoluteTolerance(kToleranceDegrees);
     m_pid.setInputRange(-180.0f, 180.0f);

@@ -37,7 +37,8 @@ public class SetElevatorHeight extends Command {
     SmartDashboard.putNumber("Elev SetHeight", this.height);
     System.out.println("We're in setElevatorHegiht initialize()");
     
-    Robot.m_elevatorWinch.enable();           //starts the pid loop
+    Robot.m_elevatorWinch.getPIDController().reset(); //???
+    Robot.m_elevatorWinch.getPIDController().enable();           //starts the pid loop
     Robot.m_elevatorWinch.setSetpoint(height);  //method call for all pid controllers
   
   }
@@ -45,7 +46,7 @@ public class SetElevatorHeight extends Command {
   //Ends the command if it's interrupted
   @Override
   protected void interrupted(){
-    Robot.m_elevatorWinch.disable();
+    Robot.m_elevatorWinch.getPIDController().disable();
   }
 
   // Make this return true when this Command no longer needs to run execute()

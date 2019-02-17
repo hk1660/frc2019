@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.kauailabs.navx.frc.AHRS;
 
-public class NavX {
+public class NavX extends Subsystem{
 
 	private static AHRS navx;
 	//double rotateToAngleRate;
@@ -42,7 +42,10 @@ public class NavX {
 		return rawAngle;
 	}
 
-
+    @Override
+    public void initDefaultCommand() {
+	}
+	
 	public void log() {
 		
 		SmartDashboard.putNumber("navxAngle", getCurrentAngle());

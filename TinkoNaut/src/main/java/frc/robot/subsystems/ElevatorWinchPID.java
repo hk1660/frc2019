@@ -30,10 +30,10 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private DoubleSolenoid theLocker;
   public DigitalInput limitSwitch;
   
-  private static double kp = 4.0;
+  private static double kp = 1.0;
   private static double ki = 0.0;
-  private static double kd = 0.0;
-  private static final double kElevatorTolerance = 10;
+  private static double kd = 1.0;
+  private static final double kElevatorTolerance = 500;
 
   /**
    * Create a new elevator subsystem.
@@ -63,7 +63,6 @@ public class ElevatorWinchPID extends PIDSubsystem {
    */
   @Override
   public void initDefaultCommand() {
-    //getPIDController().disable();
     setDefaultCommand(new ElevateManual());
   }
 
@@ -148,9 +147,9 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
     SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
 
-    //double xp = SmartDashboard.getNumber("Winch P", kp);
-    //double xi = SmartDashboard.getNumber("Winch I ", ki);
-    //double xd = SmartDashboard.getNumber("Winch D", kd);    
+    //kp = SmartDashboard.getNumber("Winch P", kp);
+    //ki = SmartDashboard.getNumber("Winch I ", ki);
+    //kd = SmartDashboard.getNumber("Winch D", kd);    
 
     super.getPIDController().setPID(kp, ki, kd);
  

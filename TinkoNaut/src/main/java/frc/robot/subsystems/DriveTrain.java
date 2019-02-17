@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.utils.XboxOne;
-import frc.robot.commands.MecDriveWithJoystick;
+import frc.robot.commands.DriveMecWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
@@ -28,9 +28,11 @@ public class DriveTrain extends Subsystem {
 	private WPI_TalonSRX frontRight;
 	private WPI_TalonSRX backRight;
   private MecanumDrive mecDrive;
-  
-  //private final Encoder m_leftEncoder = new Encoder(1, 2);
-  //private final AnalogInput m_rangefinder = new AnalogInput(6);
+
+  private double strafeSpeed = 0.0;
+  private double forwardSpeed = 0.0;
+  private double turnSpeed = 0.0;
+  private double angleParameter = 0.0;
   
   /**
    * Create a new drive train subsystem.
@@ -53,8 +55,7 @@ public class DriveTrain extends Subsystem {
     backLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
   }
-  
-  
+    
   /**
    * Mecanum-style driving for the DriveTrain with a Joystick.
    *
@@ -63,19 +64,50 @@ public class DriveTrain extends Subsystem {
    * @param turnParameter The speed to turn the robot with (1.0 is turn right, and -1.0 is turn left)?
    * @param angleParameter The heading of the robot based off of a gyro/NavX
    */
+  public void drive(){
+    mecDrive.driveCartesian(strafeSpeed, forwardSpeed, turnSpeed, angleParameter);
+  }
+  
   public void drive(double strafeParameter, double forwardParameter, double turnParameter, double angleParameter) {
+    strafeSpeed = strafeParameter;
+    forwardSpeed = forwardParameter;
+    turnSpeed = turnParameter;
+    this.angleParameter = angleParameter;
     
-    mecDrive.driveCartesian(strafeParameter, forwardParameter, turnParameter, angleParameter);
-	}
+    drive();
+  }
+  
+  public void drive(double strafeParameter, double forwardParameter, double turnParameter) {
+    strafeSpeed = strafeParameter;
+    forwardSpeed = forwardParameter;
+    turnSpeed = turnParameter;
+    
+    drive();
+  }
+
+  public void setStrafeSpeed(double strafeSpeed){
+    this.strafeSpeed = strafeSpeed;
+    drive();
+  }
+
+  public void setForwardSpeed(double forwardSpeed){
+    this.forwardSpeed = forwardSpeed;
+    drive();
+  }
+
+  public void setTurnSpeed(double turnSpeed){
+    this.turnSpeed = turnSpeed;
+    drive();
+  }
+
   
   /**
    * Mecanum-style driving for the DriveTrain with a Joystick.
-   *
    * @param joy The xboxone joystick to use to drive mecanum style.
    */
-  public void drive(XboxOne joy) {
+  public void driveJoystick(XboxOne joy) {
 
-    drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X(), 0);
+    drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X());
   }
 
   
@@ -84,7 +116,7 @@ public class DriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new MecDriveWithJoystick());
+    setDefaultCommand(new DriveMecWithJoystick());
   }
 
   //Get the raw value from the encoder -Aldenis
@@ -105,7 +137,7 @@ public class DriveTrain extends Subsystem {
 
   //Set the encoder position back to zero -Aldenis
   public void zeroEncoder() {
-    System.out.print("Something");
+
     backLeft.setSelectedSensorPosition(0);
   }
 

@@ -66,20 +66,21 @@ public class Limelight extends Subsystem {
     public void initDefaultCommand() {
     }
 
-    public double getStrafeToTargetSpeed() {
-        double targetLeftThresh = -3.5;
-        double targetRightThresh = -targetLeftThresh;
-        double strafeRightSpeed = 0.5;
-        double strafeLeftSpeed = -strafeRightSpeed;
 
-        if (getTXdouble() < targetLeftThresh) {
-            return strafeLeftSpeed;
-        } else if (getTXdouble() > targetRightThresh) {
-            return strafeRightSpeed;
-        } else {
-            System.out.println("on trrget???");
-            return 0.0;
-        }
-    }
+    // public double getStrafeToTargetSpeed() {
+    //     double targetLeftThresh = -3.5;
+    //     double targetRightThresh = -targetLeftThresh;
+    //     double strafeRightSpeed = 0.5;
+    //     double strafeLeftSpeed = -strafeRightSpeed;
+
+    //     if (getTXdouble() < targetLeftThresh) {
+    //         return strafeLeftSpeed;
+    //     } else if (getTXdouble() > targetRightThresh) {
+    //         return strafeRightSpeed;
+    //     } else {
+    //         System.out.println("on trrget???");
+    //         return 0.0;
+    //     }
+    // }
 
 }

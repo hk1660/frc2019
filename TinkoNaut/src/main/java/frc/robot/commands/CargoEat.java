@@ -13,8 +13,8 @@ import frc.robot.Robot;
 /**
  * An example command. You can replace me with your own command.
  */
-public class EatCargo extends Command {
-  public EatCargo() {
+public class CargoEat extends Command {
+  public CargoEat() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_cargoGrabber);
 
