@@ -9,6 +9,7 @@ package frc.robot.auto_commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 /**
@@ -19,14 +20,14 @@ public class Autonomous extends CommandGroup {
    * Create a new autonomous command.
    */
   public Autonomous() {
-    // addSequential(new PrepareToPickup());
+   //addSequential(new PrepareToPickup());
     // addSequential(new Pickup());
-    // addSequential(new SetDistanceToBox(0.10));
-    SmartDashboard.putString("Auto?", "Auto work");
-    
-    // addSequential(new AutoDriveStraight(5)); // Use Encoders if ultrasonic is
+     //addSequential(new SetDistanceToBox(0.10));
+     addSequential(new AutoDriveStraight(3.0)); // Use Encoders if ultrasonic is
+     addSequential(new AutoTurn(90.0));
+     addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
     //addSequential(new EatCargo());
-    addSequential(new TonsilEat());
+    //addSequential(new TonsilEat());
     // broken
     // addSequential(new Place());
     // addSequential(new SetDistanceToBox(0.60));
