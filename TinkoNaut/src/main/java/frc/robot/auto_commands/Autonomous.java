@@ -8,6 +8,8 @@
 package frc.robot.auto_commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 import frc.robot.commands.*;
 
 /**
@@ -18,17 +20,21 @@ public class Autonomous extends CommandGroup {
    * Create a new autonomous command.
    */
   public Autonomous() {
-    addSequential(new PrepareToPickup());
-    addSequential(new Pickup());
-    addSequential(new SetDistanceToBox(0.10));
-    // addSequential(new DriveStraight(4)); // Use Encoders if ultrasonic is
+   //addSequential(new PrepareToPickup());
+    // addSequential(new Pickup());
+     //addSequential(new SetDistanceToBox(0.10));
+     addSequential(new AutoDriveStraight(3.0)); // Use Encoders if ultrasonic is
+     addSequential(new AutoTurn(90.0));
+     addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
+    //addSequential(new EatCargo());
+    //addSequential(new TonsilEat());
     // broken
-    addSequential(new Place());
-    addSequential(new SetDistanceToBox(0.60));
+    // addSequential(new Place());
+    // addSequential(new SetDistanceToBox(0.60));
     // addSequential(new DriveStraight(-2)); // Use Encoders if ultrasonic
     // is broken
-    addParallel(new SetWristSetpoint(-45));
-    addSequential(new CloseClaw());
+    // addParallel(new SetWristSetpoint(-45));
+    // addSequential(new CloseClaw());
     
   }
 }

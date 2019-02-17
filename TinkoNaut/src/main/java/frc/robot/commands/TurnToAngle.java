@@ -15,12 +15,15 @@ public class TurnToAngle extends Command {
   private double kp = 1.0;
   private double ki = 0.1;
   private double kd = 0.1;
-  private double kToleranceDegrees = 1.0; //how off can a turn be?
+  private double kToleranceDegrees = 1.0; // how off can a turn be?
 
   public TurnToAngle(double angle, double strafeSpeed, double forwardSpeed) {
 
     requires(Robot.m_drivetrain);
     SmartDashboard.putNumber("angle", angle);
+    SmartDashboard.putNumber("Drive kp", kp);
+    SmartDashboard.putNumber("Drive ki", ki);
+    SmartDashboard.putNumber("Drive kd", kd);
 
     m_pid = new PIDController(kp, ki, kd, new PIDSource() {
       PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
@@ -43,12 +46,12 @@ public class TurnToAngle extends Command {
     }, turn -> Robot.m_drivetrain.drive(strafeSpeed, forwardSpeed, turn, 0)); // mayg3 pass thru other argument too
 
     m_pid.setAbsoluteTolerance(kToleranceDegrees);
-    m_pid.setInputRange(-180.0f,  180.0f);
-		m_pid.setOutputRange(-1.0, 1.0);
+    m_pid.setInputRange(-180.0f, 180.0f);
+    m_pid.setOutputRange(-1.0, 1.0);
     m_pid.setContinuous(true);
-    
+
     m_pid.setSetpoint(angle);
-		
+
   }
 
   protected void initialize() {
@@ -63,6 +66,18 @@ public class TurnToAngle extends Command {
   @Override
   protected boolean isFinished() {
     return m_pid.onTarget(); // change to m_pid
+  }
+
+  @Override
+  protected void execute() {
+
+    kp = SmartDashboard.getNumber("Drive kp", kp);
+    ki = SmartDashboard.getNumber("Drive ki", ki);
+    kd = SmartDashboard.getNumber("Drive kd", kd);
+    System.out.println("P:" + kp + " I:" + ki + " D:" + kd);
+    m_pid.setPID(kp, ki, kd);
+
+    super.execute();
   }
 
   // Called once after isFinished returns true
