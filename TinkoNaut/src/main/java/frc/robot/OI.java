@@ -108,7 +108,7 @@ public class OI {
       manipStick.ButtonB().whileHeld(new PistOut());
       manipStick.ButtonLB().whileHeld(new EatCargo());
       manipStick.ButtonLeftTrigger().whileHeld(new SpitCargo());
-      //manipStick.ButtonX().whileHeld(new TonsilEat());
+      manipStick.ButtonX().whileHeld(new TonsilEat());
       manipStick.ButtonY().whileHeld(new TonsilSpit());
 
       //STICK Elevator buttons
@@ -118,7 +118,7 @@ public class OI {
       manipStick.ButtonPovUpLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
       manipStick.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
       manipStick.ButtonPovUpRight().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
-      manipStick.ButtonX().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
+  
 
       //STICK extra buttons
       //manipStick.ButtonStart().whenPressed(new UnlockWinch());

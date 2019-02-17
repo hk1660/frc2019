@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ElevateManual;
 import frc.robot.utils.XboxOne;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -29,10 +30,10 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private DoubleSolenoid theLocker;
   public DigitalInput limitSwitch;
   
-  private static final double kp = 0.05;
-  private static final double ki = 0.0;
-  private static final double kd = 0.05;
-  private static final double kElevatorTolerance = 1000;
+  private static double kp = 4.0;
+  private static double ki = 0.0;
+  private static double kd = 0.0;
+  private static final double kElevatorTolerance = 10;
 
   /**
    * Create a new elevator subsystem.
@@ -57,7 +58,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putNumber("Winch D", kd);
   }
 
+/**
+   * When no other command is running, driver uses the Xbox controller
+   */
+  @Override
   public void initDefaultCommand() {
+    //getPIDController().disable();
+    setDefaultCommand(new ElevateManual());
   }
 
   public double returnPIDInput() {
@@ -80,10 +87,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
   public void elevateManual(double speed) {
     zeroWithLimitCheck();
-    if(getEncoderVal() > 0 && getEncoderVal() < RobotMap.LEVEL_3){
       winchMotor.set(speed);
       winchMotorTwo.set(speed);
-    }
   }
 
   public int getEncoderVal(){
@@ -143,11 +148,11 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
     SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
 
-    double xp = SmartDashboard.getNumber("Winch P", kp);
-    double xi = SmartDashboard.getNumber("Winch I ", ki);
-    double xd = SmartDashboard.getNumber("Winch D", kd);    
+    //double xp = SmartDashboard.getNumber("Winch P", kp);
+    //double xi = SmartDashboard.getNumber("Winch I ", ki);
+    //double xd = SmartDashboard.getNumber("Winch D", kd);    
 
-    super.getPIDController().setPID(xp, xi, xd);
+    super.getPIDController().setPID(kp, ki, kd);
  
   }
 

@@ -105,7 +105,7 @@ public class RobotMap {
     public final static int PDP_ID = 0; //fix this???
 
     //Levels
-    public final static double LEVEL_0 = -5000;
+    public final static double LEVEL_0 = -10000;
     public final static double LEVEL_1 = 200.0;
     public final static double LEVEL_1_5 = 24000.0;
     public final static double LEVEL_2 = 57000.0;

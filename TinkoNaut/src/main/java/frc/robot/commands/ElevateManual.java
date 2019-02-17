@@ -18,6 +18,15 @@ import frc.robot.RobotMap;
 public class ElevateManual extends Command {
   public ElevateManual() {
     requires(Robot.m_elevatorWinch);
+    //Robot.m_elevatorWinch.getdisable();
+  }
+
+
+
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
+      Robot.m_elevatorWinch.getPIDController().disable();
   }
 
   // Called repeatedly when this Command is scheduled to run
