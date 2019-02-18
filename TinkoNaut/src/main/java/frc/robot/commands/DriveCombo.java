@@ -19,17 +19,12 @@ public class DriveCombo extends CommandGroup {
   /**
    * Create a new autonomous command.
    */
-  public DriveCombo(double turnAngle, boolean limelightTarget, boolean joystickForward) {
+  public DriveCombo(double turnAngle, boolean limelightTarget) {
     
     addParallel(new DriveTurnToAngle(turnAngle));
 
     if(limelightTarget){
       addParallel(new LLStrafe());
-    }
-
-    if(joystickForward){
-      addParallel(new DriveForwardJoystick());
-    }
-      
+    } 
   }
 }

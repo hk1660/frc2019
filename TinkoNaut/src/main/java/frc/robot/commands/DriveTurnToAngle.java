@@ -12,9 +12,9 @@ public class DriveTurnToAngle extends Command {
 
   private final PIDController m_pid;
 
-  private double kp = 1.0;
-  private double ki = 0.1;
-  private double kd = 0.5;
+  private double kp = .001;
+  private double ki = 0.0;
+  private double kd = 0.0;
   private double kToleranceDegrees = 1.0; // how off can a turn be?
   private float kMinAngle = -180.0f;
   private float kMaxAngle = 180.0f;
@@ -79,6 +79,7 @@ public class DriveTurnToAngle extends Command {
     System.out.println("P:" + kp + " I:" + ki + " D:" + kd);
     m_pid.setPID(kp, ki, kd);
 
+    Robot.m_drivetrain.setForwardSpeed(Robot.m_oi.getDriverStick().getRightStickRaw_Y());
     super.execute();
   }
 
@@ -86,6 +87,7 @@ public class DriveTurnToAngle extends Command {
   @Override
   protected void end() {
 
+    Robot.m_drivetrain.setForwardSpeed(0.0);
     m_pid.disable();
 
   }

@@ -15,7 +15,7 @@ import frc.robot.Robot;
  */
 public class DriveForwardJoystick extends Command {
   public DriveForwardJoystick() {
-    requires(Robot.m_drivetrain);
+    //requires(Robot.m_drivetrain);
   }
 
   // Called repeatedly when this Command is scheduled to run
