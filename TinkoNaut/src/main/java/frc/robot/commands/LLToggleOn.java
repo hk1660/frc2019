@@ -7,9 +7,9 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LLToggle extends Command{
+public class LLToggleOn extends Command{
 
-    public LLToggle(){
+    public LLToggleOn(){
         //Gotta use that pid subsystem B
         //requires(Robot.m_elevatorWinch);
     }

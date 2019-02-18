@@ -102,7 +102,7 @@ public class RobotMap {
     public final static double RIGHT_ROCKET_BACK_ANGLE = 151.0;
 
 
-    public final static int PDP_ID = 0; //fix this???
+    public final static int PDP_ID = 0;
 
     //Levels
     public final static double LEVEL_0 = -10000;
@@ -123,7 +123,7 @@ public class RobotMap {
 
   //Flags
   public static boolean WINCH_PID_FLAG = true;
-  public static boolean BB_FLAG = false;
+  public static boolean BB_FLAG = true;
   public static boolean LL_FLAG = false;
 
 }

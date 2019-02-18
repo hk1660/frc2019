@@ -23,9 +23,9 @@ public class Autonomous extends CommandGroup {
    //addSequential(new PrepareToPickup());
     // addSequential(new Pickup());
      //addSequential(new SetDistanceToBox(0.10));
-     addSequential(new AutoDriveStraight(3.0)); // Use Encoders if ultrasonic is
-     addSequential(new DriveTurnToAngle(90.0));
-     addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
+     addSequential(new AutoDriveStraight(33.0)); 
+     //addSequential(new DriveTurnToAngle(90.0));
+     //addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
     //addSequential(new EatCargo());
     //addSequential(new TonsilEat());
     // broken

@@ -24,6 +24,7 @@ import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 import frc.robot.subsystems.NavX;
+import edu.wpi.first.wpilibj.CameraServer;
 
 
 /**
@@ -59,7 +60,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
-
+    CameraServer.getInstance().startAutomaticCapture();
+    
     if(RobotMap.WINCH_PID_FLAG){
       m_elevatorWinch = new ElevatorWinchPID();    
     } else {
@@ -79,7 +81,13 @@ public class Robot extends TimedRobot {
     
 
     // instantiate the command used for the autonomous period
-    m_autonomousCommand = new Autonomous();
+    int autoNumber = (int) SmartDashboard.getNumber("AutoNumber", 0);
+
+    if(autoNumber == 0){
+      m_autonomousCommand = new Autonomous();
+    } else if (autoNumber ==1 ){
+      m_autonomousCommand = new AutoDriveStraight(500);
+    }
   
 
     // Show what command your subsystem is running on the SmartDashboard
@@ -113,7 +121,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    //Scheduler.getInstance().run();
     //System.out.print("Checkpoint 3.0");
     log();
     //System.out.print("Checkpoint 4.0");

@@ -22,24 +22,34 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_TWO = 2; // spit
 	public static final int BUTTON_THREE = 3; // hatch push
 	public static final int BUTTON_FOUR = 4;// hatch pull
-	public static final int BUTTON_FIVE = 5; // ground level
-	public static final int BUTTON_SIX = 6; // level 1.5
-	public static final int BUTTON_SEVEN = 7; // level 2
-	public static final int BUTTON_EIGHT = 8; // level 2.5
+	public static final int BUTTON_FIVE = 7; // ground level
+	public static final int BUTTON_SIX = 8; // level 1.5
+	public static final int BUTTON_SEVEN = 5; // level 2
+	public static final int BUTTON_EIGHT = 6; // level 2.5
 	public static final int BUTTON_NINE = 9; // level 3 & LOCK
 	public static final int BUTTON_TEN = 10; // level 3.5 & UNLOCK
 	public static final int BUTTON_ELEVEN = 11;
 	public static final int BUTTON_TWELVE = 12;
 
-	// XboxOne Pov (D-Pad) buttons Manip
-	public final static int POV_UP = 0;
-	public final static int POV_UP_RIGHT = 45;
-	public final static int POV_RIGHT = 90;
-	public final static int POV_DOWN_RIGHT = 135;
-	public final static int POV_DOWN = 180;
-	public final static int POV_DOWN_LEFT = 225;
-	public final static int POV_LEFT = 270;
-	public final static int POV_UP_LEFT = 315;
+	// BUttonBoard POV buttons Manip
+	public final static int POV_UP = 270;
+	public final static int POV_UP_RIGHT = 315;
+	public final static int POV_RIGHT = 0;
+	public final static int POV_DOWN_RIGHT = 45;
+	public final static int POV_DOWN = 90;
+	public final static int POV_DOWN_LEFT = 135;
+	public final static int POV_LEFT = 180;
+	public final static int POV_UP_LEFT = 225;
+
+	// public final static int POV_UP = 0;
+	// public final static int POV_UP_RIGHT = 45;
+	// public final static int POV_RIGHT = 90;
+	// public final static int POV_DOWN_RIGHT = 135;
+	// public final static int POV_DOWN = 180;
+	// public final static int POV_DOWN_LEFT = 225;
+	// public final static int POV_LEFT = 270;
+	// public final static int POV_UP_LEFT = 315;
+
 
 	/**
 	 * Default constructor

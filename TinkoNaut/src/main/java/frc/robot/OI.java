@@ -17,7 +17,8 @@ import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.commands.DriveAngleZero;
 import frc.robot.commands.DriveCombo;
 import frc.robot.commands.LLStrafe;
-import frc.robot.commands.LLToggle;
+import frc.robot.commands.LLToggleOff;
+import frc.robot.commands.LLToggleOn;
 import frc.robot.commands.PistIn;
 import frc.robot.commands.PistOut;
 import frc.robot.commands.CargoEat;
@@ -112,8 +113,8 @@ public class OI {
       manipBoard.ButtonEight().whenPressed(new WinchEncoderZero());
 
       // //BOARD manual joystick
-      manipBoard.ButtonSeven().whileHeld(new ElevateManual(-1.0));
-      manipBoard.ButtonNine().whileHeld(new ElevateManual(1.0));
+      manipBoard.ButtonSeven().whileHeld(new ElevateManual(1.0));
+      manipBoard.ButtonNine().whileHeld(new ElevateManual(-1.0));
 
     } else {
 
@@ -146,19 +147,29 @@ public class OI {
 
     //-------------DRIVER BUTTONS -------------------------//
     
-    driverStick.ButtonRightTrigger().whileHeld(new LLToggle());
+    driverStick.ButtonRightTrigger().whileHeld(new LLToggleOn());
+    driverStick.ButtonLeftTrigger().whileHeld(new LLToggleOff());
     driverStick.ButtonStart().whileHeld(new DriveEncoderZero());
     driverStick.ButtonY().whileHeld(new DriveAngleZero());
+    driverStick.ButtonA().whileHeld(new LLStrafe());
 
-    driverStick.ButtonPovRight().whileHeld(new DriveCombo(RobotMap.RIGHT_WALL_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovLeft().whileHeld(new DriveCombo(RobotMap.LEFT_WALL_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovUp().whileHeld(new DriveCombo(RobotMap.BACK_WALL_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovDown().whileHeld(new DriveCombo(RobotMap.FRONT_WALL_ANGLE,RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovUpRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovDownRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovUpLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG, true));
-    driverStick.ButtonPovDownLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovRight().whileHeld(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
+    // driverStick.ButtonPovLeft().whileHeld(new DriveCombo(RobotMap.LEFT_WALL_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovUp().whileHeld(new DriveCombo(RobotMap.BACK_WALL_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovDown().whileHeld(new DriveCombo(RobotMap.FRONT_WALL_ANGLE,RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovUpRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovDownRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovUpLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG, true));
+    // driverStick.ButtonPovDownLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG, true));
 
+    driverStick.ButtonPovRight().whileHeld(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
+    driverStick.ButtonPovLeft().whileHeld(new DriveTurnToAngle(RobotMap.LEFT_WALL_ANGLE));
+    driverStick.ButtonPovUp().whileHeld(new DriveTurnToAngle(RobotMap.BACK_WALL_ANGLE));
+    driverStick.ButtonPovDown().whileHeld(new DriveTurnToAngle(RobotMap.FRONT_WALL_ANGLE));
+    driverStick.ButtonPovUpRight().whileHeld(new DriveTurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownRight().whileHeld(new DriveTurnToAngle(RobotMap.RIGHT_ROCKET_BACK_ANGLE));
+    driverStick.ButtonPovUpLeft().whileHeld(new DriveTurnToAngle(RobotMap.LEFT_ROCKET_FRONT_ANGLE));
+    driverStick.ButtonPovDownLeft().whileHeld(new DriveTurnToAngle(RobotMap.LEFT_ROCKET_BACK_ANGLE));
 
   //-------------SMARTDASHBOARD COMMANDS  -------------------------//
   

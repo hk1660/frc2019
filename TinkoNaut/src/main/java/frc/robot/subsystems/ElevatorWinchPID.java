@@ -50,9 +50,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
     winchMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);  //sets up encoder on winch talon
 
     getPIDController().setAbsoluteTolerance(kElevatorTolerance);
-    getPIDController().setContinuous(false);
+    getPIDController().setContinuous(false);      //elevator going up won't reach the bottom
     
-
     SmartDashboard.putNumber("Winch P", kp);
     SmartDashboard.putNumber("Winch I ", ki);
     SmartDashboard.putNumber("Winch D", kd);
@@ -63,6 +62,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
    */
   @Override
   public void initDefaultCommand() {
+    
     setDefaultCommand(new ElevateManual());
   }
 
@@ -134,7 +134,14 @@ public class ElevatorWinchPID extends PIDSubsystem {
    * @param joy The xboxone joystick to use to drive mecanum style.
    */
   public void elevateJoystick(XboxOne joy) {
-    elevateManual(joy.getRightStickRaw_Y());
+
+    double joyVal = joy.getRightStickRaw_Y();
+
+    if(isLimitPressed() && joyVal < 0.0){
+      //don't go down anymore!
+    } else{
+      elevateManual(joy.getRightStickRaw_Y());
+    }
   }
 
 
@@ -147,9 +154,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
     SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
 
-    //kp = SmartDashboard.getNumber("Winch P", kp);
-    //ki = SmartDashboard.getNumber("Winch I ", ki);
-    //kd = SmartDashboard.getNumber("Winch D", kd);    
+    double xp = SmartDashboard.getNumber("Winch P", kp);
+    double xi = SmartDashboard.getNumber("Winch I ", ki);
+    double xd = SmartDashboard.getNumber("Winch D", kd);
+    
+    this.kp = xp;
+    this.ki = xi;
+    this.kd = xd;
 
     super.getPIDController().setPID(kp, ki, kd);
  

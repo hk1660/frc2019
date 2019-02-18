@@ -53,6 +53,7 @@ public class SetElevatorHeight extends Command {
   @Override
   protected boolean isFinished() {
 
+    Robot.m_elevatorWinch.getPIDController().disable();   //will it stop when it reaches its height?
     System.out.println("We're in setElevatorHegiht isFinished()");
     return Robot.m_elevatorWinch.onTarget();
 

@@ -106,8 +106,14 @@ public class DriveTrain extends Subsystem {
    * @param joy The xboxone joystick to use to drive mecanum style.
    */
   public void driveJoystick(XboxOne joy) {
+      this.strafeSpeed = joy.getRightStickRaw_X();
+      this.forwardSpeed = joy.getRightStickRaw_Y();
+      this.turnSpeed =  joy.getLeftStickRaw_X();
 
-    drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X());
+      drive();
+
+
+    //drive(joy.getRightStickRaw_X(), joy.getRightStickRaw_Y(), joy.getLeftStickRaw_X());
   }
 
   

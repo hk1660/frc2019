@@ -14,8 +14,10 @@ public class DriveTurnToAngle extends Command {
 
   private double kp = 1.0;
   private double ki = 0.1;
-  private double kd = 0.1;
+  private double kd = 0.5;
   private double kToleranceDegrees = 1.0; // how off can a turn be?
+  private float kMinAngle = -180.0f;
+  private float kMaxAngle = 180.0f;
 
   public DriveTurnToAngle(double angle) {
 
@@ -46,9 +48,9 @@ public class DriveTurnToAngle extends Command {
     }, turn -> Robot.m_drivetrain.setTurnSpeed(turn));
 
     m_pid.setAbsoluteTolerance(kToleranceDegrees);
-    m_pid.setInputRange(-180.0f, 180.0f);
+    m_pid.setInputRange(kMinAngle, kMaxAngle);
     m_pid.setOutputRange(-1.0, 1.0);
-    m_pid.setContinuous(true);
+    m_pid.setContinuous(true);        //-180 value turns into +180
 
     m_pid.setSetpoint(angle);
 
