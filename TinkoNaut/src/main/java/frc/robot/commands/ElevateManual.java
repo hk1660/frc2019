@@ -40,12 +40,12 @@ public class ElevateManual extends Command {
   @Override
   protected void execute() {
 
-    if( RobotMap.BB_FLAG){
-      Robot.m_elevatorWinch.elevateManual(speed);
-    } else {
-      Robot.m_elevatorWinch.elevateManual(Robot.m_oi.getManipStick().getRightStickRaw_Y());
-    }
-    
+      if( RobotMap.BB_FLAG){
+        Robot.m_elevatorWinch.elevateManual(speed);
+      } else {
+        Robot.m_elevatorWinch.elevateManual(Robot.m_oi.getManipStick().getRightStickRaw_Y());
+      }
+          
 
   }
 
@@ -55,9 +55,17 @@ public class ElevateManual extends Command {
     return false; // Runs until interrupted
   }
 
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
+    Robot.m_elevatorWinch.elevateManual(0.0);
+  }
+
   // Called once after isFinished returns true
   @Override
   protected void end() {
     Robot.m_elevatorWinch.elevateManual(0.0);
+    Robot.m_elevatorWinch.enable();
   }
 }

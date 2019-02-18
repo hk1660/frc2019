@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ElevateManual;
 import frc.robot.utils.XboxOne;
@@ -32,7 +33,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
   
   private static double kp = 1.0;
   private static double ki = 0.0;
-  private static double kd = 1.0;
+  private static double kd = 0.0;
   private static final double kElevatorTolerance = 500;
 
   /**
@@ -74,8 +75,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
     zeroWithLimitCheck();
     
-      winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
-      winchMotorTwo.pidWrite(output);
+      winchMotor.pidWrite(-output); // this is where the computed output value fromthe PIDController is applied to the motor
+      winchMotorTwo.pidWrite(-output);
   }
 
 
@@ -86,16 +87,25 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
   public void elevateManual(double speed) {
     zeroWithLimitCheck();
+    
+    if(isLimitPressed() && speed > 0.0){  
+      //don't go down anymore!
+        winchMotor.set(0.0);
+        winchMotorTwo.set(0.0);
+    } else{
       winchMotor.set(speed);
       winchMotorTwo.set(speed);
+    }
+      
   }
 
   public int getEncoderVal(){
-    return -winchMotor.getSelectedSensorPosition();
+    return winchMotor.getSelectedSensorPosition();
   }
 
   public void zeroEncoder() {
     winchMotor.setSelectedSensorPosition(0);
+    setSetpoint(0);
   }
 
   public boolean isLimitPressed(){
@@ -125,7 +135,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
   // Stops the solenoid
   public void stopPiston() {
-    theLocker.set(DoubleSolenoid.Value.kOff);
+   // theLocker.set(DoubleSolenoid.Value.kOff);
   }
 
 
@@ -135,14 +145,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
    */
   public void elevateJoystick(XboxOne joy) {
 
-    double joyVal = joy.getRightStickRaw_Y();
-
-    if(isLimitPressed() && joyVal < 0.0){
-      //don't go down anymore!
-    } else{
       elevateManual(joy.getRightStickRaw_Y());
     }
-  }
 
 
   /**
@@ -152,7 +156,11 @@ public class ElevatorWinchPID extends PIDSubsystem {
     SmartDashboard.putBoolean("WinchPID?", true);
     SmartDashboard.putData(winchMotor);
     SmartDashboard.putNumber("Encoder Height", this.getEncoderVal());
+    SmartDashboard.putNumber("Elev SetHeight", getSetpoint());
     SmartDashboard.putBoolean("Limit Switch", this.isLimitPressed());
+    LiveWindow.addActuator("Elevator", "WinchMotor", winchMotor);
+    LiveWindow.addSensor("Elevator", "WinchEncoder", winchMotor);
+    
 
     double xp = SmartDashboard.getNumber("Winch P", kp);
     double xi = SmartDashboard.getNumber("Winch I ", ki);

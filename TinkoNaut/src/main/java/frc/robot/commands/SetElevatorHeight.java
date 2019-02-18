@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.ElevatorWinchPID;
 
 /**
  * Move the elevator to a given location. This command finishes when it is
@@ -25,8 +26,9 @@ public class SetElevatorHeight extends Command {
     
     requires(Robot.m_elevatorWinch);
     this.height = height;
-    SmartDashboard.putNumber("Elev SetHeight", this.height);
+    // SmartDashboard.putNumber("Elev SetHeight", this.height);
     System.out.println("We're in setElevatorHegiht constructor");
+    
 
   }
 
@@ -43,17 +45,23 @@ public class SetElevatorHeight extends Command {
   
   }
 
+  @Override
+  protected void execute(){
+    if(Robot.m_elevatorWinch.isLimitPressed()){
+      Robot.m_elevatorWinch.lockPiston();
+    }
+  }
+
   //Ends the command if it's interrupted
   @Override
   protected void interrupted(){
-    Robot.m_elevatorWinch.getPIDController().disable();
+    //Robot.m_elevatorWinch.getPIDController().disable();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
 
-    Robot.m_elevatorWinch.getPIDController().disable();   //will it stop when it reaches its height?
     System.out.println("We're in setElevatorHegiht isFinished()");
     return Robot.m_elevatorWinch.onTarget();
 
@@ -62,4 +70,14 @@ public class SetElevatorHeight extends Command {
   //no need for a execute method, because the pid controller will be
   //constantly making the elevator move to its proper position
 
+    // Called once after isFinished returns true
+    @Override
+    protected void end() {
+      // Stop PID and the wheels
+      //m_pid.disable();
+      //Robot.m_drivetrain.drive(0, 0, 0, 0);
+      if(Robot.m_elevatorWinch.isLimitPressed()){
+        Robot.m_elevatorWinch.lockPiston();
+      }
+    }
 }

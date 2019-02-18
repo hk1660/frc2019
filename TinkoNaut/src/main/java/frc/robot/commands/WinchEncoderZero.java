@@ -10,11 +10,11 @@ public class WinchEncoderZero extends Command{
         requires(Robot.m_elevatorWinch);
     }
 
-    protected void execute() {
+    protected void initialize() {
         Robot.m_elevatorWinch.zeroEncoder();
     }
 
     protected boolean isFinished() {
-        return false; // Runs until interrupted
+        return true;
       }
 }
