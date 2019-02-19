@@ -23,16 +23,20 @@ public class Autonomous extends CommandGroup {
    //addSequential(new PrepareToPickup());
     // addSequential(new Pickup());
      //addSequential(new SetDistanceToBox(0.10));
-     addSequential(new AutoDriveStraight(33.0)); 
+     addSequential(new AutoDriveStraight(118.5)); 
+     addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE)); //turn 90.0
+     addSequential(new AutoDriveStraight(27.0));
+     addSequential(new DriveTurnToAngle(RobotMap.LEFT_WALL_ANGLE)); //-90.0
+     addSequential(new AutoDriveStraight(1.0));
+     addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE )); //90.0
+     addSequential(new AutoDriveStraight(1.5));
      //addSequential(new DriveTurnToAngle(90.0));
      //addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
     //addSequential(new EatCargo());
     //addSequential(new TonsilEat());
     // broken
-    // addSequential(new Place());
-    // addSequential(new SetDistanceToBox(0.60));
-    // addParallel(new SetWristSetpoint(-45));
-    // addSequential(new CloseClaw());
+    // addSequential(new DriveStraight(-2)); // Use Encoders if ultrasonic
+    // is broken
     
   }
 }
