@@ -154,6 +154,4 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Raw Encoder Distance", getEncoderVal());
     SmartDashboard.putNumber("Distance(Inches)", getDistance());
   }
-
-
 }

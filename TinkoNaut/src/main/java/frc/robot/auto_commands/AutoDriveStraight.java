@@ -72,6 +72,11 @@ public class AutoDriveStraight extends Command {
     m_pid.enable();
   }
 
+  @Override
+  protected void execute() {
+    super.execute();
+  }
+
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
@@ -84,7 +89,5 @@ public class AutoDriveStraight extends Command {
     // Stop PID and the wheels
     m_pid.disable();
     Robot.m_drivetrain.drive(0,0,0,0);
-  }
-
-  
+  } 
 }
