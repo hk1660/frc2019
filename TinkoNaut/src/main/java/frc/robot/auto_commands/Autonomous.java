@@ -31,8 +31,6 @@ public class Autonomous extends CommandGroup {
     // broken
     // addSequential(new Place());
     // addSequential(new SetDistanceToBox(0.60));
-    // addSequential(new DriveStraight(-2)); // Use Encoders if ultrasonic
-    // is broken
     // addParallel(new SetWristSetpoint(-45));
     // addSequential(new CloseClaw());
     
