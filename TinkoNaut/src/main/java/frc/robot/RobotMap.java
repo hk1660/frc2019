@@ -105,13 +105,15 @@ public class RobotMap {
     public final static int PDP_ID = 0;
 
     //Levels
+    //OG vals: Lvl 1 - 200.0, 1.5 - 24000.0, 2 - 57000.0, 2.5 - 82000.0, 3 - 109000.0, 3.5 - 135000.0
     public final static double LEVEL_0 = -10000;
-    public final static double LEVEL_1 = 200.0;
-    public final static double LEVEL_1_5 = 24000.0;
-    public final static double LEVEL_2 = 57000.0;
-    public final static double LEVEL_2_5 = 82000.0;
-    public final static double LEVEL_3 = 109000.0;
-    public final static double LEVEL_3_5 = 135000.0;
+    public final static double LEVEL_1 = 0;
+    public final static double LEVEL_1_5 = 57100.0;
+    public final static double LEVEL_2 = 184722.0;
+    public final static double EAT_CARGO_HEIGHT = 141622.0;
+    public final static double LEVEL_2_5 = 165251.0;
+    public final static double LEVEL_3 = 242600.0;
+    public final static double LEVEL_3_5 = 302000.0;
 
   
   //Digital Input Channels

@@ -121,7 +121,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
     //System.out.print("Checkpoint 3.0");
     log();
     //System.out.print("Checkpoint 4.0");

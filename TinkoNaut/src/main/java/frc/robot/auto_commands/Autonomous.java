@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
+import frc.robot.commands.DriveEncoderZero;
 
 /**
  * The main autonomous command to pickup and deliver the soda to the box.
@@ -20,17 +21,18 @@ public class Autonomous extends CommandGroup {
    * Create a new autonomous command.
    */
   public Autonomous() {
-   //addSequential(new PrepareToPickup());
-    // addSequential(new Pickup());
-     //addSequential(new SetDistanceToBox(0.10));
-     addSequential(new AutoDriveStraight(118.5)); 
-     addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE)); //turn 90.0
-     addSequential(new AutoDriveStraight(27.0));
-     addSequential(new DriveTurnToAngle(RobotMap.LEFT_WALL_ANGLE)); //-90.0
-     addSequential(new AutoDriveStraight(1.0));
-     addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE )); //90.0
-     addSequential(new AutoDriveStraight(1.5));
-     //addSequential(new DriveTurnToAngle(90.0));
+   
+    System.out.println("testing");
+    //  addSequential(new DriveEncoderZero());
+     addSequential(new AutoDriveStraight(60)); 
+    // addParallel(new DriveTurnToAngle(RobotMap.FRONT_WALL_ANGLE));
+    addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE)); //turn 90.0
+      addSequential(new AutoDriveStraight(27.0));
+      addSequential(new DriveTurnToAngle(RobotMap.RIGHT_ROCKET_FRONT_ANGLE)); //-90.0
+      addSequential(new AutoDriveStraight(6.0));
+    //  addSequential(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE )); //90.0
+    //  addSequential(new AutoDriveStraight(1.5));
+    //  //addSequential(new DriveTurnToAngle(90.0));
      //addSequential(new SetElevatorHeight((RobotMap.LEVEL_3)));
     //addSequential(new EatCargo());
     //addSequential(new TonsilEat());

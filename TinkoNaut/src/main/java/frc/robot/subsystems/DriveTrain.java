@@ -15,6 +15,9 @@ import frc.robot.RobotMap;
 import frc.robot.utils.XboxOne;
 import frc.robot.commands.DriveMecWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import java.awt.geom.CubicCurve2D.Double;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 /**
@@ -33,6 +36,8 @@ public class DriveTrain extends Subsystem {
   private double forwardSpeed = 0.0;
   private double turnSpeed = 0.0;
   private double angleParameter = 0.0;
+
+  private int ticksPerInch = 460;
   
   /**
    * Create a new drive train subsystem.
@@ -127,19 +132,23 @@ public class DriveTrain extends Subsystem {
 
   //Get the raw value from the encoder -Aldenis
   public int getEncoderVal(){
-    return backLeft.getSelectedSensorPosition();
+    return (backLeft.getSelectedSensorPosition()*-1);
   }
 
   //Get the distance traveled in inches -Aldenis
   public double getDistance(){
-    int clicks = getEncoderVal();
-    int diameter = 6;
-    double inchesPerRev = Math.PI * diameter;
-    int clicksPerRev = 1000;
-    double inchesPerClick = inchesPerRev/clicksPerRev ;
-
-    return clicks * inchesPerClick;
+    int encoderTicks = getEncoderVal();
+    int distanceInInches = encoderTicks / ticksPerInch ;
+    return distanceInInches;
   }
+
+  //Convert distance in inches to ticks -Aldenis
+  public double getRawDistance(double inches){
+ 
+    return inches * ticksPerInch;
+  }
+
+
 
   //Set the encoder position back to zero -Aldenis
   public void zeroEncoder() {
@@ -151,8 +160,9 @@ public class DriveTrain extends Subsystem {
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    SmartDashboard.putNumber("Raw Encoder Distance", getEncoderVal());
-    SmartDashboard.putNumber("Distance(Inches)", getDistance());
+    SmartDashboard.putNumber("RawEncoderD", getEncoderVal());
+    SmartDashboard.putNumber("Distance", getDistance());
+
   }
 
 

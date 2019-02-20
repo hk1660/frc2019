@@ -10,11 +10,11 @@ public class DriveEncoderZero extends Command{
         requires(Robot.m_drivetrain);
     }
 
-    protected void execute() {
+    protected void initialize() {
         Robot.m_drivetrain.zeroEncoder();
     }
 
     protected boolean isFinished() {
-        return false; // Runs until interrupted
+        return true; // Runs until interrupted
       }
 }

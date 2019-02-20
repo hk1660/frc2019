@@ -90,7 +90,8 @@ public class OI {
       manipBoard.ButtonThree().whileHeld(new PistIn());
       manipBoard.ButtonFour().whileHeld(new PistOut());
       manipBoard.ButtonFive().whileHeld(new TonsilSpit());
-      manipBoard.ButtonSix().whileHeld(new TonsilEat());
+      //manipBoard.ButtonSix().whileHeld(new TonsilEat());
+      manipBoard.ButtonSix().whileHeld(new SetElevatorHeight(RobotMap.EAT_CARGO_HEIGHT));
 
       //BOARD Elevator Buttons
       // manipBoard.ButtonSeven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));

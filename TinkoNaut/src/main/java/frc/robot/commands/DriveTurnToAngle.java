@@ -12,7 +12,7 @@ public class DriveTurnToAngle extends Command {
 
   private final PIDController m_pid;
 
-  private double kp = .001;
+  private double kp = .1;//.05?
   private double ki = 0.0;
   private double kd = 0.0;
   private double kToleranceDegrees = 1.0; // how off can a turn be?
@@ -21,7 +21,8 @@ public class DriveTurnToAngle extends Command {
 
   public DriveTurnToAngle(double angle) {
 
-    requires(Robot.m_drivetrain);
+    //requires(Robot.m_drivetrain);
+
     SmartDashboard.putNumber("angle", angle);
     SmartDashboard.putNumber("Drive kp", kp);
     SmartDashboard.putNumber("Drive ki", ki);
@@ -76,10 +77,10 @@ public class DriveTurnToAngle extends Command {
     kp = SmartDashboard.getNumber("Drive kp", kp);
     ki = SmartDashboard.getNumber("Drive ki", ki);
     kd = SmartDashboard.getNumber("Drive kd", kd);
-    System.out.println("P:" + kp + " I:" + ki + " D:" + kd);
+    //.out.println("P:" + kp + " I:" + ki + " D:" + kd);
     m_pid.setPID(kp, ki, kd);
 
-    Robot.m_drivetrain.setForwardSpeed(Robot.m_oi.getDriverStick().getRightStickRaw_Y());
+    //Robot.m_drivetrain.setForwardSpeed(Robot.m_oi.getDriverStick().getRightStickRaw_Y());
     super.execute();
   }
 
@@ -88,6 +89,7 @@ public class DriveTurnToAngle extends Command {
   protected void end() {
 
     Robot.m_drivetrain.setForwardSpeed(0.0);
+    Robot.m_drivetrain.setTurnSpeed(0.0);
     m_pid.disable();
 
   }

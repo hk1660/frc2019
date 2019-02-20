@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveTurnToAngle;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
@@ -25,66 +26,88 @@ import frc.robot.subsystems.NavX;
  */
 public class AutoDriveStraight extends Command {
 
-  private final PIDController m_pid;
+  //private final PIDController m_pid;
   private final int kWheelEncoderTolerance = 2000;
- // private double turnAngle = 90.0;
+  private final double inchesForward;
+  // private double turnAngle = 90.0;
 
   /**
    * Create a new DriveStraight command.
+   * 
    * @param distance The distance to drive
    */
-  
-  public AutoDriveStraight(double distance) {
 
-    requires(Robot.m_drivetrain);
-    
-    m_pid = new PIDController(2, 0, 0, new PIDSource() {
-      PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+  public AutoDriveStraight(double inchesForward) {
 
-      @Override
-      public double pidGet() {
-        return Robot.m_drivetrain.getDistance();
-        //return 0.0;
-      }
+    //requires(Robot.m_drivetrain);
+    this.inchesForward = inchesForward;
 
-      @Override
-      public void setPIDSourceType(PIDSourceType pidSource) {
-        m_sourceType = pidSource;
-      }
+    // m_pid = new PIDController(.5, 0, .2, new PIDSource() {
+    //   PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
-      @Override
-      public PIDSourceType getPIDSourceType() {
-        return m_sourceType;
-      }
-    }, d -> Robot.m_drivetrain.drive(0, 1.0,0,0));
- 
+    //   @Override
+    //   public double pidGet() {
+    //     return Robot.m_drivetrain.getDistance();
+    //     // return 0.0;
+    //   }
 
-    m_pid.setAbsoluteTolerance(kWheelEncoderTolerance);
-    m_pid.setSetpoint(distance);
+    //   @Override
+    //   public void setPIDSourceType(PIDSourceType pidSource) {
+    //     m_sourceType = pidSource;
+    //   }
+
+    //   @Override
+    //   public PIDSourceType getPIDSourceType() {
+    //     return m_sourceType;
+    //   }
+    // }, forwardSpeed -> Robot.m_drivetrain.setForwardSpeed(forwardSpeed));
+
+    // m_pid.setAbsoluteTolerance(kWheelEncoderTolerance);
+    // m_pid.setSetpoint(Robot.m_drivetrain.getRawDistance(inchesForward));
   }
 
+
+  
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_drivetrain.zeroEncoder();
+    System.out.println("Running AutoDriveStraight");
     // Get everything in a safe starting state.
-    //Robot.m_drivetrain.reset();
-    m_pid.reset();
-    m_pid.enable();
+    // Robot.m_drivetrain.reset();
+    //m_pid.reset();
+    //m_pid.enable();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return m_pid.onTarget();
+    // return false;
+
+    double inchesWant = inchesForward; 
+    double inchesHave = Robot.m_drivetrain.getDistance();
+    return inchesHave>inchesWant;
+    //return m_pid.onTarget();
+  }
+
+  @Override
+  protected void execute() {
+
+    Robot.m_drivetrain.setForwardSpeed(0.8);
+    
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     // Stop PID and the wheels
-    m_pid.disable();
-    Robot.m_drivetrain.drive(0,0,0,0);
+    //m_pid.disable();
+    //Robot.m_drivetrain.drive(0, 0, 0, 0);
+    Robot.m_drivetrain.setForwardSpeed(0.0);
   }
 
-  
+ protected void log(){
+
+  }
 }
