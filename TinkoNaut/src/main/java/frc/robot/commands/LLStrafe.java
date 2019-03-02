@@ -11,7 +11,7 @@ public class LLStrafe extends Command {
     double targetRightThresh = -targetLeftThresh;
     int targetAreaScore = 400;
 
-    double strafeRightSpeed = 0.5;
+    double strafeRightSpeed = -0.5;
     double strafeLeftSpeed = -strafeRightSpeed;
     
     public LLStrafe() {
@@ -28,7 +28,7 @@ public class LLStrafe extends Command {
      @Override
      protected void execute(){
         if(Robot.m_limelight.getTXdouble() < targetLeftThresh) {
-            Robot.m_drivetrain.setStrafeSpeed(-strafeLeftSpeed);
+            Robot.m_drivetrain.setStrafeSpeed(strafeRightSpeed);
         }
         else if(Robot.m_limelight.getTXdouble() > targetRightThresh){
             Robot.m_drivetrain.setStrafeSpeed(strafeLeftSpeed);        }
