@@ -24,6 +24,8 @@ import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Wrist;
 import frc.robot.subsystems.NavX;
+import frc.robot.subsystems.Blinkin;
+
 import edu.wpi.first.wpilibj.CameraServer;
 
 
@@ -49,6 +51,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
+  public static Blinkin m_blinkin;
 
   public boolean skipAuto = true;
 
@@ -67,6 +70,7 @@ public class Robot extends TimedRobot {
     } else {
       //m_elevatorWinch = new ElevatorWinchManual();
     }
+    m_blinkin = new Blinkin();
     m_drivetrain = new DriveTrain();
     m_cargoGrabber = new CargoGrabber();
     m_hatchPanelPanel = new HatchPanelPanel();
@@ -175,7 +179,7 @@ public class Robot extends TimedRobot {
     m_limelight.log();
     m_navx.log();
     m_pneumatics.log();
-
+    m_blinkin.log();
     SmartDashboard.putBoolean("LL_FLAG", RobotMap.LL_FLAG);
     SmartDashboard.putBoolean("WINCH_PID_FLAG", RobotMap.WINCH_PID_FLAG);
   
