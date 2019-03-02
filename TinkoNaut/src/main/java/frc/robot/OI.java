@@ -111,7 +111,7 @@ public class OI {
       // //BOARD extra buttons
       manipBoard.ButtonTwelve().whenPressed(new WinchLock()); 
       manipBoard.ButtonTen().whenPressed(new WinchUnlock()); 
-      manipBoard.ButtonEight().whileHeld(new WinchEncoderZero());
+      manipBoard.ButtonEight().whileHeld(new LLStrafe());
 
       // //BOARD manual joystick
       manipBoard.ButtonSeven().whileHeld(new ElevateManual(1.0));

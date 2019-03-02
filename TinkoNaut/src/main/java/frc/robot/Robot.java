@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
+    System.out.println("Checking 1,2,3...");
     CameraServer.getInstance().startAutomaticCapture();
     
     if(RobotMap.WINCH_PID_FLAG){
@@ -136,6 +137,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     
     m_autonomousCommand.cancel();
+    System.out.println("Testing ");
     
     if(skipAuto){
       Robot.m_navx.zeroAngle();

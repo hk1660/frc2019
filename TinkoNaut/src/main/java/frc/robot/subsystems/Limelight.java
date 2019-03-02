@@ -27,6 +27,7 @@ public class Limelight extends Subsystem {
 
     // //post to smart dashboard periodically
     public void log() {
+        System.out.println("Hi I'm a test");
         update();
         // //read values periodically
         double x = tx.getDouble(0.0);
@@ -67,20 +68,20 @@ public class Limelight extends Subsystem {
     }
 
 
-    // public double getStrafeToTargetSpeed() {
-    //     double targetLeftThresh = -3.5;
-    //     double targetRightThresh = -targetLeftThresh;
-    //     double strafeRightSpeed = 0.5;
-    //     double strafeLeftSpeed = -strafeRightSpeed;
+     /* public double getStrafeToTargetSpeed() {
+         double targetLeftThresh = -3.5;
+         double targetRightThresh = -targetLeftThresh;
+         double strafeRightSpeed = 0.5;
+         double strafeLeftSpeed = -strafeRightSpeed;
 
-    //     if (getTXdouble() < targetLeftThresh) {
-    //         return strafeLeftSpeed;
-    //     } else if (getTXdouble() > targetRightThresh) {
-    //         return strafeRightSpeed;
-    //     } else {
-    //         System.out.println("on trrget???");
-    //         return 0.0;
-    //     }
-    // }
+         if (getTXdouble() < targetLeftThresh) {
+             return strafeLeftSpeed;
+         } else if (getTXdouble() > targetRightThresh) {
+             return strafeRightSpeed;
+         } else {
+             System.out.println("on trrget???");
+             return 0.0;
+         }
+     }*/
 
 }
