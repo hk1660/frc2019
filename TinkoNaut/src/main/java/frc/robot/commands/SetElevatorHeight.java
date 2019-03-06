@@ -36,6 +36,7 @@ public class SetElevatorHeight extends Command {
   @Override
   protected void initialize() {
 
+    Robot.m_elevatorWinch.unlockPiston();
     SmartDashboard.putNumber("Elev SetHeight", this.height);
     System.out.println("We're in setElevatorHegiht initialize()");
     

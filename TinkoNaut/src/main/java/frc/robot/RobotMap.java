@@ -127,5 +127,5 @@ public class RobotMap {
   public static boolean WINCH_PID_FLAG = true;
   public static boolean BB_FLAG = true;
   public static boolean LL_FLAG = false;
-
+  public static boolean LOCK_FLAG = false;
 }
