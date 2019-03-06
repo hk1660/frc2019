@@ -57,14 +57,14 @@ public class Robot extends IterativeRobot {
     int RIGHT_Y_AXIS = 5;
 
     //BUTTONS
-    int LOAD_BUTTON = 5;  //lb
-    int UNLOAD_BUTTON = 6;  //rb
+    int LOAD_BUTTON = 4;  //lb
+    int UNLOAD_BUTTON = 3;  //rb
     int PRESSURE_OVERRIDE_BUTTON = 8; //START
     int AUTO_COMPRESSOR_BUTTON = 7; //BACK
     int SHOOTING_BUTTON = 1;  //a
     int STOP_SHOOTING_BUTTON = 2;//b
-    int JAW_UP_BUTTON = 4;  //y
-    int JAW_DOWN_BUTTON = 3;  //x
+    //int JAW_UP_BUTTON = 4;  //y
+    //int JAW_DOWN_BUTTON = 3;  //x
 
     //PCM PORTS
     int COMPRESSOR_PORT = 0;
@@ -281,11 +281,11 @@ public class Robot extends IterativeRobot {
         
 
 
-        if (driveStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
-            isManualCompFlag = true;
-        } else if(driveStick.getRawButton(AUTO_COMPRESSOR_BUTTON)){
-            isManualCompFlag = false;
-        }
+        // if (driveStick.getRawButton(PRESSURE_OVERRIDE_BUTTON)) {
+        //     isManualCompFlag = true;
+        // } else if(driveStick.getRawButton(AUTO_COMPRESSOR_BUTTON)){
+        //     isManualCompFlag = false;
+        // }
 
         if(isManualCompFlag){
             compressorCLOn();
@@ -679,11 +679,11 @@ public class Robot extends IterativeRobot {
     }
 */
 
-    public void newCheckJawMotorButton() {
+    /*public void newCheckJawMotorButton() {
                       
     	double JawSpeed = 0.5;
-    	boolean JawUpVal = driveStick.getRawButton(JAW_UP_BUTTON);
-    	boolean JawDownVal = driveStick.getRawButton(JAW_DOWN_BUTTON);
+    	//boolean JawUpVal = driveStick.getRawButton(JAW_UP_BUTTON);
+    	//boolean JawDownVal = driveStick.getRawButton(JAW_DOWN_BUTTON);
         
     	if(JawUpVal){
         shootingJawMotor.set(ControlMode.PercentOutput, JawSpeed *1.0);

@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.Spark;
 import frc.robot.commands.BlinkinCargoColor;
 
 
@@ -32,7 +34,7 @@ public class Blinkin extends Subsystem {
   public double heartBeatSlow = 0.03;
   public double heartBeatFast = 0.07;
 
-  public BlinkLeds(){
+  public Blinkin(){
     //Initialize LED to Red
     spark = new Spark (sparkChannel);
     cargoButton = new DigitalInput(cargoButtonChannel);
@@ -54,14 +56,13 @@ public class Blinkin extends Subsystem {
   }
 
   public boolean hasCargo(){
-    cargoButton.get();
+    return cargoButton.get();
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    BlinkinCargoColor();
+   setDefaultCommand(new BlinkinCargoColor());
   }
 
   public void log() {
