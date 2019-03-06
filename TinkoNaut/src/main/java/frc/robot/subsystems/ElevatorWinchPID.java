@@ -126,11 +126,13 @@ public class ElevatorWinchPID extends PIDSubsystem {
   // Lock method will lock the winch's gearbox
   public void lockPiston() {
     theLocker.set(DoubleSolenoid.Value.kForward);
+    RobotMap.LOCK_FLAG = true;
   }
 
   // Unlock method does opposite of above method
   public void unlockPiston() {
     theLocker.set(DoubleSolenoid.Value.kReverse);
+    RobotMap.LOCK_FLAG = false;
   }
 
   // Stops the solenoid
