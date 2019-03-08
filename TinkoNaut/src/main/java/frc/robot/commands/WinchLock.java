@@ -12,7 +12,7 @@ public class WinchLock extends Command{
 
     public WinchLock(){
         //Gotta use that pid subsystem B
-        requires(Robot.m_elevatorWinch);
+        //requires(Robot.m_elevatorWinch);
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ public class WinchLock extends Command{
       @Override
       protected void execute(){
         Robot.m_elevatorWinch.lockPiston();
-        RobotMap.LOCK_FLAG = true;
+        //RobotMap.LOCK_FLAG = true;
       }
  
        // Make this return true when this Command no longer needs to run execute()

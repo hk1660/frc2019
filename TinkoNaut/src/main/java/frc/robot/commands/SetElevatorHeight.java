@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.ElevatorWinchPID;
 
 /**
@@ -64,7 +65,18 @@ public class SetElevatorHeight extends Command {
   protected boolean isFinished() {
 
     System.out.println("We're in setElevatorHegiht isFinished()");
-    return Robot.m_elevatorWinch.onTarget();
+    
+    if(Robot.m_elevatorWinch.onTarget()){
+      return true;
+    } else if(!RobotMap.BB_FLAG && Math.abs(Robot.m_oi.getManipStick().getLeftStickRaw_Y()) > 0.2  ){
+      return true;
+    } else if(RobotMap.BB_FLAG && 
+        (Robot.m_oi.getManipBoard().ButtonSeven().get() 
+        || Robot.m_oi.getManipBoard().ButtonNine().get())){
+      return true;
+    }
+
+    return false;
 
   }
 
