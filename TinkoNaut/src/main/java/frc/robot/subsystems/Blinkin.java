@@ -9,9 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.Spark;
 import frc.robot.commands.BlinkinCargoColor;
 
@@ -22,22 +20,22 @@ public class Blinkin extends Subsystem {
   
   private Spark spark;
   public DigitalInput cargoButton;
-  
-
-  private int sparkChannel = 0;  //Change channel, this is just filler
-  public int cargoButtonChannel = 2;
 
   public double red = 0.61;
+  public double darkRed = 0.57;
+  public double hotPink = 0.59;
+  
   public double green = 0.77;
   public double blue = 0.89;
   public double rainbow = -0.99;
   public double heartBeatSlow = 0.03;
   public double heartBeatFast = 0.07;
+  
 
   public Blinkin(){
     //Initialize LED to Red
-    spark = new Spark (sparkChannel);
-    cargoButton = new DigitalInput(cargoButtonChannel);
+    spark = new Spark (RobotMap.BLINKIN_PWM_CHANNEL);
+    cargoButton = new DigitalInput(RobotMap.CARGO_BUTTON_CHANNEL);
 
     setRed();
 
@@ -54,6 +52,21 @@ public class Blinkin extends Subsystem {
   public void setRed(){
     spark.set(red);
   }
+
+  public void setDarkRed(){
+    spark.set(darkRed);
+  }
+
+  public void setHotPink(){
+    spark.set(hotPink);
+  }
+
+
+
+  public void setRainbow(){
+    spark.set(rainbow);
+  }
+
 
   public boolean hasCargo(){
     return cargoButton.get();

@@ -28,6 +28,8 @@ import frc.robot.subsystems.NavX;
 import frc.robot.subsystems.Blinkin;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 
 /**
@@ -53,6 +55,8 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics;
   public static NavX m_navx;
   public static Blinkin m_blinkin;
+  public static DriverStation ds;
+  public static PowerDistributionPanel pdp;
 
   public boolean skipAuto = true;
 
@@ -82,6 +86,8 @@ public class Robot extends TimedRobot {
     m_limelight = new Limelight();
     m_pneumatics = new Pneumatics();
     m_navx = new NavX ();
+    ds = DriverStation.getInstance();
+    pdp = new PowerDistributionPanel();
 
     m_oi = new OI();  //save OI for last so that when it calls subsystems they are not null
     
@@ -115,9 +121,8 @@ public class Robot extends TimedRobot {
     System.out.print("Checkpoint 1.0");
     
 
-   m_autonomousCommand.start(); // schedule the autonomous command (example)
-   //DriveStraight autoFor = new DriveStraight(1.0);
-  // TurnToAngle turnAngle = new TurnToAngle(90.0);
+   //m_autonomousCommand.start(); // schedule the autonomous command (example)
+
   System.out.print("Checkpoint 2.0");
 
   }
@@ -127,7 +132,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    //Scheduler.getInstance().run();
     //System.out.print("Checkpoint 3.0");
     log();
     //System.out.print("Checkpoint 4.0");

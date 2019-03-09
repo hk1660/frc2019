@@ -5,9 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
 package frc.robot;
-
 
 //package org.usfirst.frc.team1660.robot;
 
@@ -15,6 +13,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Compressor;
@@ -56,15 +55,30 @@ public class Robot extends IterativeRobot {
     int RIGHT_X_AXIS = 4;
     int RIGHT_Y_AXIS = 5;
 
+    	// XBoxOne buttons
+	public static final int BUTTON_A = 1;
+	public static final int BUTTON_B = 2;
+	public static final int BUTTON_X = 3;
+	public static final int BUTTON_Y = 4;
+	public static final int BUTTON_LB = 5;
+	public static final int BUTTON_RB = 6;
+	public static final int BUTTON_BACK = 7;
+	public static final int BUTTON_START = 8;
+	public static final int BUTTON_LEFT_JOY = 9;
+	public static final int BUTTON_RIGHT_JOY = 10;
+
     //BUTTONS
-    int LOAD_BUTTON = 4;  //lb
-    int UNLOAD_BUTTON = 3;  //rb
-    int PRESSURE_OVERRIDE_BUTTON = 8; //START
-    int AUTO_COMPRESSOR_BUTTON = 7; //BACK
-    int SHOOTING_BUTTON = 1;  //a
-    int STOP_SHOOTING_BUTTON = 2;//b
-    //int JAW_UP_BUTTON = 4;  //y
-    //int JAW_DOWN_BUTTON = 3;  //x
+    int LOAD_BUTTON = BUTTON_Y; 
+    int UNLOAD_BUTTON = BUTTON_X;
+    //int PRESSURE_OVERRIDE_BUTTON = BUTTON_START;
+    //int AUTO_COMPRESSOR_BUTTON = BUTTON_BACK;
+    int SHOOTING_BUTTON = BUTTON_A;
+    int STOP_SHOOTING_BUTTON = BUTTON_B;
+    int JAW_UP_BUTTON = BUTTON_RB;
+    int JAW_DOWN_BUTTON = BUTTON_LB;
+    int SLOW_SHOOT_BUTTON = BUTTON_BACK;
+    int FAST_SHOOT_BUTTON = BUTTON_START;
+    int COMBO_LAUNCH_TRIGGER = RIGHT_TRIGGER;
 
     //PCM PORTS
     int COMPRESSOR_PORT = 0;
@@ -79,7 +93,8 @@ public class Robot extends IterativeRobot {
     private WPI_TalonSRX leftDriveF;
     private WPI_TalonSRX leftDriveR;
     private WPI_TalonSRX shootingWheel1, shootingWheel2, shootingWheel3, shootingWheel4;
-    private TalonSRX shootingJawMotor;
+    //private TalonSRX shootingJawMotor;
+    private Spark shootingJawMotor;
 
     private Relay loadingRelay, climbRelay, compressorRelay;
 
@@ -94,7 +109,10 @@ public class Robot extends IterativeRobot {
     //private static double ROBOT_TURN_SPEED = 0.80;
     //private static String CAMERA_STATUS = "CAM_STATUS";
     //private boolean slow_drive_mode = true;
-    private boolean shootingMotorFlag = true;
+
+    private boolean isShootingFlag = true;
+    private boolean isFastFlag = true;
+
     private boolean is_launching = false;
     Timer launchingTimer = new Timer();
     //private Timer alignmentTimer = new Timer();
@@ -126,7 +144,8 @@ public class Robot extends IterativeRobot {
 
             //newHkDrive = new DifferentialDrive(rightDriveF, rightDriveR, rightDriveF, rightDriveR);
 
-            shootingJawMotor = new TalonSRX(JAW);
+            shootingJawMotor = new Spark(JAW);
+            //shootingJawMotor = new TalonSRX(JAW);
             shootingWheel1 = new WPI_TalonSRX(SHOOT1);
             shootingWheel2 = new WPI_TalonSRX(SHOOT2);
             shootingWheel3 = new WPI_TalonSRX(SHOOT3);
@@ -165,7 +184,7 @@ public class Robot extends IterativeRobot {
 
     
     public void teleopPeriodic() {
-        shootingMotorFlag = false;
+        isShootingFlag = false;
         System.out.println("__________________teleop__________________");
 
         while (isOperatorControl() && isEnabled()) {
@@ -214,22 +233,36 @@ public class Robot extends IterativeRobot {
     }
 */
     public void checkShootingWheelButton() {
+
+        double shootSpeed = 1.0;
+
         try {
 
             if (driveStick.getRawButton(SHOOTING_BUTTON)) {
-                shootingMotorFlag = true;
+                isShootingFlag = true;
             }
             if (driveStick.getRawButton(STOP_SHOOTING_BUTTON)) {
-                shootingMotorFlag = false;
+                isShootingFlag = false;
+            }
+            
+            if (driveStick.getRawButton(FAST_SHOOT_BUTTON)) {
+                if(shootSpeed < 1.0){
+                    shootSpeed += 0.1;
+                }
+            }
+            if (driveStick.getRawButton(SLOW_SHOOT_BUTTON)) {
+                if(shootSpeed > 0.0){
+                    shootSpeed += 0.1;
+                }
             }
 
-            if (shootingMotorFlag == true) {
-                shootingWheel1.set(-1.0);
-                shootingWheel2.set(-1.0);
-                shootingWheel3.set(-1.0);
-                shootingWheel4.set(-1.0);
+            if (isShootingFlag) {
+                shootingWheel1.set(-shootSpeed);
+                shootingWheel2.set(-shootSpeed);
+                shootingWheel3.set(-shootSpeed);
+                shootingWheel4.set(-shootSpeed);
 
-            } else {
+             } else {
                 shootingWheel1.set(0);
                 shootingWheel2.set(0);
                 shootingWheel3.set(0);
@@ -240,9 +273,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void checkComboLaunchingButton() {
-        if (frisbeeStick.getRawButton(1) && is_launching == false) {
+        if (Math.abs(driveStick.getRawAxis(COMBO_LAUNCH_TRIGGER)) > 0.5 && is_launching == false) {
             is_launching = true;
-            shootingMotorFlag = true;
+            isShootingFlag = true;
             launchingTimer.reset();
             launchingTimer.start();
         }
@@ -259,7 +292,7 @@ public class Robot extends IterativeRobot {
         }
         if (launchingTimer.get() > 4) {
             launchingTimer.stop();
-            shootingMotorFlag = false;
+            isShootingFlag = false;
         }
     }
 

@@ -23,7 +23,12 @@ public class BlinkinCargoColor extends Command{
      @Override
      protected void execute(){
 
-        if(Robot.m_blinkin.hasCargo()){
+        if(Robot.ds.getMatchTime() < 12.0 && Robot.ds.getMatchTime() > 7.0){
+        //if(Robot.ds.getMatchTime() < 30.0 && Robot.ds.getMatchTime() > 25.0){
+            Robot.m_blinkin.setHotPink();
+        } else if (Robot.pdp.getVoltage()<10.0){
+            Robot.m_blinkin.setDarkRed();
+        } else if(Robot.m_blinkin.hasCargo()){
             Robot.m_blinkin.setGreen();
         } else {
             Robot.m_blinkin.setRed();
