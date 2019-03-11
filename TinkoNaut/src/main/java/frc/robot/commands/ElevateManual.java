@@ -20,7 +20,7 @@ public class ElevateManual extends Command {
   private double speed;
 
   public ElevateManual(double speed) {
-    requires(Robot.m_elevatorWinch);
+    //requires(Robot.m_elevatorWinch);
     this.speed = speed;
   }
   
