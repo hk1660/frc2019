@@ -87,8 +87,8 @@ public class OI {
       manipBoard.ButtonTwo().whileHeld(new CargoSpitBoth());  
       //manipBoard.ButtonOne().whileHeld(new CargoEat());
       //manipBoard.ButtonTwo().whileHeld(new CargoSpit());
-      manipBoard.ButtonThree().whileHeld(new PistIn());
-      manipBoard.ButtonFour().whileHeld(new PistOut());
+      manipBoard.ButtonFour().whileHeld(new PistIn());
+      manipBoard.ButtonThree().whileHeld(new PistOut());
       manipBoard.ButtonFive().whileHeld(new TonsilSpit());
       //manipBoard.ButtonSix().whileHeld(new TonsilEat());
       manipBoard.ButtonSix().whileHeld(new SetElevatorHeight(RobotMap.EAT_CARGO_HEIGHT));
@@ -100,18 +100,18 @@ public class OI {
       // manipBoard.ButtonTen().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
       // manipBoard.ButtonEleven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
       // manipBoard.ButtonTwelve().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3_5));
-      manipBoard.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
-      manipBoard.ButtonPovDownLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
-      manipBoard.ButtonPovLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
-      manipBoard.ButtonPovUpLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
-      manipBoard.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
-      manipBoard.ButtonPovUpRight().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
-
+      manipBoard.ButtonPovLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
+      manipBoard.ButtonPovRight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
+      manipBoard.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
+      manipBoard.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
+      manipBoard.ButtonFive().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
+      manipBoard.ButtonTwelve().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
 
       // //BOARD extra buttons
-      manipBoard.ButtonTwelve().whenPressed(new WinchLock()); 
+      //manipBoard.ButtonTwelve().whenPressed(new WinchLock()); 
       manipBoard.ButtonTen().whenPressed(new WinchUnlock()); 
-      manipBoard.ButtonEight().whileHeld(new LLStrafe());
+      manipBoard.ButtonEight().whileHeld(new WinchEncoderZero());
+
 
       // //BOARD manual joystick
       manipBoard.ButtonSeven().whileHeld(new ElevateManual(1.0)); //see also SetElevatorHeight command
@@ -120,16 +120,16 @@ public class OI {
     } else {
 
       //STICK Action buttons
-      manipStick.ButtonA().whileHeld(new PistIn());
-      manipStick.ButtonB().whileHeld(new PistOut());
+      manipStick.ButtonLB().whileHeld(new PistIn());
+      manipStick.ButtonLeftTrigger().whileHeld(new PistOut());
       // manipStick.ButtonLB().whileHeld(new CargoEat());
       // manipStick.ButtonLeftTrigger().whileHeld(new CargoSpit());
-      manipStick.ButtonLB().whileHeld(new CargoEatBoth());
-      manipStick.ButtonLeftTrigger().whileHeld(new CargoSpitBoth());
+      manipStick.ButtonA().whileHeld(new CargoEatBoth());
+      manipStick.ButtonB().whileHeld(new CargoSpitBoth());
      // manipStick.ButtonX().whileHeld(new TonsilEat());
       //manipStick.ButtonY().whileHeld(new TonsilSpit());
-      manipStick.ButtonX().whileHeld(new ElevateManual(1.0));
-      manipStick.ButtonY().whileHeld(new ElevateManual(-1.0));
+      manipStick.ButtonY().whileHeld(new ElevateManual(1.0));
+      manipStick.ButtonX().whileHeld(new ElevateManual(-1.0));
 
       //STICK Elevator buttons
       manipStick.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));

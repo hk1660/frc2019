@@ -75,8 +75,8 @@ public class ElevatorWinchPID extends PIDSubsystem {
 
     zeroWithLimitCheck();
     
-      winchMotor.pidWrite(-output); // this is where the computed output value fromthe PIDController is applied to the motor
-      winchMotorTwo.pidWrite(-output);
+      winchMotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
+      winchMotorTwo.pidWrite(output);
   }
 
 
@@ -100,7 +100,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
   }
 
   public int getEncoderVal(){
-    return winchMotor.getSelectedSensorPosition();
+    return -winchMotor.getSelectedSensorPosition();
   }
 
   public void zeroEncoder() {

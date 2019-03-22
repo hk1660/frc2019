@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
    //m_autonomousCommand.start(); // schedule the autonomous command (example)
 
   System.out.print("Checkpoint 2.0");
-
+  teleopInit();
   }
 
   /**
@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
     //System.out.print("Checkpoint 3.0");
     log();
     //System.out.print("Checkpoint 4.0");
