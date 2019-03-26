@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-
+import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -60,6 +60,8 @@ public class NavX extends Subsystem{
 		SmartDashboard.putNumber("navxStarterAngle", starterAngle);		
 		SmartDashboard.putNumber("navxRawAngle", navx.getAngle());		
 		SmartDashboard.putNumber("navxCurrentAngle", getCurrentAngle());
+		SmartDashboard.putBoolean("NavX Flag", RobotMap.NAVX_TURN_FLAG);
+		
 		
 	}
 

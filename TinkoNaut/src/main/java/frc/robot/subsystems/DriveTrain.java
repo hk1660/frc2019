@@ -113,8 +113,14 @@ public class DriveTrain extends Subsystem {
   public void driveJoystick(XboxOne joy) {
       this.strafeSpeed = joy.getRightStickRaw_X();
       this.forwardSpeed = joy.getRightStickRaw_Y();
-      this.turnSpeed =  joy.getLeftStickRaw_X();
-
+      if(Math.abs(joy.getLeftStickRaw_X()) > 0.1){
+        RobotMap.NAVX_TURN_FLAG = false;
+      }
+      
+      
+      if(!RobotMap.NAVX_TURN_FLAG){
+        this.turnSpeed =  joy.getLeftStickRaw_X();
+      }
       drive();
 
 
@@ -127,7 +133,9 @@ public class DriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new DriveMecWithJoystick());
+         setDefaultCommand(new DriveMecWithJoystick());
+    
+    
   }
 
   //Get the raw value from the encoder -Aldenis
@@ -162,6 +170,9 @@ public class DriveTrain extends Subsystem {
   public void log() {
     SmartDashboard.putNumber("RawEncoderD", getEncoderVal());
     SmartDashboard.putNumber("Distance", getDistance());
+    SmartDashboard.putNumber("TurnSpeed", turnSpeed);
+    SmartDashboard.putNumber("ForwardSpeed", forwardSpeed);
+    SmartDashboard.putNumber("Strafepeed", strafeSpeed);
 
   }
 }

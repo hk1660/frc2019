@@ -106,14 +106,14 @@ public class RobotMap {
 
     //Levels
     //OG vals: Lvl 1 - 200.0, 1.5 - 24000.0, 2 - 57000.0, 2.5 - 82000.0, 3 - 109000.0, 3.5 - 135000.0
-    public final static double LEVEL_0 = -10000;
-    public final static double LEVEL_1 = 0;
-    public final static double LEVEL_1_5 = 57100.0;
-    public final static double LEVEL_2 = 184722.0;
+    public final static double LEVEL_0 = 0;
+    public final static double LEVEL_1 = 5942.0;
+    public final static double LEVEL_1_5 = 49010.0;
+    public final static double LEVEL_2 = 88763.0;
     public final static double EAT_CARGO_HEIGHT = 141622.0;
-    public final static double LEVEL_2_5 = 165251.0;
-    public final static double LEVEL_3 = 242600.0;
-    public final static double LEVEL_3_5 = 302000.0;
+    public final static double LEVEL_2_5 = 140138.0;
+    public final static double LEVEL_3 = 187462.0;
+    public final static double LEVEL_3_5 = 263260.0;
 
   
   //Digital Input Channels
@@ -129,4 +129,5 @@ public class RobotMap {
   public static boolean BB_FLAG = true;
   public static boolean LL_FLAG = false;
   public static boolean LOCK_FLAG = false;
+  public static boolean NAVX_TURN_FLAG = false;
 }

@@ -89,7 +89,8 @@ public class OI {
       //manipBoard.ButtonTwo().whileHeld(new CargoSpit());
       manipBoard.ButtonFour().whileHeld(new PistIn());
       manipBoard.ButtonThree().whileHeld(new PistOut());
-      manipBoard.ButtonFive().whileHeld(new TonsilSpit());
+      //manipBoard.ButtonFive().whileHeld(new TonsilSpit());
+      manipBoard.ButtonFive().whileHeld(new WinchEncoderZero());
       //manipBoard.ButtonSix().whileHeld(new TonsilEat());
       manipBoard.ButtonSix().whileHeld(new SetElevatorHeight(RobotMap.EAT_CARGO_HEIGHT));
 
@@ -101,16 +102,18 @@ public class OI {
       // manipBoard.ButtonEleven().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
       // manipBoard.ButtonTwelve().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3_5));
       manipBoard.ButtonPovLeft().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1));
-      manipBoard.ButtonPovRight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
+      //manipBoard.ButtonPovRight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5));
       manipBoard.ButtonPovDown().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2));
       manipBoard.ButtonPovUp().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_2_5));
-      manipBoard.ButtonFive().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
+      //manipBoard.ButtonFive().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
       manipBoard.ButtonTwelve().whileHeld(new SetElevatorHeight(RobotMap.LEVEL_3_5));
 
       // //BOARD extra buttons
       //manipBoard.ButtonTwelve().whenPressed(new WinchLock()); 
-      manipBoard.ButtonTen().whenPressed(new WinchUnlock()); 
-      manipBoard.ButtonEight().whileHeld(new WinchEncoderZero());
+      //manipBoard.ButtonTen().whenPressed(new WinchUnlock());
+      manipBoard.ButtonTen().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_1_5)); 
+      //manipBoard.ButtonEight().whileHeld(new WinchEncoderZero());
+      manipBoard.ButtonEight().whenPressed(new SetElevatorHeight(RobotMap.LEVEL_3));
 
 
       // //BOARD manual joystick
@@ -158,10 +161,10 @@ public class OI {
     driverStick.ButtonY().whileHeld(new DriveAngleZero());
     driverStick.ButtonA().whileHeld(new LLStrafe());
 
-    driverStick.ButtonPovRight().whileHeld(new DriveCombo(RobotMap.RIGHT_WALL_ANGLE, true));
-    driverStick.ButtonPovLeft().whileHeld(new DriveCombo(RobotMap.LEFT_WALL_ANGLE, RobotMap.LL_FLAG));
-    driverStick.ButtonPovUp().whileHeld(new DriveCombo(RobotMap.BACK_WALL_ANGLE, RobotMap.LL_FLAG));
-    driverStick.ButtonPovDown().whileHeld(new DriveCombo(RobotMap.FRONT_WALL_ANGLE,RobotMap.LL_FLAG));
+    driverStick.ButtonPovRight().whenPressed(new DriveCombo(RobotMap.RIGHT_WALL_ANGLE, true));
+    driverStick.ButtonPovLeft().whenPressed(new DriveCombo(RobotMap.LEFT_WALL_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovUp().whenPressed(new DriveCombo(RobotMap.FRONT_WALL_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovDown().whenPressed(new DriveCombo(RobotMap.BACK_WALL_ANGLE,RobotMap.LL_FLAG));
     driverStick.ButtonPovUpRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));
     driverStick.ButtonPovDownRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG));
     driverStick.ButtonPovUpLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));

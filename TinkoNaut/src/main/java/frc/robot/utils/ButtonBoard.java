@@ -32,14 +32,14 @@ public class ButtonBoard extends Joystick {
 	public static final int BUTTON_TWELVE = 12;
 
 	// BUttonBoard POV buttons Manip
-	public final static int POV_UP = 90;
-	public final static int POV_UP_RIGHT = 135;
-	public final static int POV_RIGHT = 180;
-	public final static int POV_DOWN_RIGHT = 225;
-	public final static int POV_DOWN = 270;
-	public final static int POV_DOWN_LEFT = 315;
-	public final static int POV_LEFT = 0;
-	public final static int POV_UP_LEFT = 45;
+	public final static int POV_UP = 0;
+	public final static int POV_UP_RIGHT = 45;
+	public final static int POV_RIGHT = 90;
+	public final static int POV_DOWN_RIGHT = 135;
+	public final static int POV_DOWN = 180;
+	public final static int POV_DOWN_LEFT = 225;
+	public final static int POV_LEFT = 270;
+	public final static int POV_UP_LEFT = 315;
 
 	// public final static int POV_UP = 0;
 	// public final static int POV_UP_RIGHT = 45;
