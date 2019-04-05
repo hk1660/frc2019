@@ -34,7 +34,7 @@ public class ElevatorWinchPID extends PIDSubsystem {
   private static double kp = 1.0;
   private static double ki = 0.0;
   private static double kd = 0.0;
-  private static final double kElevatorTolerance = 500;
+  private static final double kElevatorTolerance = 250;
 
   /**
    * Create a new elevator subsystem.

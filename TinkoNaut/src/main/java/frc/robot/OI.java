@@ -161,14 +161,14 @@ public class OI {
     driverStick.ButtonY().whileHeld(new DriveAngleZero());
     driverStick.ButtonA().whileHeld(new LLStrafe());
 
-    driverStick.ButtonPovRight().whenPressed(new DriveCombo(RobotMap.RIGHT_WALL_ANGLE, true));
+    driverStick.ButtonPovRight().whenPressed(new DriveCombo(RobotMap.RIGHT_WALL_ANGLE, RobotMap.LL_FLAG));
     driverStick.ButtonPovLeft().whenPressed(new DriveCombo(RobotMap.LEFT_WALL_ANGLE, RobotMap.LL_FLAG));
     driverStick.ButtonPovUp().whenPressed(new DriveCombo(RobotMap.FRONT_WALL_ANGLE, RobotMap.LL_FLAG));
     driverStick.ButtonPovDown().whenPressed(new DriveCombo(RobotMap.BACK_WALL_ANGLE,RobotMap.LL_FLAG));
-    driverStick.ButtonPovUpRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));
-    driverStick.ButtonPovDownRight().whileHeld(new DriveCombo(RobotMap.RIGHT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG));
-    driverStick.ButtonPovUpLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));
-    driverStick.ButtonPovDownLeft().whileHeld(new DriveCombo(RobotMap.LEFT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovUpRight().whenPressed(new DriveCombo(RobotMap.RIGHT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovDownRight().whenPressed(new DriveCombo(RobotMap.RIGHT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovUpLeft().whenPressed(new DriveCombo(RobotMap.LEFT_ROCKET_FRONT_ANGLE, RobotMap.LL_FLAG));
+    driverStick.ButtonPovDownLeft().whenPressed(new DriveCombo(RobotMap.LEFT_ROCKET_BACK_ANGLE, RobotMap.LL_FLAG));
 
     // driverStick.ButtonPovRight().whileHeld(new DriveTurnToAngle(RobotMap.RIGHT_WALL_ANGLE));
     // driverStick.ButtonPovLeft().whileHeld(new DriveTurnToAngle(RobotMap.LEFT_WALL_ANGLE));

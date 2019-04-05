@@ -72,7 +72,7 @@ public class AutoDriveStraight extends Command {
   @Override
   protected void initialize() {
     Robot.m_drivetrain.zeroEncoder();
-    System.out.println("Running AutoDriveStraight");
+    //System.out.println("Running AutoDriveStraight");
     // Get everything in a safe starting state.
     // Robot.m_drivetrain.reset();
     //m_pid.reset();

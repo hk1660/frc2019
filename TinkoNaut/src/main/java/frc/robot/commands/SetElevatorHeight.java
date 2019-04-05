@@ -28,7 +28,7 @@ public class SetElevatorHeight extends Command {
     requires(Robot.m_elevatorWinch);
     this.height = height;
     // SmartDashboard.putNumber("Elev SetHeight", this.height);
-    System.out.println("We're in setElevatorHegiht constructor");
+    //System.out.println("We're in setElevatorHegiht constructor");
     
 
   }
@@ -39,7 +39,7 @@ public class SetElevatorHeight extends Command {
 
     Robot.m_elevatorWinch.unlockPiston();
     SmartDashboard.putNumber("Elev SetHeight", this.height);
-    System.out.println("We're in setElevatorHegiht initialize()");
+    //System.out.println("We're in setElevatorHegiht initialize()");
     
     Robot.m_elevatorWinch.getPIDController().reset(); //???
     Robot.m_elevatorWinch.getPIDController().enable();           //starts the pid loop
@@ -64,7 +64,7 @@ public class SetElevatorHeight extends Command {
   @Override
   protected boolean isFinished() {
 
-    System.out.println("We're in setElevatorHegiht isFinished()");
+    //System.out.println("We're in setElevatorHegiht isFinished()");
     
     if(Robot.m_elevatorWinch.onTarget()){
       return true;

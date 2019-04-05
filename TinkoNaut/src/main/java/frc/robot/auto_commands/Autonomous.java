@@ -22,7 +22,7 @@ public class Autonomous extends CommandGroup {
    */
   public Autonomous() {
    
-    System.out.println("testing");
+    //System.out.println("testing");
     //  addSequential(new DriveEncoderZero());
      addSequential(new AutoDriveStraight(60)); 
     // addParallel(new DriveTurnToAngle(RobotMap.FRONT_WALL_ANGLE));

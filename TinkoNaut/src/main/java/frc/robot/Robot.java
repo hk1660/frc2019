@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Initialize all subsystems
-    System.out.println("Checking 1,2,3...");
+    //System.out.println("Checking 1,2,3...");
     CameraServer.getInstance().startAutomaticCapture();
     
     if(RobotMap.WINCH_PID_FLAG){
@@ -118,12 +118,12 @@ public class Robot extends TimedRobot {
     skipAuto = false;
     Robot.m_navx.zeroAngle();
     
-    System.out.print("Checkpoint 1.0");
+    //System.out.print("Checkpoint 1.0");
     
 
    //m_autonomousCommand.start(); // schedule the autonomous command (example)
 
-  System.out.print("Checkpoint 2.0");
+  //System.out.print("Checkpoint 2.0");
   teleopInit();
   }
 
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     
     m_autonomousCommand.cancel();
-    System.out.println("Testing ");
+    //System.out.println("Testing ");
     
     if(skipAuto){
       Robot.m_navx.zeroAngle();

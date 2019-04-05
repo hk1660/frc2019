@@ -28,7 +28,7 @@ public class CargoEat extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("Execute in EatCargo");
+    //System.out.println("Execute in EatCargo");
     Robot.m_cargoGrabber.moveRoller(1.0);
   }
 

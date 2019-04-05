@@ -27,7 +27,7 @@ public class Limelight extends Subsystem {
 
     // //post to smart dashboard periodically
     public void log() {
-        System.out.println("Hi I'm a test");
+        //System.out.println("Hi I'm a test");
         update();
         // //read values periodically
         double x = tx.getDouble(0.0);

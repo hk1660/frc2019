@@ -33,7 +33,7 @@ public class LLStrafe extends Command {
         else if(Robot.m_limelight.getTXdouble() > targetRightThresh){
             Robot.m_drivetrain.setStrafeSpeed(strafeLeftSpeed);        }
         else {
-            System.out.println("on trarget???");
+            //System.out.println("on trarget???");
         }
         
     }
