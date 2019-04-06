@@ -106,14 +106,14 @@ public class RobotMap {
 
     //Levels
     //OG vals: Lvl 1 - 200.0, 1.5 - 24000.0, 2 - 57000.0, 2.5 - 82000.0, 3 - 109000.0, 3.5 - 135000.0
-    public final static double LEVEL_0 = 0;
-    public final static double LEVEL_1 = 5942.0;
-    public final static double LEVEL_1_5 = 52000.0;
-    public final static double LEVEL_2 = 99840.0;
-    public final static double EAT_CARGO_HEIGHT = 123000.0;
-    public final static double LEVEL_2_5 = 160000.0;
-    public final static double LEVEL_3 = 187462.0;
-    public final static double LEVEL_3_5 = 263260.0;
+    public final static double LEVEL_0 = 0 * 1000;
+    public final static double LEVEL_1 = 5.942 * 1000;
+    public final static double LEVEL_1_5 = 52 * 1000;
+    public final static double LEVEL_2 = 99.840 * 1000;
+    public final static double EAT_CARGO_HEIGHT = 123 * 1000; //Dillan Height
+    public final static double LEVEL_2_5 = 160 * 1000;
+    public final static double LEVEL_3 = 187.5 * 1000;
+    public final static double LEVEL_3_5 = 263 * 1000;
 
   
   //Digital Input Channels
