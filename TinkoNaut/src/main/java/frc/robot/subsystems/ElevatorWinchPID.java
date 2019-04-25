@@ -88,14 +88,14 @@ public class ElevatorWinchPID extends PIDSubsystem {
   public void elevateManual(double speed) {
     zeroWithLimitCheck();
     
-    if(isLimitPressed() && speed > 0.0){  
+    /*if(isLimitPressed() && speed > 0.0){  
       //don't go down anymore!
         winchMotor.set(0.0);
         winchMotorTwo.set(0.0);
-    } else{
+    } else{*/
       winchMotor.set(speed);
       winchMotorTwo.set(speed);
-    }
+    // n}
       
   }
 

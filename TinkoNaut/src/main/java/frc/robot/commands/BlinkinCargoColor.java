@@ -29,9 +29,9 @@ public class BlinkinCargoColor extends Command{
         } else if (Robot.pdp.getVoltage()<10.0){
             Robot.m_blinkin.setDarkRed();
         } else if(Robot.m_blinkin.hasCargo()){
-            Robot.m_blinkin.setGreen();
+            Robot.m_blinkin.setSkyBlue();
         } else {
-            Robot.m_blinkin.setRed();
+            Robot.m_blinkin.setPushPattern();
         }
 
     }

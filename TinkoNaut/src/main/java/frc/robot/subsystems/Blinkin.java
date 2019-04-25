@@ -27,7 +27,9 @@ public class Blinkin extends Subsystem {
   
   public double green = 0.77;
   public double blue = 0.89;
+  public double skyBlue = 0.83;
   public double rainbow = -0.99;
+  public double pushPattern = 0.55; // Forest BPM
   public double heartBeatSlow = 0.03;
   public double heartBeatFast = 0.07;
   
@@ -43,6 +45,10 @@ public class Blinkin extends Subsystem {
 
   public void setLEDColor(int color){
     spark.set(color);
+  }
+
+  public void setPushPattern(){
+    spark.set(pushPattern);
   }
 
   public void setGreen(){
@@ -65,6 +71,10 @@ public class Blinkin extends Subsystem {
 
   public void setRainbow(){
     spark.set(rainbow);
+  }
+
+  public void setSkyBlue(){
+    spark.set(skyBlue);
   }
 
 
